@@ -45,6 +45,8 @@ const i18n = {
     // Hero
     "hero.title": "Приватный туннель для <span class=\"gradient-text\">свободного</span> интернета",
     "hero.description": "AvariGate объединяет протоколы Mieru, Hysteria 2 и AmneziaWG в едином приложении для обхода блокировок. Умный failover, раздельное туннелирование и нулевые привилегии интерфейса.",
+    "hero.sphereConnected": "Защищённый туннель активен",
+    "hero.sphereEngine": "enfein/mbox 1.14.3 • Mieru + Hysteria 2 + AmneziaWG",
     "hero.releasesBtn": "GitHub Releases",
     "hero.connected": "Туннель активен",
     "hero.tabConnected": "Подключение",
@@ -56,8 +58,8 @@ const i18n = {
     "hero.captionConnected": "Главный экран: статус защищённого туннеля, таймер сессии и мгновенное управление соединением.",
     "hero.captionProfiles": "Список профилей: приоритет обхода нод, индикация протоколов Mieru, Hysteria 2 и AmneziaWG.",
     "hero.captionSplit": "Сплит-туннелирование: режимы Include/Exclude, маски доменов и переключатель Bypass LAN.",
-    "hero.captionDragons": "Тема DragonGate: императорский изумрудный нефрит с золотым драконом.",
-    "hero.captionAndroid": "Android-клиент: капсула навигации, per-app маршрутизация и CameraX QR-сканер.",
+    "hero.captionDragons": "Тема DragonGate: изумрудный нефрит и золотое драконье кольцо вокруг сферы состояния.",
+    "hero.captionAndroid": "Android-клиент: статус VPN, подключение в один тап и список профилей с приоритетом серверов.",
     "hero.captionServer": "Консоль mieru-admin: дашборд состояния служб и портов прямо в терминале.",
 
     // Protocols
@@ -126,6 +128,11 @@ const i18n = {
     "themes.title": "Авторские темы оформления интерфейса",
     "themes.subtitle": "Интерфейс приложения адаптируется под ваше настроение. Переключайте визуальные стили одним кликом: тема меняет эстетику, сохраняя настройки и профили в полной безопасности.",
     "themes.palette": "Палитра:",
+    "themes.btnPirates": "CorsairGate (Pirate Helm)",
+    "themes.btnKawaii": "KawaiiGate (Pastel Mascot)",
+    "themes.realScreenshotPending": "Реальный скриншот темы готовится",
+    "themes.noMockupPolicy": "По политике честности проекта макеты не подменяют реальные снимки приложения. Скриншот будет добавлен после релизной съёмки интерфейса.",
+    "themes.themeAvailable": "Тема полностью реализована и доступна для выбора в настройках AvariGate.",
 
     // Downloads
     "downloads.tag": "Официальные сборки",
@@ -146,6 +153,15 @@ const i18n = {
     "downloads.linuxPackagesNote": "Стабильные сборки desktop для Linux",
     "downloads.platformStatusTitle": "Честный статус платформ и архитектур:",
     "downloads.shaCheckCmd": "Проверка в терминале:",
+    "downloads.clientTitle": "Клиентские приложения",
+    "downloads.clientSubtitle": "Полнофункциональные графические клиенты для персональных устройств",
+    "downloads.clientBadge": "Desktop & Mobile GUI",
+    "downloads.serverGroupTitle": "Серверный стек",
+    "downloads.serverGroupSubtitle": "Статический бинарник для развёртывания узлов Mieru, Hysteria 2 и AmneziaWG",
+    "downloads.serverGroupBadge": "Linux Service & TUI CLI",
+    "downloads.serverQuickTitle": "Быстрый запуск на сервере (SSH):",
+    "downloads.serverQuickDesc": "Автоматически настроит systemd, валидирует порты и выведет QR-код для моментального импорта в клиент.",
+    "downloads.learnMoreServer": "Подробнее о возможностях mieru-admin →",
 
     // Statuses
     "status.ready": "Готово",
@@ -156,11 +172,24 @@ const i18n = {
     "changelog.tag": "История развития",
     "changelog.title": "Хронология реальных релизов проекта",
     "changelog.subtitle": "Каждая строчка подкреплена исходным кодом, unit-тестами и сетевыми проверками в репозитории.",
+    "changelog.showOlder": "Показать предыдущие релизы (v0.5.0, v0.4.0, v0.3.x, v0.1.0)",
+    "changelog.hideOlder": "Скрыть предыдущие релизы",
 
     // Architecture
     "arch.tag": "Архитектурная схема",
     "arch.title": "Принцип нулевого доверия к интерфейсу",
     "arch.subtitle": "Вредоносный код или компрометация UI не могут захватить систему: сетевые адаптеры изолированы в отдельном системном сервисе.",
+    "arch.uiTitle": "Графический интерфейс",
+    "arch.uiDesc": "Tauri v2 (Rust + Vite) или Jetpack Compose (Android)",
+    "arch.uiBadge": "UID: обычный пользователь (без root)",
+    "arch.helperTitle": "Системный демон (Helper)",
+    "arch.helperDesc": "launchd (macOS) / Polkit (Linux) / VpnService (Android)",
+    "arch.helperBadge": "Строгая валидация PID и UID",
+    "arch.coreTitle": "Ядро enfein/mbox 1.14.3",
+    "arch.coreDesc": "Mieru 3.38 + Hysteria 2 + AmneziaWG 3.1 + TUN",
+    "arch.coreBadge": "Таблица маршрутов и DNS",
+    "arch.socketLabel": "Unix-сокет / IPC (0600)",
+    "arch.ipcCore": "Управление ядром",
 
     // FAQ
     "faq.tag": "Ответы на вопросы",
@@ -213,6 +242,8 @@ const i18n = {
     // Hero
     "hero.title": "A Private Tunnel for an <span class=\"gradient-text\">Open Internet</span>",
     "hero.description": "AvariGate combines Mieru, Hysteria 2, and AmneziaWG protocols into a unified client with zero interface privileges. Robust protocol-level censorship resistance, automated failover on node outage, and split tunneling.",
+    "hero.sphereConnected": "Secure tunnel active",
+    "hero.sphereEngine": "enfein/mbox 1.14.3 • Mieru + Hysteria 2 + AmneziaWG",
     "hero.releasesBtn": "GitHub Releases",
     "hero.connected": "Tunnel Active",
     "hero.tabConnected": "Connection",
@@ -224,8 +255,8 @@ const i18n = {
     "hero.captionConnected": "Main screen: live tunnel status, session uptime counter, and instant connection toggle.",
     "hero.captionProfiles": "Profiles screen: priority order, protocol badges for Mieru, Hysteria 2, and AmneziaWG.",
     "hero.captionSplit": "Split tunneling: Include/Exclude modes, domain wildcards, and Bypass LAN switch.",
-    "hero.captionDragons": "DragonGate Theme: imperial emerald jade orb encircled by an ancient golden dragon.",
-    "hero.captionAndroid": "Android client: floating capsule navbar, per-app routing, and CameraX QR scanner.",
+    "hero.captionDragons": "DragonGate theme: emerald jade with a golden dragon ring encircling the status sphere.",
+    "hero.captionAndroid": "Android client: VPN status, one-tap connect, and the prioritized server profile list.",
     "hero.captionServer": "mieru-admin TUI: service and port dashboard directly inside your SSH terminal.",
 
     // Protocols
@@ -294,6 +325,11 @@ const i18n = {
     "themes.title": "Signature Interface Visual Themes",
     "themes.subtitle": "The client adapts to your visual style. Switch themes with one click: aesthetics shift instantly while keeping your profiles, keys, and settings intact.",
     "themes.palette": "Palette:",
+    "themes.btnPirates": "CorsairGate (Pirate Helm)",
+    "themes.btnKawaii": "KawaiiGate (Pastel Mascot)",
+    "themes.realScreenshotPending": "Real theme screenshot coming soon",
+    "themes.noMockupPolicy": "Under the project's honesty policy, mockups are never presented as real application screenshots. A real capture will be added after the next release snapshot.",
+    "themes.themeAvailable": "The theme is fully implemented and selectable in AvariGate settings.",
 
     // Downloads
     "downloads.tag": "Official Releases",
@@ -314,6 +350,15 @@ const i18n = {
     "downloads.linuxPackagesNote": "Stable desktop builds for Linux distributions",
     "downloads.platformStatusTitle": "Honest Platform & Architecture Status:",
     "downloads.shaCheckCmd": "Verify in terminal:",
+    "downloads.clientTitle": "Client Applications",
+    "downloads.clientSubtitle": "Full-featured graphical clients for personal devices",
+    "downloads.clientBadge": "Desktop & Mobile GUI",
+    "downloads.serverGroupTitle": "Server Stack",
+    "downloads.serverGroupSubtitle": "Static binary for deploying Mieru, Hysteria 2, and AmneziaWG nodes",
+    "downloads.serverGroupBadge": "Linux Service & TUI CLI",
+    "downloads.serverQuickTitle": "Quick start on the server (SSH):",
+    "downloads.serverQuickDesc": "Configures systemd automatically, validates ports, and prints a QR code for instant client import.",
+    "downloads.learnMoreServer": "Learn more about mieru-admin →",
 
     // Statuses
     "status.ready": "Ready",
@@ -324,11 +369,24 @@ const i18n = {
     "changelog.tag": "Release History",
     "changelog.title": "Verified Project Release Timeline",
     "changelog.subtitle": "Every bullet is backed by actual commit history, unit tests, and live network verifications in the repository.",
+    "changelog.showOlder": "Show previous releases (v0.5.0, v0.4.0, v0.3.x, v0.1.0)",
+    "changelog.hideOlder": "Hide previous releases",
 
     // Architecture
     "arch.tag": "Architecture Diagram",
     "arch.title": "Zero-Trust Architecture for UI",
     "arch.subtitle": "Compromised UI scripts cannot escalate privileges: network interfaces are isolated in a separate background system service.",
+    "arch.uiTitle": "Graphical Interface",
+    "arch.uiDesc": "Tauri v2 (Rust + Vite) or Jetpack Compose (Android)",
+    "arch.uiBadge": "UID: standard user (no root)",
+    "arch.helperTitle": "System Daemon (Helper)",
+    "arch.helperDesc": "launchd (macOS) / Polkit (Linux) / VpnService (Android)",
+    "arch.helperBadge": "Strict PID and UID validation",
+    "arch.coreTitle": "enfein/mbox 1.14.3 Core",
+    "arch.coreDesc": "Mieru 3.38 + Hysteria 2 + AmneziaWG 3.1 + TUN",
+    "arch.coreBadge": "Routing table & DNS",
+    "arch.socketLabel": "Unix socket / IPC (0600)",
+    "arch.ipcCore": "Core management",
 
     // FAQ
     "faq.tag": "FAQ",
@@ -474,11 +532,99 @@ function setLanguage(lang) {
     const tuiKey = activeTuiTab.getAttribute("data-tui");
     switchServerTui(tuiKey);
   }
+
+  // Keep the changelog toggle label consistent with its expanded state
+  const olderToggle = document.getElementById("toggle-older-releases");
+  const olderToggleText = document.getElementById("toggle-older-text");
+  if (olderToggle && olderToggleText) {
+    const expanded = olderToggle.getAttribute("aria-expanded") === "true";
+    const key = expanded ? "changelog.hideOlder" : "changelog.showOlder";
+    if (i18n[lang] && i18n[lang][key]) olderToggleText.textContent = i18n[lang][key];
+  }
 }
 
 // ==========================================================================
 // 4. Hero Preview Screens (Real Application Screenshots Only)
 // ==========================================================================
+
+// Smooth two-layer crossfade shared by hero preview and server TUI viewers.
+// Avoids layout jumps: both layers are absolutely positioned in a fixed
+// aspect-ratio container, only opacity changes.
+function createCrossfader(frontEl, backEl, fallbackAlt) {
+  // frontEl stays the base/visible layer; backEl is the overlay used only
+  // during a transition. Keeping roles fixed avoids state drift on rapid
+  // switching (previously layers were swapped, which could desync).
+  const base = frontEl;
+  let overlay = backEl;
+  let token = 0;
+
+  if (!base) return { set: function () {} };
+  if (overlay) {
+    overlay.style.opacity = "0";
+    overlay.setAttribute("aria-hidden", "true");
+  }
+
+  function set(src, alt, animate) {
+    if (!src) return;
+    const cleanAlt = alt || fallbackAlt || "";
+    if (base.getAttribute("src") === src) {
+      base.alt = cleanAlt;
+      return;
+    }
+
+    const reduceMotion = window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (!overlay || animate === false || reduceMotion) {
+      base.src = src;
+      base.alt = cleanAlt;
+      base.style.opacity = "1";
+      if (overlay) {
+        overlay.style.opacity = "0";
+        overlay.setAttribute("aria-hidden", "true");
+      }
+      return;
+    }
+
+    const myToken = ++token;
+    overlay.src = src;
+    overlay.alt = "";
+    overlay.removeAttribute("aria-hidden");
+
+    const startFade = () => {
+      if (myToken !== token) return;
+      overlay.style.opacity = "1";
+      base.style.opacity = "0";
+      // After the fade, make the base the source of truth again.
+      window.setTimeout(() => {
+        if (myToken !== token) return;
+        base.src = src;
+        base.alt = cleanAlt;
+        base.style.opacity = "1";
+        overlay.style.opacity = "0";
+        overlay.setAttribute("aria-hidden", "true");
+      }, 320);
+    };
+
+    if (overlay.complete && overlay.naturalWidth > 0) {
+      startFade();
+    } else {
+      overlay.addEventListener("load", startFade, { once: true });
+      overlay.addEventListener("error", () => {
+        if (myToken === token) {
+          base.src = src;
+          base.alt = cleanAlt;
+          base.style.opacity = "1";
+          overlay.style.opacity = "0";
+        }
+      }, { once: true });
+    }
+  }
+
+  return { set };
+}
+
+let previewCrossfader = null;
 
 const previewScreens = {
   connected: {
@@ -529,12 +675,18 @@ function updatePreviewScreen(targetKey) {
   const data = previewScreens[targetKey];
   if (!data) return;
 
-  const previewImg = document.getElementById("preview-img");
   const previewCaption = document.getElementById("preview-caption");
   const previewTitle = document.getElementById("preview-window-title");
 
   const imgSrc = (currentLang === "en" && data.en) ? data.en : data.ru;
-  if (previewImg) previewImg.src = imgSrc;
+  const altText = currentLang === "en" ? data.titleEn : data.titleRu;
+
+  if (previewCrossfader) {
+    previewCrossfader.set(imgSrc, altText);
+  } else {
+    const previewImg = document.getElementById("preview-img");
+    if (previewImg) previewImg.src = imgSrc;
+  }
 
   if (previewCaption && i18n[currentLang] && i18n[currentLang][data.captionKey]) {
     previewCaption.innerHTML = i18n[currentLang][data.captionKey];
@@ -543,6 +695,132 @@ function updatePreviewScreen(targetKey) {
   if (previewTitle) {
     previewTitle.textContent = currentLang === "en" ? data.titleEn : data.titleRu;
   }
+}
+
+// ==========================================================================
+// 4b. Hero Connection Sphere (real particle/orbit effect from the client)
+// ==========================================================================
+
+function initHeroSphere() {
+  const canvas = document.getElementById("hero-sphere-canvas");
+  if (!canvas || !canvas.getContext) return;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  const reduceMotion = window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const DPR = Math.min(window.devicePixelRatio || 1, 2);
+  const SIZE = 160;
+  canvas.width = Math.round(SIZE * DPR);
+  canvas.height = Math.round(SIZE * DPR);
+
+  const W = canvas.width;
+  const H = canvas.height;
+  const cx = W / 2;
+  const cy = H / 2;
+  const radius = W * 0.33;
+
+  // Fibonacci sphere for an even particle distribution.
+  const COUNT = 150;
+  const points = [];
+  for (let i = 0; i < COUNT; i++) {
+    const y = 1 - (i / (COUNT - 1)) * 2;
+    const r = Math.sqrt(Math.max(0, 1 - y * y));
+    const theta = i * Math.PI * (3 - Math.sqrt(5));
+    points.push({ x: Math.cos(theta) * r, y, z: Math.sin(theta) * r });
+  }
+
+  function project(p, angle) {
+    const cosA = Math.cos(angle);
+    const sinA = Math.sin(angle);
+    const x = p.x * cosA - p.z * sinA;
+    const z = p.x * sinA + p.z * cosA;
+    // Mild perspective tilt.
+    const tilt = 0.35;
+    const ty = p.y * Math.cos(tilt) - z * Math.sin(tilt);
+    const tz = p.y * Math.sin(tilt) + z * Math.cos(tilt);
+    const perspective = 2.2 / (2.2 - tz);
+    return { sx: cx + x * radius * perspective, sy: cy + ty * radius * perspective, depth: tz };
+  }
+
+  function drawFrame(time) {
+    ctx.clearRect(0, 0, W, H);
+
+    // Core glow.
+    const glow = ctx.createRadialGradient(cx, cy, radius * 0.1, cx, cy, radius * 1.5);
+    glow.addColorStop(0, "rgba(52, 211, 153, 0.55)");
+    glow.addColorStop(0.5, "rgba(16, 185, 129, 0.16)");
+    glow.addColorStop(1, "rgba(16, 185, 129, 0)");
+    ctx.fillStyle = glow;
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius * 1.5, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Orbit rings.
+    for (let ring = 0; ring < 3; ring++) {
+      ctx.beginPath();
+      ctx.strokeStyle = "rgba(52, 211, 153, " + (0.16 - ring * 0.04) + ")";
+      ctx.lineWidth = 1 * DPR;
+      ctx.ellipse(
+        cx,
+        cy,
+        radius * (1.12 + ring * 0.16),
+        radius * (0.55 + ring * 0.14),
+        time * 0.00012 * (ring % 2 ? -1 : 1),
+        0,
+        Math.PI * 2
+      );
+      ctx.stroke();
+    }
+
+    const angle = time * 0.00042;
+    const projected = points
+      .map((p) => project(p, angle))
+      .sort((a, b) => a.depth - b.depth);
+
+    // Connection web between near neighbours (subtle).
+    ctx.lineWidth = 0.6 * DPR;
+    for (let i = 0; i < projected.length; i += 2) {
+      const a = projected[i];
+      const b = projected[(i + 7) % projected.length];
+      if (Math.abs(a.depth - b.depth) > 0.35) continue;
+      ctx.strokeStyle = "rgba(45, 212, 191, 0.12)";
+      ctx.beginPath();
+      ctx.moveTo(a.sx, a.sy);
+      ctx.lineTo(b.sx, b.sy);
+      ctx.stroke();
+    }
+
+    // Particles.
+    projected.forEach((p) => {
+      const alpha = 0.25 + (p.depth + 1) * 0.35;
+      const dot = (0.9 + (p.depth + 1) * 0.9) * DPR;
+      ctx.beginPath();
+      ctx.fillStyle = "rgba(110, 231, 183, " + alpha.toFixed(3) + ")";
+      ctx.arc(p.sx, p.sy, dot, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // Central core dot.
+    ctx.beginPath();
+    ctx.fillStyle = "rgba(209, 250, 229, 0.9)";
+    ctx.arc(cx, cy, 2.2 * DPR, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  if (reduceMotion) {
+    drawFrame(0);
+    return;
+  }
+
+  let start = null;
+  function loop(ts) {
+    if (start === null) start = ts;
+    drawFrame(ts - start);
+    window.requestAnimationFrame(loop);
+  }
+  window.requestAnimationFrame(loop);
 }
 
 // ==========================================================================
@@ -571,6 +849,28 @@ const themeDetails = {
     screenshotRu: "./assets/screenshots/desktop-dragons.png",
     screenshotEn: "./assets/screenshots/desktop-dragons-en.png",
     swatches: ["#061c14", "#10b981", "#f59e0b", "#064e3b"]
+  },
+  pirates: {
+    name: "CorsairGate",
+    subRu: "Пиратский штурвал & латунь",
+    subEn: "Pirate Helm & Weathered Brass",
+    descRu: "Морская тема: латунный штурвал, глубокий океанский фон и тёплые золотые акценты. Тема реализована в клиенте; честный скриншот будет добавлен после релизной съёмки.",
+    descEn: "Nautical theme: a brass ship's helm, deep ocean backdrop, and warm golden accents. The theme ships in the client; an honest capture will be added after the release snapshot.",
+    logo: "./assets/logos/pirates-logo.svg",
+    screenshotRu: null,
+    screenshotEn: null,
+    swatches: ["#1c1306", "#f59e0b", "#d97706", "#0b1a24"]
+  },
+  kawaii: {
+    name: "KawaiiGate",
+    subRu: "Пастельный маскот & мягкий неон",
+    subEn: "Pastel Mascot & Soft Neon",
+    descRu: "Пастельная тема: розово-лавандовая палитра и милый маскот-компаньон. Тема реализована в клиенте; честный скриншот будет добавлен после релизной съёмки.",
+    descEn: "Pastel theme: a pink-lavender palette with a cute companion mascot. The theme ships in the client; an honest capture will be added after the release snapshot.",
+    logo: "./assets/logos/kawaii-logo.svg",
+    screenshotRu: null,
+    screenshotEn: null,
+    swatches: ["#1a0f1d", "#f472b6", "#c084fc", "#fbcfe8"]
   }
 };
 
@@ -586,6 +886,8 @@ function updateThemeDisplay(themeId) {
   const themeLogo = document.getElementById("theme-logo");
   const themeScreenshot = document.getElementById("theme-screenshot");
   const themeSwatches = document.getElementById("theme-swatches");
+  const placeholderView = document.getElementById("theme-placeholder-view");
+  const placeholderLogo = document.getElementById("placeholder-logo");
 
   if (themeName) themeName.textContent = t.name;
   if (themeSub) themeSub.textContent = currentLang === "en" ? t.subEn : t.subRu;
@@ -593,7 +895,34 @@ function updateThemeDisplay(themeId) {
   if (themeLogo) themeLogo.src = t.logo;
 
   const shot = (currentLang === "en" && t.screenshotEn) ? t.screenshotEn : t.screenshotRu;
-  if (themeScreenshot) themeScreenshot.src = shot;
+
+  // Honesty policy: never substitute a mockup for a real screenshot.
+  if (shot) {
+    if (themeScreenshot) {
+      themeScreenshot.src = shot;
+      themeScreenshot.style.display = "block";
+      themeScreenshot.alt = t.name + (currentLang === "en" ? " theme screenshot" : " — скриншот темы");
+    }
+    if (placeholderView) placeholderView.style.display = "none";
+  } else {
+    if (themeScreenshot) {
+      themeScreenshot.style.display = "none";
+      themeScreenshot.alt = "";
+    }
+    if (placeholderView) placeholderView.style.display = "flex";
+    if (placeholderLogo) {
+      placeholderLogo.src = t.logo;
+      placeholderLogo.alt = t.name + " logo";
+    }
+    // Re-apply localized placeholder text (data-i18n already handled on language switch).
+    if (i18n[currentLang]) {
+      const dict = i18n[currentLang];
+      document.querySelectorAll("#theme-placeholder-view [data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key]) el.innerHTML = dict[key];
+      });
+    }
+  }
 
   if (themeSwatches) {
     themeSwatches.innerHTML = "";
@@ -634,38 +963,62 @@ const serverTuiData = {
   }
 };
 
+let tuiCrossfader = null;
+let activeTuiKey = "wizard";
+
 function switchServerTui(tuiKey) {
   const data = serverTuiData[tuiKey];
   if (!data) return;
+  activeTuiKey = tuiKey;
 
   const tabs = document.querySelectorAll(".tui-tab");
   tabs.forEach((t) => {
     const isTarget = t.getAttribute("data-tui") === tuiKey;
     t.classList.toggle("active", isTarget);
     t.setAttribute("aria-selected", isTarget ? "true" : "false");
+    t.setAttribute("tabindex", isTarget ? "0" : "-1");
   });
 
   const points = document.querySelectorAll(".server-point[data-point-target]");
   points.forEach((p) => {
     const isTarget = p.getAttribute("data-point-target") === tuiKey;
     p.classList.toggle("active", isTarget);
+    p.setAttribute("aria-current", isTarget ? "true" : "false");
   });
 
-  const tuiImg = document.getElementById("tui-screen-img");
   const tuiCaption = document.getElementById("tui-caption");
+  const altText = currentLang === "en" ? "mieru-admin TUI screen" : "Экран консоли mieru-admin";
 
-  if (tuiImg) tuiImg.src = data.src;
+  if (tuiCrossfader) {
+    tuiCrossfader.set(data.src, altText);
+  } else {
+    const tuiImg = document.getElementById("tui-screen-img");
+    if (tuiImg) tuiImg.src = data.src;
+  }
+
   if (tuiCaption && i18n[currentLang] && i18n[currentLang][data.captionKey]) {
     tuiCaption.innerHTML = i18n[currentLang][data.captionKey];
   }
 }
 
 function initServerTuiTabs() {
-  const tabs = document.querySelectorAll(".tui-tab");
-  tabs.forEach((tab) => {
+  const tabs = Array.from(document.querySelectorAll(".tui-tab"));
+  tabs.forEach((tab, index) => {
+    tab.setAttribute("tabindex", tab.classList.contains("active") ? "0" : "-1");
     tab.addEventListener("click", () => {
       const tuiKey = tab.getAttribute("data-tui");
       switchServerTui(tuiKey);
+    });
+    tab.addEventListener("keydown", (e) => {
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft" && e.key !== "Home" && e.key !== "End") return;
+      e.preventDefault();
+      let next = index;
+      if (e.key === "ArrowRight") next = (index + 1) % tabs.length;
+      if (e.key === "ArrowLeft") next = (index - 1 + tabs.length) % tabs.length;
+      if (e.key === "Home") next = 0;
+      if (e.key === "End") next = tabs.length - 1;
+      tabs[next].focus();
+      switchServerTui(tabs[next].getAttribute("data-tui"));
     });
   });
 
@@ -865,8 +1218,24 @@ function copyToClipboard(text, buttonEl, successText) {
 // ==========================================================================
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Initialize smooth crossfaders before the first language pass so the
+  // initial image/language application does not snap.
+  const previewFront = document.getElementById("preview-img");
+  const previewBack = document.getElementById("preview-img-next");
+  if (previewFront && previewBack) {
+    previewCrossfader = createCrossfader(previewFront, previewBack, "AvariGate Desktop");
+  }
+  const tuiFront = document.getElementById("tui-screen-img");
+  const tuiBack = document.getElementById("tui-screen-img-next");
+  if (tuiFront && tuiBack) {
+    tuiCrossfader = createCrossfader(tuiFront, tuiBack, "mieru-admin TUI");
+  }
+
   // Apply initial language & version labels
   setLanguage(currentLang);
+
+  // Animated connection sphere above the hero headline
+  initHeroSphere();
 
   // Platform detection
   detectUserPlatform();
@@ -922,32 +1291,60 @@ document.addEventListener("DOMContentLoaded", () => {
   }, { passive: true });
 
   // Hero Preview tabs
-  const previewTabs = document.querySelectorAll(".preview-tab");
-  previewTabs.forEach((tab) => {
+  const previewTabs = Array.from(document.querySelectorAll(".preview-tab"));
+  previewTabs.forEach((tab, index) => {
+    tab.setAttribute("tabindex", tab.classList.contains("active") ? "0" : "-1");
     tab.addEventListener("click", () => {
       previewTabs.forEach((t) => {
         t.classList.remove("active");
         t.setAttribute("aria-selected", "false");
+        t.setAttribute("tabindex", "-1");
       });
       tab.classList.add("active");
       tab.setAttribute("aria-selected", "true");
+      tab.setAttribute("tabindex", "0");
       const target = tab.getAttribute("data-target");
       updatePreviewScreen(target);
+    });
+    tab.addEventListener("keydown", (e) => {
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft" && e.key !== "Home" && e.key !== "End") return;
+      e.preventDefault();
+      let next = index;
+      if (e.key === "ArrowRight") next = (index + 1) % previewTabs.length;
+      if (e.key === "ArrowLeft") next = (index - 1 + previewTabs.length) % previewTabs.length;
+      if (e.key === "Home") next = 0;
+      if (e.key === "End") next = previewTabs.length - 1;
+      previewTabs[next].focus();
+      previewTabs[next].click();
     });
   });
 
   // Theme selector buttons
-  const themeBtns = document.querySelectorAll(".theme-btn");
-  themeBtns.forEach((btn) => {
+  const themeBtns = Array.from(document.querySelectorAll(".theme-btn"));
+  themeBtns.forEach((btn, index) => {
+    btn.setAttribute("tabindex", btn.classList.contains("active") ? "0" : "-1");
     btn.addEventListener("click", () => {
       themeBtns.forEach((b) => {
         b.classList.remove("active");
         b.setAttribute("aria-selected", "false");
+        b.setAttribute("tabindex", "-1");
       });
       btn.classList.add("active");
       btn.setAttribute("aria-selected", "true");
+      btn.setAttribute("tabindex", "0");
       const themeId = btn.getAttribute("data-theme-id");
       updateThemeDisplay(themeId);
+    });
+    btn.addEventListener("keydown", (e) => {
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft" && e.key !== "Home" && e.key !== "End") return;
+      e.preventDefault();
+      let next = index;
+      if (e.key === "ArrowRight") next = (index + 1) % themeBtns.length;
+      if (e.key === "ArrowLeft") next = (index - 1 + themeBtns.length) % themeBtns.length;
+      if (e.key === "Home") next = 0;
+      if (e.key === "End") next = themeBtns.length - 1;
+      themeBtns[next].focus();
+      themeBtns[next].click();
     });
   });
 
@@ -974,6 +1371,31 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   });
+
+  // Changelog: latest release open, older releases collapsed behind a button
+  const olderToggle = document.getElementById("toggle-older-releases");
+  const olderList = document.getElementById("older-releases-list");
+  const olderToggleText = document.getElementById("toggle-older-text");
+
+  function applyChangelogState(expanded) {
+    if (!olderToggle || !olderList) return;
+    olderList.classList.toggle("collapsed", !expanded);
+    olderList.setAttribute("aria-hidden", expanded ? "false" : "true");
+    olderToggle.setAttribute("aria-expanded", expanded ? "true" : "false");
+    if (olderToggleText && i18n[currentLang]) {
+      const key = expanded ? "changelog.hideOlder" : "changelog.showOlder";
+      if (i18n[currentLang][key]) olderToggleText.textContent = i18n[currentLang][key];
+    }
+  }
+
+  if (olderToggle && olderList) {
+    // Respect the current state (collapsed by default in markup).
+    applyChangelogState(olderToggle.getAttribute("aria-expanded") === "true");
+    olderToggle.addEventListener("click", () => {
+      const expanded = olderToggle.getAttribute("aria-expanded") !== "true";
+      applyChangelogState(expanded);
+    });
+  }
 
   // Quick Command Copy Button
   const copyQuickCmd = document.getElementById("copy-quick-cmd");

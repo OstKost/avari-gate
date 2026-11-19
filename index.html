@@ -95,6 +95,25 @@
       
       <div class="container hero-container">
         <div class="hero-content">
+          <!-- Connection Status Sphere (Real Canvas 2D / 3D orbital particle effect from AvariGate) -->
+          <div class="hero-sphere-badge" id="hero-sphere-badge" role="region" aria-label="Статус защищённого соединения">
+            <div class="hero-sphere-canvas-wrap">
+              <div class="hero-sphere-ripples" aria-hidden="true">
+                <div class="hero-ripple hero-ripple-1"></div>
+                <div class="hero-ripple hero-ripple-2"></div>
+                <div class="hero-ripple hero-ripple-3"></div>
+              </div>
+              <canvas id="hero-sphere-canvas" width="160" height="160" class="hero-sphere-canvas" aria-hidden="true"></canvas>
+            </div>
+            <div class="hero-sphere-meta">
+              <div class="hero-sphere-pill">
+                <span class="hero-sphere-dot" aria-hidden="true"></span>
+                <span class="hero-sphere-status" id="hero-sphere-status" data-i18n="hero.sphereConnected">Защищённый туннель активен</span>
+              </div>
+              <span class="hero-sphere-sub" data-i18n="hero.sphereEngine">enfein/mbox 1.14.3 • Mieru + Hysteria 2 + AmneziaWG</span>
+            </div>
+          </div>
+
           <h1 class="hero-title" data-i18n="hero.title">
             Приватный туннель для <span class="gradient-text">свободного</span> интернета
           </h1>
@@ -106,11 +125,13 @@
           <!-- Action Buttons -->
           <div class="hero-cta-group">
             <a href="#downloads" class="btn-primary btn-lg" id="hero-download-btn">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                <polyline points="7 10 12 15 17 10"></polyline>
-                <line x1="12" y1="15" x2="12" y2="3"></line>
-              </svg>
+              <span class="btn-icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" class="download-icon">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+              </span>
               <span id="hero-download-label">Скачать AvariGate</span>
             </a>
 
@@ -149,8 +170,11 @@
               <button type="button" class="preview-tab" data-target="server" data-i18n="hero.tabServer" role="tab" aria-selected="false" aria-controls="preview-screen-wrapper">Сервер TUI</button>
             </div>
 
-            <div class="preview-screen-wrapper" id="preview-screen-wrapper">
-              <img src="./assets/screenshots/desktop-connected.png" alt="Интерфейс AvariGate Desktop" class="preview-img active" id="preview-img" width="1024" height="640">
+            <div class="preview-screen-wrapper" id="preview-screen-wrapper" role="tabpanel" tabindex="0">
+              <div class="preview-img-container" id="preview-img-container">
+                <img src="./assets/screenshots/desktop-connected.png" alt="Интерфейс AvariGate Desktop" class="preview-img preview-img-active" id="preview-img" width="1024" height="640">
+                <img src="./assets/screenshots/desktop-connected.png" alt="" class="preview-img preview-img-next" id="preview-img-next" width="1024" height="640" style="opacity: 0;" aria-hidden="true">
+              </div>
               <div class="preview-caption" id="preview-caption" data-i18n="hero.captionConnected">
                 Главный экран: статус защищённого туннеля, таймер сессии и мгновенное управление соединением.
               </div>
@@ -496,8 +520,11 @@
                 </div>
               </div>
 
-              <div class="server-screen-wrapper">
-                <img src="./assets/screenshots/server-tui-wizard.png" alt="mieru-admin TUI Setup Wizard" class="tui-img" id="tui-screen-img" width="800" height="480">
+              <div class="server-screen-wrapper" id="server-screen-wrapper" role="tabpanel" tabindex="0">
+                <div class="server-img-container" id="server-img-container">
+                  <img src="./assets/screenshots/server-tui-wizard.png" alt="mieru-admin TUI Setup Wizard" class="tui-img tui-img-active" id="tui-screen-img" width="800" height="480">
+                  <img src="./assets/screenshots/server-tui-wizard.png" alt="" class="tui-img tui-img-next" id="tui-screen-img-next" width="800" height="480" style="opacity: 0;" aria-hidden="true">
+                </div>
                 <div class="tui-caption-bar">
                   <span class="tui-badge">SSH TUI</span>
                   <span class="tui-caption-text" id="tui-caption" data-i18n="server.captionWizard">
@@ -532,6 +559,14 @@
             <span class="theme-dot dot-dragons" aria-hidden="true"></span>
             <span class="theme-btn-title">DragonGate (Jade Dragon)</span>
           </button>
+          <button type="button" class="theme-btn" data-theme-id="pirates" role="tab" aria-selected="false">
+            <span class="theme-dot dot-pirates" aria-hidden="true"></span>
+            <span class="theme-btn-title" data-i18n="themes.btnPirates">CorsairGate (Pirate Helm)</span>
+          </button>
+          <button type="button" class="theme-btn" data-theme-id="kawaii" role="tab" aria-selected="false">
+            <span class="theme-dot dot-kawaii" aria-hidden="true"></span>
+            <span class="theme-btn-title" data-i18n="themes.btnKawaii">KawaiiGate (Pastel Mascot)</span>
+          </button>
         </div>
 
         <!-- Dynamic Theme Showcase Display -->
@@ -560,8 +595,22 @@
             </div>
           </div>
 
-          <div class="theme-display-preview">
-            <img src="./assets/screenshots/desktop-connected.png" alt="AvariGate Theme Preview" class="theme-preview-img" id="theme-screenshot" width="700" height="440">
+          <div class="theme-display-preview" id="theme-display-preview">
+            <div class="theme-preview-container" id="theme-preview-container">
+              <img src="./assets/screenshots/desktop-connected.png" alt="AvariGate Theme Preview" class="theme-preview-img" id="theme-screenshot" width="700" height="440">
+              <div class="theme-placeholder-view" id="theme-placeholder-view" style="display: none;">
+                <div class="placeholder-icon-wrap">
+                  <img src="./assets/logos/pirates-logo.svg" alt="" class="placeholder-logo" id="placeholder-logo" width="64" height="64">
+                </div>
+                <div class="placeholder-tag" data-i18n="themes.realScreenshotPending">Реальный скриншот темы готовится</div>
+                <p class="placeholder-desc" data-i18n="themes.noMockupPolicy">
+                  В соответствии с политикой честности проекта макеты не подменяют реальные снимки приложения. Скриншот будет добавлен после релизной съёмки интерфейса.
+                </p>
+                <div class="placeholder-subnote" data-i18n="themes.themeAvailable">
+                  Тема полностью реализована и доступна для выбора в настройках AvariGate.
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -578,97 +627,139 @@
           </p>
         </div>
 
-        <div class="downloads-grid">
-          <!-- macOS Apple Silicon: AvariGate -->
-          <div class="download-card featured" id="card-macos">
-            <div class="download-badge" data-i18n="downloads.appleSilicon">macOS Apple Silicon</div>
-            <div class="download-icon-box" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor">
-                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.92-2.85-.9.04-1.99.6-2.63 1.35-.57.65-1.07 1.72-.94 2.74 1.01.08 2.03-.49 2.65-1.24z"/>
-              </svg>
+        <!-- Client Applications Group -->
+        <div class="downloads-group client-downloads-group">
+          <div class="downloads-group-header">
+            <div>
+              <h3 class="downloads-group-title" data-i18n="downloads.clientTitle">Клиентские приложения</h3>
+              <p class="downloads-group-subtitle" data-i18n="downloads.clientSubtitle">Полнофункциональные графические клиенты для персональных устройств</p>
             </div>
-            <h3 class="download-title">AvariGate macOS</h3>
-            <span class="download-target">macOS 12+ (M1 / M2 / M3 / M4)</span>
-            <div class="download-file-info">
-              <code id="file-macos-name">AvariGate_0.6.0_aarch64.dmg</code>
-              <span class="file-size" id="file-macos-size">~27.3 МБ</span>
-            </div>
-            <a href="https://github.com/OstKost/avari-gate/releases/download/v0.6.0/AvariGate_0.6.0_aarch64.dmg" class="btn-primary btn-block" id="btn-download-macos">
-              <span data-i18n="downloads.downloadDmgAvari">Скачать .DMG (AvariGate)</span>
-            </a>
-            <div class="download-secondary-link">
-              <span class="subtle-note" data-i18n="downloads.macosNote">Релизный .DMG с ad-hoc подписью и launchd-демоном</span>
-            </div>
+            <span class="downloads-group-badge" data-i18n="downloads.clientBadge">Desktop & Mobile GUI</span>
           </div>
 
-          <!-- Android: APK (Points to verified releases) -->
-          <div class="download-card featured" id="card-android">
-            <div class="download-badge" data-i18n="downloads.androidBadge">Android 8.0+</div>
-            <div class="download-icon-box" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor">
-                <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.551 0 .9993.4482.9993.9993.0001.5511-.4483.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5896 8.3585 13.8566 8 12 8s-3.5896.3585-5.1368.9507L4.8409 5.4477a.416.416 0 00-.5676-.1521.416.416 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3432-4.1021-2.6889-7.5743-6.1185-9.4396"/>
-              </svg>
+          <div class="downloads-grid client-downloads-grid">
+            <!-- macOS Apple Silicon: AvariGate -->
+            <div class="download-card featured" id="card-macos">
+              <div class="download-badge" data-i18n="downloads.appleSilicon">macOS Apple Silicon</div>
+              <div class="download-icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor">
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.92-2.85-.9.04-1.99.6-2.63 1.35-.57.65-1.07 1.72-.94 2.74 1.01.08 2.03-.49 2.65-1.24z"/>
+                </svg>
+              </div>
+              <h3 class="download-title">AvariGate macOS</h3>
+              <span class="download-target">macOS 12+ (M1 / M2 / M3 / M4)</span>
+              <div class="download-file-info">
+                <code id="file-macos-name">AvariGate_0.6.0_aarch64.dmg</code>
+                <span class="file-size" id="file-macos-size">~27.3 МБ</span>
+              </div>
+              <a href="https://github.com/OstKost/avari-gate/releases/download/v0.6.0/AvariGate_0.6.0_aarch64.dmg" class="btn-primary btn-block" id="btn-download-macos">
+                <span data-i18n="downloads.downloadDmgAvari">Скачать .DMG (AvariGate)</span>
+              </a>
+              <div class="download-secondary-link">
+                <span class="subtle-note" data-i18n="downloads.macosNote">Релизный .DMG с ad-hoc подписью и launchd-демоном</span>
+              </div>
             </div>
-            <h3 class="download-title">AvariGate Android</h3>
-            <span class="download-target">Android 8+ (arm64-v8a & x86_64)</span>
-            <div class="download-file-info">
-              <code id="file-android-name" data-i18n="downloads.androidFileNote">Сборка в GitHub Releases</code>
-              <span class="file-size" id="file-android-size">~155 МБ</span>
+
+            <!-- Android: APK (Points to verified releases) -->
+            <div class="download-card featured" id="card-android">
+              <div class="download-badge" data-i18n="downloads.androidBadge">Android 8.0+</div>
+              <div class="download-icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor">
+                  <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.551 0 .9993.4482.9993.9993.0001.5511-.4483.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5896 8.3585 13.8566 8 12 8s-3.5896.3585-5.1368.9507L4.8409 5.4477a.416.416 0 00-.5676-.1521.416.416 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3432-4.1021-2.6889-7.5743-6.1185-9.4396"/>
+                </svg>
+              </div>
+              <h3 class="download-title">AvariGate Android</h3>
+              <span class="download-target">Android 8+ (arm64-v8a & x86_64)</span>
+              <div class="download-file-info">
+                <code id="file-android-name" data-i18n="downloads.androidFileNote">Сборка в GitHub Releases</code>
+                <span class="file-size" id="file-android-size">~155 МБ</span>
+              </div>
+              <a href="https://github.com/OstKost/avari-gate/releases/latest" class="btn-primary btn-block" id="btn-download-android" target="_blank" rel="noopener noreferrer">
+                <span id="btn-download-android-label" data-i18n="downloads.downloadApkAvari">Смотреть релиз Android</span>
+              </a>
+              <div class="download-secondary-link">
+                <span class="subtle-note" data-i18n="downloads.androidNote">ARM64 и x86_64 сборка с системным VpnService</span>
+              </div>
             </div>
-            <a href="https://github.com/OstKost/avari-gate/releases/latest" class="btn-primary btn-block" id="btn-download-android" target="_blank" rel="noopener noreferrer">
-              <span id="btn-download-android-label" data-i18n="downloads.downloadApkAvari">Смотреть релиз Android</span>
-            </a>
-            <div class="download-secondary-link">
-              <span class="subtle-note" data-i18n="downloads.androidNote">ARM64 и x86_64 сборка с системным VpnService</span>
+
+            <!-- Linux Desktop & Others -->
+            <div class="download-card" id="card-linux">
+              <div class="download-badge" data-i18n="downloads.linuxDesktopBadge">Linux Desktop</div>
+              <div class="download-icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                  <line x1="8" y1="21" x2="16" y2="21"></line>
+                  <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+              </div>
+              <h3 class="download-title">Пакеты Linux GUI</h3>
+              <span class="download-target">Ubuntu, Debian (.deb) & Arch (.pkg.tar.zst)</span>
+              <div class="download-file-info">
+                <code>.deb / .pkg.tar.zst</code>
+                <span class="file-size">~15–19 МБ</span>
+              </div>
+              <a href="https://github.com/OstKost/avari-gate/releases" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-block">
+                <span data-i18n="downloads.viewLinuxPackages">Смотреть пакеты в Releases</span>
+              </a>
+              <div class="download-secondary-link">
+                <span class="subtle-note" data-i18n="downloads.linuxPackagesNote">Стабильные сборки desktop для Linux</span>
+              </div>
             </div>
           </div>
+        </div>
 
-          <!-- Linux Server: mieru-admin -->
-          <div class="download-card" id="card-server">
-            <div class="download-badge" data-i18n="downloads.serverBadge">Linux Server</div>
-            <div class="download-icon-box" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
-                <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
-                <line x1="6" y1="6" x2="6.01" y2="6"></line>
-                <line x1="6" y1="18" x2="6.01" y2="18"></line>
-              </svg>
+        <!-- Server Stack Group (Separated from Client Downloads) -->
+        <div class="downloads-group server-downloads-group">
+          <div class="downloads-group-header">
+            <div>
+              <h3 class="downloads-group-title" data-i18n="downloads.serverGroupTitle">Серверный стек</h3>
+              <p class="downloads-group-subtitle" data-i18n="downloads.serverGroupSubtitle">Статический бинарник для развёртывания узлов Mieru, Hysteria 2 и AmneziaWG</p>
             </div>
-            <h3 class="download-title">mieru-admin Server</h3>
-            <span class="download-target">Ubuntu 24.04 / Debian 13 (x86_64)</span>
-            <div class="download-file-info">
-              <code id="file-server-name">AvariGate-admin-linux-amd64.tar.gz</code>
-              <span class="file-size" id="file-server-size">~5.5 МБ</span>
-            </div>
-            <a href="https://github.com/OstKost/avari-gate/releases/download/v0.6.0/AvariGate-admin-linux-amd64.tar.gz" class="btn-secondary btn-block" id="btn-download-server">
-              <span data-i18n="downloads.downloadServer">Скачать бинарник сервера</span>
-            </a>
-            <div class="download-secondary-link">
-              <span class="subtle-note" data-i18n="downloads.serverNote">Включает TUI, REST API daemon и systemd unit</span>
-            </div>
+            <span class="downloads-group-badge badge-server" data-i18n="downloads.serverGroupBadge">Linux Service & TUI CLI</span>
           </div>
 
-          <!-- Linux Desktop & Others -->
-          <div class="download-card" id="card-linux">
-            <div class="download-badge" data-i18n="downloads.linuxDesktopBadge">Linux Desktop</div>
-            <div class="download-icon-box" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                <line x1="8" y1="21" x2="16" y2="21"></line>
-                <line x1="12" y1="17" x2="12" y2="21"></line>
-              </svg>
+          <div class="server-download-row">
+            <!-- Linux Server Card -->
+            <div class="download-card server-card-featured" id="card-server">
+              <div class="download-badge badge-server-pill" data-i18n="downloads.serverBadge">Linux Server</div>
+              <div class="download-icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                  <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                  <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                  <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                </svg>
+              </div>
+              <h3 class="download-title">mieru-admin Server</h3>
+              <span class="download-target">Ubuntu 24.04 / Debian 13 (x86_64)</span>
+              <div class="download-file-info">
+                <code id="file-server-name">AvariGate-admin-linux-amd64.tar.gz</code>
+                <span class="file-size" id="file-server-size">~5.5 МБ</span>
+              </div>
+              <a href="https://github.com/OstKost/avari-gate/releases/download/v0.6.0/AvariGate-admin-linux-amd64.tar.gz" class="btn-primary btn-block btn-server-download" id="btn-download-server">
+                <span data-i18n="downloads.downloadServer">Скачать бинарник сервера</span>
+              </a>
+              <div class="download-secondary-link">
+                <span class="subtle-note" data-i18n="downloads.serverNote">Включает TUI, REST API daemon и systemd unit</span>
+              </div>
             </div>
-            <h3 class="download-title">Пакеты Linux GUI</h3>
-            <span class="download-target">Ubuntu, Debian (.deb) & Arch (.pkg.tar.zst)</span>
-            <div class="download-file-info">
-              <code>.deb / .pkg.tar.zst</code>
-              <span class="file-size">~15–19 МБ</span>
-            </div>
-            <a href="https://github.com/OstKost/avari-gate/releases" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-block">
-              <span data-i18n="downloads.viewLinuxPackages">Смотреть пакеты в Releases</span>
-            </a>
-            <div class="download-secondary-link">
-              <span class="subtle-note" data-i18n="downloads.linuxPackagesNote">Стабильные сборки desktop для Linux</span>
+
+            <!-- Server Quick Info Box -->
+            <div class="server-quick-start-box">
+              <div class="quick-start-header">
+                <span class="quick-start-title" data-i18n="downloads.serverQuickTitle">Быстрый запуск на сервере (SSH):</span>
+                <span class="quick-start-tag">Ubuntu 24.04 / Debian 13</span>
+              </div>
+              <div class="quick-start-code-wrap">
+                <code class="quick-start-code" id="server-install-cmd">tar -xzf AvariGate-admin-linux-amd64.tar.gz && sudo ./mieru-admin wizard</code>
+                <button type="button" class="btn-copy-code" id="copy-server-cmd" aria-label="Скопировать команду запуска" data-copy-target="server-install-cmd" data-i18n="common.copy">Копировать</button>
+              </div>
+              <p class="quick-start-desc" data-i18n="downloads.serverQuickDesc">
+                Автоматически настроит systemd, валидирует порты и выведет QR-код для моментального импорта в клиент.
+              </p>
+              <div class="server-anchor-link-wrap">
+                <a href="#server" class="link-to-server-tui" data-i18n="downloads.learnMoreServer">Подробнее о возможностях mieru-admin →</a>
+              </div>
             </div>
           </div>
         </div>
@@ -749,98 +840,111 @@
               </ul>
             </div>
           </div>
+        </div>
 
-          <!-- Release v0.5.0 -->
-          <div class="timeline-item">
-            <div class="timeline-badge" aria-hidden="true">v0.5.0</div>
-            <div class="timeline-card">
-              <div class="timeline-header">
-                <h3 class="timeline-title">v0.5.0 — Android редизайн, живой трафик, QR-сканер и секундомер переключений</h3>
-                <span class="timeline-date">19 ноября 2026</span>
+        <!-- Toggle Button for Older Releases -->
+        <div class="changelog-toggle-wrap">
+          <button type="button" class="btn-toggle-changelog" id="toggle-older-releases" aria-expanded="false" aria-controls="older-releases-list">
+            <span class="toggle-icon" aria-hidden="true">▾</span>
+            <span id="toggle-older-text" data-i18n="changelog.showOlder">Показать предыдущие релизы (v0.5.0, v0.4.0, v0.3.x, v0.1.0)</span>
+          </button>
+        </div>
+
+        <!-- Older Releases (Collapsed by default, accessible) -->
+        <div class="older-releases-wrapper collapsed" id="older-releases-list" aria-hidden="true">
+          <div class="timeline older-timeline">
+            <!-- Release v0.5.0 -->
+            <div class="timeline-item">
+              <div class="timeline-badge" aria-hidden="true">v0.5.0</div>
+              <div class="timeline-card">
+                <div class="timeline-header">
+                  <h3 class="timeline-title">v0.5.0 — Android редизайн, живой трафик, QR-сканер и секундомер переключений</h3>
+                  <span class="timeline-date">19 ноября 2026</span>
+                </div>
+                <ul class="timeline-list">
+                  <li>
+                    <strong>Полный редизайн Android:</strong> плавающая навигационная капсула, карусель тем, тактильный отклик и сигилы состояния.
+                  </li>
+                  <li>
+                    <strong>Камера и QR-сканер:</strong> встроенный сканер CameraX + ZXing для моментального сканирования Mieru, Hysteria 2, WireGuard и AmneziaWG.
+                  </li>
+                  <li>
+                    <strong>Подтверждённое живое туннелирование:</strong> успешные сетевые тесты TCP Mieru и WireGuard/AWG на эмуляторе с подтверждением обратного трафика.
+                  </li>
+                  <li>
+                    <strong>Секундомер в Desktop UI:</strong> визуализация стадий переключения профилей (stopping, releasing, starting, verifying) с таймером в интерфейсе.
+                  </li>
+                  <li>
+                    <strong>Генерация QR в Server TUI:</strong> вывод QR-кода прямо в терминале при создании или просмотре профиля клиента.
+                  </li>
+                </ul>
               </div>
-              <ul class="timeline-list">
-                <li>
-                  <strong>Полный редизайн Android:</strong> плавающая навигационная капсула, карусель тем, тактильный отклик и сигилы состояния.
-                </li>
-                <li>
-                  <strong>Камера и QR-сканер:</strong> встроенный сканер CameraX + ZXing для моментального сканирования Mieru, Hysteria 2, WireGuard и AmneziaWG.
-                </li>
-                <li>
-                  <strong>Подтверждённое живое туннелирование:</strong> успешные сетевые тесты TCP Mieru и WireGuard/AWG на эмуляторе с подтверждением обратного трафика.
-                </li>
-                <li>
-                  <strong>Секундомер в Desktop UI:</strong> визуализация стадий переключения профилей (stopping, releasing, starting, verifying) с таймером в интерфейсе.
-                </li>
-                <li>
-                  <strong>Генерация QR в Server TUI:</strong> вывод QR-кода прямо в терминале при создании или просмотре профиля клиента.
-                </li>
-              </ul>
             </div>
-          </div>
 
-          <!-- Release v0.4.0 -->
-          <div class="timeline-item">
-            <div class="timeline-badge" aria-hidden="true">v0.4.0</div>
-            <div class="timeline-card">
-              <div class="timeline-header">
-                <h3 class="timeline-title">v0.4.0 — Запуск мобильного клиента AvariGate для Android</h3>
-                <span class="timeline-date">18 ноября 2026</span>
+            <!-- Release v0.4.0 -->
+            <div class="timeline-item">
+              <div class="timeline-badge" aria-hidden="true">v0.4.0</div>
+              <div class="timeline-card">
+                <div class="timeline-header">
+                  <h3 class="timeline-title">v0.4.0 — Запуск мобильного клиента AvariGate для Android</h3>
+                  <span class="timeline-date">18 ноября 2026</span>
+                </div>
+                <ul class="timeline-list">
+                  <li>
+                    <strong>Android VpnService:</strong> интеграция мобильного ядра с системной службой Android, сохранение сессии в фоне.
+                  </li>
+                  <li>
+                    <strong>Мультиархитектурность:</strong> сборка под arm64-v8a и x86_64, поддержка Android 8.0+ (API 26).
+                  </li>
+                  <li>
+                    <strong>Единая логика настроек:</strong> перенос правил сплит-туннелирования и failover с настольного клиента.
+                  </li>
+                </ul>
               </div>
-              <ul class="timeline-list">
-                <li>
-                  <strong>Android VpnService:</strong> интеграция мобильного ядра с системной службой Android, сохранение сессии в фоне.
-                </li>
-                <li>
-                  <strong>Мультиархитектурность:</strong> сборка под arm64-v8a и x86_64, поддержка Android 8.0+ (API 26).
-                </li>
-                <li>
-                  <strong>Единая логика настроек:</strong> перенос правил сплит-туннелирования и failover с настольного клиента.
-                </li>
-              </ul>
             </div>
-          </div>
 
-          <!-- Release v0.3.0 - v0.3.2 -->
-          <div class="timeline-item">
-            <div class="timeline-badge" aria-hidden="true">v0.3.x</div>
-            <div class="timeline-card">
-              <div class="timeline-header">
-                <h3 class="timeline-title">v0.3.0–v0.3.2 — Linux дистрибуция, мультипрофили и темы</h3>
-                <span class="timeline-date">17 ноября 2026</span>
+            <!-- Release v0.3.0 - v0.3.2 -->
+            <div class="timeline-item">
+              <div class="timeline-badge" aria-hidden="true">v0.3.x</div>
+              <div class="timeline-card">
+                <div class="timeline-header">
+                  <h3 class="timeline-title">v0.3.0–v0.3.2 — Linux дистрибуция, мультипрофили и темы</h3>
+                  <span class="timeline-date">17 ноября 2026</span>
+                </div>
+                <ul class="timeline-list">
+                  <li>
+                    <strong>Linux пакеты:</strong> сборка пакетов .deb для Ubuntu 24.04 и Debian 13, а также .pkg.tar.zst для Arch Linux.
+                  </li>
+                  <li>
+                    <strong>Темы оформления:</strong> релиз авторских тем DragonGate (нефрит и дракон) и CorsairGate (морской штурвал и латунь).
+                  </li>
+                  <li>
+                    <strong>Мультипрофильность:</strong> менеджер нескольких серверов с настраиваемым приоритетом обхода при автопереключении.
+                  </li>
+                  <li>
+                    <strong>Серверный TUI:</strong> первый релиз интерактивной консоли управления <code>mieru-admin</code> с поддержкой Hysteria 2 и AmneziaWG.
+                  </li>
+                </ul>
               </div>
-              <ul class="timeline-list">
-                <li>
-                  <strong>Linux пакеты:</strong> сборка пакетов .deb для Ubuntu 24.04 и Debian 13, а также .pkg.tar.zst для Arch Linux.
-                </li>
-                <li>
-                  <strong>Темы оформления:</strong> релиз авторских тем DragonGate (нефрит и дракон) и CorsairGate (морской штурвал и латунь).
-                </li>
-                <li>
-                  <strong>Мультипрофильность:</strong> менеджер нескольких серверов с настраиваемым приоритетом обхода при автопереключении.
-                </li>
-                <li>
-                  <strong>Серверный TUI:</strong> первый релиз интерактивной консоли управления <code>mieru-admin</code> с поддержкой Hysteria 2 и AmneziaWG.
-                </li>
-              </ul>
             </div>
-          </div>
 
-          <!-- Release v0.1.0 -->
-          <div class="timeline-item">
-            <div class="timeline-badge" aria-hidden="true">v0.1.0</div>
-            <div class="timeline-card">
-              <div class="timeline-header">
-                <h3 class="timeline-title">v0.1.0 — Первый MVP релиз для macOS Apple Silicon</h3>
-                <span class="timeline-date">12 ноября 2026</span>
+            <!-- Release v0.1.0 -->
+            <div class="timeline-item">
+              <div class="timeline-badge" aria-hidden="true">v0.1.0</div>
+              <div class="timeline-card">
+                <div class="timeline-header">
+                  <h3 class="timeline-title">v0.1.0 — Первый MVP релиз для macOS Apple Silicon</h3>
+                  <span class="timeline-date">12 ноября 2026</span>
+                </div>
+                <ul class="timeline-list">
+                  <li>
+                    <strong>Архитектурный фундамент:</strong> связка Tauri v2 + Rust, безопасный launchd-helper и ядро mbox 1.14.3.
+                  </li>
+                  <li>
+                    <strong>Базовое туннелирование:</strong> рабочий TCP Mieru клиент, системный трей macOS и чистая зачистка маршрутов.
+                  </li>
+                </ul>
               </div>
-              <ul class="timeline-list">
-                <li>
-                  <strong>Архитектурный фундамент:</strong> связка Tauri v2 + Rust, безопасный launchd-helper и ядро mbox 1.14.3.
-                </li>
-                <li>
-                  <strong>Базовое туннелирование:</strong> рабочий TCP Mieru клиент, системный трей macOS и чистая зачистка маршрутов.
-                </li>
-              </ul>
             </div>
           </div>
         </div>
@@ -863,48 +967,56 @@
             <div class="arch-box box-ui">
               <div class="box-icon" aria-hidden="true">🖥️</div>
               <div class="box-content">
-                <h3 class="arch-box-title">Графический интерфейс</h3>
-                <p>Tauri v2 (Rust + Vite) или Jetpack Compose (Android)</p>
-                <span class="arch-badge badge-safe">UID: Обычный пользователь (Без root)</span>
+                <h3 class="arch-box-title" data-i18n="arch.uiTitle">Графический интерфейс</h3>
+                <p data-i18n="arch.uiDesc">Tauri v2 (Rust + Vite) или Jetpack Compose (Android)</p>
               </div>
+              <span class="arch-badge badge-safe" data-i18n="arch.uiBadge">UID: Обычный пользователь (Без root)</span>
             </div>
           </div>
 
           <div class="arch-arrow" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-            <span class="arrow-label">Unix Domain Socket / IPC (0600)</span>
+            <div class="packet-track">
+              <span class="packet-line"></span>
+              <span class="packet-dot packet-dot-1"></span>
+              <span class="packet-dot packet-dot-2"></span>
+              <svg viewBox="0 0 24 24" class="arrow-head" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 6 15 12 9 18"></polyline>
+              </svg>
+            </div>
+            <span class="arrow-label" data-i18n="arch.socketLabel">Unix-сокет / IPC (0600)</span>
           </div>
 
           <div class="arch-col">
             <div class="arch-box box-helper">
               <div class="box-icon" aria-hidden="true">🛡️</div>
               <div class="box-content">
-                <h3 class="arch-box-title">Системный демон (Helper)</h3>
-                <p>launchd (macOS) / Polkit (Linux) / VpnService (Android)</p>
-                <span class="arch-badge badge-priv">Строгая валидация PID и UID</span>
+                <h3 class="arch-box-title" data-i18n="arch.helperTitle">Системный демон (Helper)</h3>
+                <p data-i18n="arch.helperDesc">launchd (macOS) / Polkit (Linux) / VpnService (Android)</p>
               </div>
+              <span class="arch-badge badge-priv" data-i18n="arch.helperBadge">Строгая валидация PID и UID</span>
             </div>
           </div>
 
           <div class="arch-arrow" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-            <span class="arrow-label">Управление ядром</span>
+            <div class="packet-track">
+              <span class="packet-line"></span>
+              <span class="packet-dot packet-dot-1"></span>
+              <span class="packet-dot packet-dot-2"></span>
+              <svg viewBox="0 0 24 24" class="arrow-head" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 6 15 12 9 18"></polyline>
+              </svg>
+            </div>
+            <span class="arrow-label" data-i18n="arch.ipcCore">Управление ядром</span>
           </div>
 
           <div class="arch-col">
             <div class="arch-box box-core">
               <div class="box-icon" aria-hidden="true">⚡</div>
               <div class="box-content">
-                <h3 class="arch-box-title">Ядро enfein/mbox 1.14.3</h3>
-                <p>Mieru 3.38 + Hysteria 2 + AmneziaWG 3.1 + TUN</p>
-                <span class="arch-badge badge-core">Таблица маршрутов & DNS</span>
+                <h3 class="arch-box-title" data-i18n="arch.coreTitle">Ядро enfein/mbox 1.14.3</h3>
+                <p data-i18n="arch.coreDesc">Mieru 3.38 + Hysteria 2 + AmneziaWG 3.1 + TUN</p>
               </div>
+              <span class="arch-badge badge-core" data-i18n="arch.coreBadge">Таблица маршрутов & DNS</span>
             </div>
           </div>
         </div>
