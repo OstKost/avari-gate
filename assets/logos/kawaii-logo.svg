@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <title>KawaiiGate</title>
+  <defs>
+    <radialGradient id="kawaii-logo-glow" cx="0.5" cy="0.45" r="0.55">
+      <stop offset="0" stop-color="#FFB7D5" stop-opacity="0.55"/>
+      <stop offset="0.65" stop-color="#C9B4FF" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#C9B4FF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="kawaii-logo-fur" x1="0" y1="0" x2="0.8" y2="1">
+      <stop offset="0" stop-color="#FFF9FC"/>
+      <stop offset="1" stop-color="#FFE3EF"/>
+    </linearGradient>
+    <linearGradient id="kawaii-logo-hair" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E4D8FF"/>
+      <stop offset="1" stop-color="#B79CFF"/>
+    </linearGradient>
+    <linearGradient id="kawaii-logo-scarf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FF8FB8"/>
+      <stop offset="1" stop-color="#D6336C"/>
+    </linearGradient>
+    <linearGradient id="kawaii-logo-heart" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFC1D8"/>
+      <stop offset="1" stop-color="#FF6FA5"/>
+    </linearGradient>
+  </defs>
+
+  <circle cx="256" cy="256" r="244" fill="url(#kawaii-logo-glow)"/>
+  <circle cx="256" cy="256" r="236" stroke="#FFB7D5" stroke-width="3" stroke-dasharray="5 22" opacity="0.55"/>
+
+  <path d="M 126 456 C 131 376 189 338 256 338 C 323 338 381 376 386 456 Z" fill="url(#kawaii-logo-scarf)" stroke="#5A2540" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M 202 352 C 224 372 288 372 310 352" stroke="#FFD1E3" stroke-width="13" stroke-linecap="round" opacity="0.9"/>
+
+  <path d="M 132 164 L 108 62 C 105 48 120 39 132 49 L 204 110 Z" fill="url(#kawaii-logo-fur)" stroke="#5A2540" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M 145 139 L 131 84 L 173 122 Z" fill="#FFB7D5"/>
+  <path d="M 380 164 L 404 62 C 407 48 392 39 380 49 L 308 110 Z" fill="url(#kawaii-logo-fur)" stroke="#5A2540" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M 367 139 L 381 84 L 339 122 Z" fill="#FFB7D5"/>
+
+  <path d="M 256 92 C 368 92 430 170 430 264 C 430 360 368 428 256 428 C 144 428 82 360 82 264 C 82 170 144 92 256 92 Z" fill="url(#kawaii-logo-fur)" stroke="#5A2540" stroke-width="9"/>
+
+  <path d="M 246 94 C 226 58 246 31 276 42 C 298 50 300 76 284 92 C 272 84 258 85 246 94 Z" fill="url(#kawaii-logo-hair)" stroke="#5A2540" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M 94 236 C 70 266 72 312 92 346 C 113 322 119 284 116 250 Z" fill="url(#kawaii-logo-hair)" stroke="#5A2540" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M 418 236 C 442 266 440 312 420 346 C 399 322 393 284 396 250 Z" fill="url(#kawaii-logo-hair)" stroke="#5A2540" stroke-width="6" stroke-linejoin="round"/>
+
+  <path d="M 180 252 C 196 224 228 224 244 252" stroke="#3A1024" stroke-width="12" stroke-linecap="round"/>
+  <path d="M 268 252 C 284 224 316 224 332 252" stroke="#3A1024" stroke-width="12" stroke-linecap="round"/>
+  <path d="M 174 242 L 164 230 M 338 242 L 348 230" stroke="#3A1024" stroke-width="7" stroke-linecap="round"/>
+
+  <path d="M 250 290 L 262 290 L 256 298 Z" fill="#D6336C"/>
+  <path d="M 230 316 C 241 336 271 336 282 316" stroke="#3A1024" stroke-width="8" stroke-linecap="round"/>
+
+  <ellipse cx="164" cy="300" rx="26" ry="14" fill="#FF8FB8" opacity="0.42"/>
+  <ellipse cx="348" cy="300" rx="26" ry="14" fill="#FF8FB8" opacity="0.42"/>
+
+  <g stroke="#5A2540" stroke-width="5" stroke-linecap="round" opacity="0.5">
+    <path d="M 112 276 L 160 282"/>
+    <path d="M 106 306 L 160 300"/>
+    <path d="M 114 336 L 160 318"/>
+    <path d="M 400 276 L 352 282"/>
+    <path d="M 406 306 L 352 300"/>
+    <path d="M 398 336 L 352 318"/>
+  </g>
+
+  <path d="M 256 430 C 245 410 220 420 226 442 C 231 461 256 478 256 478 C 256 478 281 461 286 442 C 292 420 267 410 256 430 Z" fill="url(#kawaii-logo-heart)" stroke="#5A2540" stroke-width="5" stroke-linejoin="round"/>
+
+  <path d="M 66 158 C 59 145 40 150 46 166 C 49 176 66 188 66 188 C 66 188 83 176 86 166 C 92 150 73 145 66 158 Z" fill="#FF8FB8"/>
+  <path d="M 444 196 C 440 189 430 191 433 200 C 435 206 444 212 444 212 C 444 212 453 206 455 200 C 458 191 448 189 444 196 Z" fill="#C9B4FF"/>
+</svg>

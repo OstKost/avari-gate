@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-label="CorsairGate">
+
+  <defs>
+    <linearGradient id="logo-brass" x1="0" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#f8e3ae" />
+      <stop offset="0.45" stop-color="#d8a94a" />
+      <stop offset="1" stop-color="#7c5514" />
+    </linearGradient>
+    <linearGradient id="logo-parchment" x1="0" y1="0" x2="0.7" y2="1">
+      <stop offset="0" stop-color="#fff8e8" />
+      <stop offset="1" stop-color="#d8c49a" />
+    </linearGradient>
+    <linearGradient id="logo-crimson" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e04b52" />
+      <stop offset="1" stop-color="#8f1d28" />
+    </linearGradient>
+    <radialGradient id="logo-night" cx="0.4" cy="0.3" r="0.8">
+      <stop offset="0" stop-color="#12344a" />
+      <stop offset="1" stop-color="#050e16" />
+    </radialGradient>
+    <radialGradient id="logo-glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#d8a94a" stop-opacity="0.28" />
+      <stop offset="0.62" stop-color="#1d6b7a" stop-opacity="0.12" />
+      <stop offset="1" stop-color="#050e16" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <circle cx="100" cy="100" r="97" fill="url(#logo-night)" />
+  <circle cx="100" cy="100" r="97" stroke="url(#logo-brass)" stroke-width="2.4" />
+  <circle cx="100" cy="100" r="90" stroke="url(#logo-brass)" stroke-width="1" opacity="0.65" />
+  <g class="pirates-bones" stroke="url(#logo-parchment)" stroke-width="9" stroke-linecap="round" fill="url(#logo-parchment)" opacity="0.9"><line x1="57" y1="145" x2="143" y2="59" /><circle cx="54.4" cy="142.4" r="4" /><circle cx="59.6" cy="147.6" r="4" /><circle cx="140.4" cy="56.4" r="4" /><circle cx="145.6" cy="61.6" r="4" /><line x1="143" y1="145" x2="57" y2="59" /><circle cx="140.4" cy="142.4" r="4" /><circle cx="145.6" cy="147.6" r="4" /><circle cx="54.4" cy="56.4" r="4" /><circle cx="59.6" cy="61.6" r="4" /></g>
+  
+  <g class="pirates-skull">
+    <path d="M 100 50
+      C 124 50 138 67 138 88
+      C 138 101 132 111 122 117
+      L 122 130
+      C 122 137 116 142 106 142
+      L 94 142
+      C 84 142 78 137 78 130
+      L 78 117
+      C 68 111 62 101 62 88
+      C 62 67 76 50 100 50 Z"
+      fill="url(#logo-parchment)" stroke="#0a1a24" stroke-width="1.6" />
+    <ellipse cx="86" cy="88" rx="8.2" ry="9.4" fill="#0a1a24" />
+    <ellipse cx="114" cy="88" rx="8.2" ry="9.4" fill="#0a1a24" />
+    <path d="M 100 99 L 94.6 110 L 105.4 110 Z" fill="#0a1a24" />
+    <path d="M 86 130 L 114 130" stroke="#0a1a24" stroke-width="1.6" />
+    <g stroke="#0a1a24" stroke-width="1.4">
+      <line x1="92" y1="118" x2="92" y2="128" />
+      <line x1="97" y1="118" x2="97" y2="129" />
+      <line x1="103" y1="118" x2="103" y2="129" />
+      <line x1="108" y1="118" x2="108" y2="128" />
+    </g>
+    <path d="M 66 74 C 76 62 90 56 100 56 C 110 56 124 62 134 74
+      C 126 69 114 66 100 66 C 86 66 74 69 66 74 Z"
+      fill="url(#logo-crimson)" stroke="#5e121a" stroke-width="1" />
+    <path d="M 132 68 C 139 68 143 73 143 77 C 143 81 139 84 134 82 C 137 78 135 72 132 68 Z" fill="url(#logo-crimson)" />
+    <path d="M 66 73 C 60 74 57 79 58 83" stroke="#8f1d28" stroke-width="2.4" fill="none" stroke-linecap="round" />
+  </g>
+</svg>
