@@ -1,10 +1,9 @@
 /**
  * AvariGate — Landing Page Interactive Script
  * - Full bilingual support (RU / EN) with instant dynamic switching
- * - Theme selector with live palette shift and preview sync
- * - Interactive anime eye tracking widget for EyeVPN
- * - Hero preview tab switcher (desktop, profiles, split tunnel, mobile, server)
- * - Server TUI screen viewer
+ * - Theme selector with live palette shift and preview sync (Avari, Dragons, OtFront)
+ * - Hero preview tab switcher (desktop, profiles, split tunnel, otfront, dragons, android, server)
+ * - Server TUI screen viewer with tab synchronization, titles, and captions
  * - FAQ accordion & copy-to-clipboard helpers
  */
 
@@ -40,14 +39,14 @@ const i18n = {
     "hero.tabConnected": "Подключение",
     "hero.tabProfiles": "Профили",
     "hero.tabSplit": "Сплит-туннель",
-    "hero.tabEyeVPN": "Тема EyeVPN",
+    "hero.tabOtFront": "Тема OtFront",
     "hero.tabDragons": "Тема Dragons",
     "hero.tabAndroid": "Android",
     "hero.tabServer": "Сервер TUI",
     "hero.captionConnected": "Главный экран: статус туннеля, измерение задержки в 24 мс и таймер аптайма.",
     "hero.captionProfiles": "Список профилей: приоритет обхода, индикация протоколов Mieru, Hysteria 2 и AmneziaWG.",
     "hero.captionSplit": "Сплит-туннелирование: режимы Include/Exclude, маски доменов и переключатель Bypass LAN.",
-    "hero.captionEyeVPN": "Тема EyeVPN: интерактивный аниме-глаз, реагирующий на состояние туннеля и курсор.",
+    "hero.captionOtFront": "Тема OtFront: неоново-пурпурная киберпанк-эстетика со стилизованным визуальным индикатором соединения.",
     "hero.captionDragons": "Тема DragonGate: нефритовая сфера, обрамлённая восточным золотым драконом.",
     "hero.captionAndroid": "Android-клиент: капсула навигации, per-app маршрутизация и CameraX QR-сканер.",
     "hero.captionServer": "Консоль mieru-admin: дашборд состояния служб и портов прямо в терминале.",
@@ -63,7 +62,6 @@ const i18n = {
     "protocols.mieruBestFor": "Идеально для: самых строгих DPI и блокировок протоколов",
     "protocols.hysteriaDesc": "Молниеносный протокол поверх кастомного UDP/QUIC с обфускацией Salamander. Выжимает максимум скорости даже при высоких потерях пакетов и троттлинге провайдером.",
     "protocols.hysteriaFeat1": "Обфускация Salamander: трафик выглядит как произвольный UDP",
-    "protocols.hysteriaFeat1": "Обфускация Salamander: трафик выглядит как произвольный UDP",
     "protocols.hysteriaFeat2": "Маскировка SNI и самоподписанные ECDSA сертификаты",
     "protocols.hysteriaFeat3": "Борьба с потерями: Brutal Congestion Control до 20–30% потерь",
     "protocols.hysteriaBestFor": "Идеально для: нестабильных мобильных сетей и высоких скоростей",
@@ -74,7 +72,7 @@ const i18n = {
     "protocols.amneziaBestFor": "Идеально для: минимального пинга, игр и стриминга",
 
     // Features
-    "features.tag": "Инженерия & Надежность",
+    "features.tag": "Инженерия & Надёжность",
     "features.title": "Создан для непрерывной связи и защиты соединения",
     "features.subtitle": "Мы не просто завернули стороннее ядро в веб-обёртку: каждый уровень клиента и сервера спроектирован с упором на стабильность соединения и нулевое доверие к привилегиям.",
     "features.failoverTitle": "Интеллектуальный Failover",
@@ -92,11 +90,9 @@ const i18n = {
 
     // Themes
     "themes.tag": "Кастомизация",
-    "themes.title": "5 уникальных оформлений — выберите свой стиль",
-    "themes.subtitle": "Интерфейс не обязан быть скучным серым окном. Переключайте стили одним кликом: тема меняет эстетику и анимации, сохраняя все ваши профили и настройки в полной неприкосновенности.",
+    "themes.title": "Авторские темы оформления — выберите свой стиль",
+    "themes.subtitle": "Интерфейс не обязан быть скучным серым окном. Переключайте стили одним кликом: тема меняет эстетику и акценты, сохраняя все ваши профили и настройки в полной неприкосновенности.",
     "themes.palette": "Палитра:",
-    "themes.eyeInteractive": "Интерактивный глаз (реагирует на курсор)",
-    "themes.eyeHint": "Подвигайте мышью по экрану: зрачок следит за вашим курсором!",
 
     // Server
     "server.tag": "Серверная часть",
@@ -115,19 +111,22 @@ const i18n = {
     "server.tuiUsers": "Пользователи",
     "server.tuiInstall": "Установка",
     "server.tuiHysteria": "Hysteria 2",
+    "server.captionDash": "Главный дашборд: мониторинг статуса служб Mieru, Hysteria 2 и AmneziaWG, открытых портов и системных ресурсов.",
+    "server.captionWizard": "Пошаговый мастер настройки: 5 простых шагов конфигурации портов, ключей и сертификатов с валидацией diff.",
+    "server.captionUsers": "Управление пользователями: генерация учетных записей, лимитов и экспорт конфигураций hy2:// и .conf.",
+    "server.captionInstall": "Скрипт развертывания: автоматическая установка зависимостей и systemd-сервисов с SHA-256 проверкой.",
+    "server.captionHysteria": "Конфигурация Hysteria 2: управление портами Salamander, самоподписанными сертификатами и Brutal CC.",
 
     // Downloads
     "downloads.tag": "Официальные сборки",
-    "downloads.title": "Скачать AvariGate & EyeVPN v0.6.0",
+    "downloads.title": "Скачать AvariGate v0.6.0",
     "downloads.subtitle": "Все пакеты собраны напрямую из открытого исходного кода. Без встроенной рекламы, без трекеров и без ограничений по скорости.",
     "downloads.appleSilicon": "macOS Apple Silicon",
     "downloads.androidBadge": "Android 8.0+",
     "downloads.serverBadge": "Linux Server",
     "downloads.linuxDesktopBadge": "Linux Desktop",
     "downloads.downloadDmgAvari": "Скачать .DMG (AvariGate)",
-    "downloads.downloadDmgEyeVPN": "или версию EyeVPN (30.3 МБ)",
     "downloads.downloadApkAvari": "Скачать .APK (AvariGate)",
-    "downloads.downloadApkEyeVPN": "или версию EyeVPN (155 МБ)",
     "downloads.downloadServer": "Скачать бинарник сервера",
     "downloads.serverNote": "Включает TUI, REST API daemon и systemd unit",
     "downloads.viewLinuxPackages": "Смотреть пакеты в Releases",
@@ -149,11 +148,11 @@ const i18n = {
     // FAQ
     "faq.tag": "Ответы на вопросы",
     "faq.title": "Часто задаваемые вопросы",
-    "faq.subtitle": "Всё, что вам нужно знать перед установкой AvariGate и EyeVPN.",
+    "faq.subtitle": "Всё, что вам нужно знать перед установкой AvariGate.",
     "faq.q1": "Чем Mieru, Hysteria 2 и AmneziaWG лучше обычного OpenVPN или WireGuard?",
     "faq.a1": "Стандартные протоколы OpenVPN и базовый WireGuard имеют легко детектируемые сигнатуры рукопожатия и заголовков, которые мгновенно распознаются современными системами DPI (ТСПУ, GFW) и глушатся. Mieru маскирует трафик под HTTPS и блокирует активные зонды, Hysteria 2 использует обфусцированный QUIC Salamander с компенсацией потерь, а AmneziaWG добавляет рандомизацию заголовков и мусорные байты (Jc, S1–S4, H1–H4), делая пакеты неотличимыми от случайного шифрованного трафика.",
-    "faq.q2": "В чем разница между AvariGate и EyeVPN?",
-    "faq.a2": "Функционально и архитектурно это одно и то же надёжное ядро! Разница исключительно в брендинге и визуальном оформлении по умолчанию: AvariGate выполнен в футуристичной кибер-космической теме с неоновой сферой частиц, а EyeVPN использует аниме-эстетику с интерактивным живым глазом, реагирующим на статус соединения и движение курсора. Вы можете переключать обе темы (а также DragonGate, CorsairGate и KawaiiGate) прямо в настройках любого из приложений.",
+    "faq.q2": "Какие темы оформления доступны в AvariGate?",
+    "faq.a2": "В клиенте AvariGate встроены темы оформления: AvariGate (фирменная кибер-космическая тема с неоновой бирюзовой сферой частиц), DragonGate (императорский изумрудный нефрит с золотым китайским драконом). Вы можете переключать их в любой момент в настройках приложения без перезапуска соединения.",
     "faq.q3": "Собирает ли клиент или сервер аналитику и логи?",
     "faq.a3": "Исходный код открыт на GitHub. Вы можете самостоятельно изучить работу приложения и его обработку данных.",
     "faq.q4": "Зачем при установке на macOS нужен пароль администратора?",
@@ -166,7 +165,7 @@ const i18n = {
     // CTA & Footer
     "cta.title": "Готовы вернуть себе свободный и быстрый интернет?",
     "cta.subtitle": "Скачайте AvariGate прямо сейчас или разверните собственный сервер mieru-admin за 2 минуты.",
-    "footer.desc": "Свободный, быстрый и мультипротокольный мультипротокольный VPN-стек.",
+    "footer.desc": "Свободный, быстрый и мультипротокольный VPN-стек.",
     "footer.license": "Лицензия:",
     "footer.colNav": "Навигация",
     "footer.colResources": "Ресурсы",
@@ -206,14 +205,14 @@ const i18n = {
     "hero.tabConnected": "Connection",
     "hero.tabProfiles": "Profiles",
     "hero.tabSplit": "Split Tunnel",
-    "hero.tabEyeVPN": "EyeVPN Theme",
+    "hero.tabOtFront": "OtFront Theme",
     "hero.tabDragons": "Dragons Theme",
     "hero.tabAndroid": "Android",
     "hero.tabServer": "Server TUI",
     "hero.captionConnected": "Main screen: live tunnel status, latency measurement (24 ms), and uptime counter.",
     "hero.captionProfiles": "Profiles screen: priority order, protocol badges for Mieru, Hysteria 2, and AmneziaWG.",
     "hero.captionSplit": "Split tunneling: Include/Exclude modes, domain wildcards, and Bypass LAN switch.",
-    "hero.captionEyeVPN": "EyeVPN Theme: interactive anime eye reacting to tunnel status and mouse movements.",
+    "hero.captionOtFront": "OtFront Theme: neon purple cyberpunk aesthetic with stylized visual connection indicator.",
     "hero.captionDragons": "DragonGate Theme: emerald jade orb encircled by an imperial golden dragon.",
     "hero.captionAndroid": "Android client: floating capsule navbar, per-app routing, and CameraX QR scanner.",
     "hero.captionServer": "mieru-admin TUI: service and port dashboard directly inside your SSH terminal.",
@@ -257,11 +256,9 @@ const i18n = {
 
     // Themes
     "themes.tag": "Customization",
-    "themes.title": "5 Distinct Visual Themes — Match Your Style",
-    "themes.subtitle": "Your VPN interface doesn't need to look like a drab 90s utility. Switch aesthetics with one click: themes transform graphics and animations while leaving your profiles untouched.",
+    "themes.title": "Custom Visual Themes — Match Your Style",
+    "themes.subtitle": "Your VPN interface doesn't need to look like a drab 90s utility. Switch aesthetics with one click: themes transform graphics and accents while leaving your profiles untouched.",
     "themes.palette": "Palette:",
-    "themes.eyeInteractive": "Interactive Eye (Tracks Cursor)",
-    "themes.eyeHint": "Move your mouse across the screen: the pupil tracks your cursor in real time!",
 
     // Server
     "server.tag": "Server Suite",
@@ -280,19 +277,22 @@ const i18n = {
     "server.tuiUsers": "User Manager",
     "server.tuiInstall": "Installer",
     "server.tuiHysteria": "Hysteria 2",
+    "server.captionDash": "Main dashboard: real-time monitoring of Mieru, Hysteria 2, AmneziaWG service statuses, open ports, and system resources.",
+    "server.captionWizard": "Setup wizard: 5 easy steps for ports, keys, and certificates with unified diff validation.",
+    "server.captionUsers": "User manager: create profiles, credentials, and export hy2:// links and WireGuard configs.",
+    "server.captionInstall": "Automated deployment: install dependencies and systemd service with strict SHA-256 validation.",
+    "server.captionHysteria": "Hysteria 2 configuration: manage Salamander ports, ECDSA certificates, and Brutal CC settings.",
 
     // Downloads
     "downloads.tag": "Official Builds",
-    "downloads.title": "Download AvariGate & EyeVPN v0.6.0",
+    "downloads.title": "Download AvariGate v0.6.0",
     "downloads.subtitle": "Every package is built directly from open-source code. Zero ads, zero trackers, and unrestricted throughput.",
     "downloads.appleSilicon": "macOS Apple Silicon",
     "downloads.androidBadge": "Android 8.0+",
     "downloads.serverBadge": "Linux Server",
     "downloads.linuxDesktopBadge": "Linux Desktop",
     "downloads.downloadDmgAvari": "Download .DMG (AvariGate)",
-    "downloads.downloadDmgEyeVPN": "or EyeVPN build (30.3 MB)",
     "downloads.downloadApkAvari": "Download .APK (AvariGate)",
-    "downloads.downloadApkEyeVPN": "or EyeVPN build (155 MB)",
     "downloads.downloadServer": "Download Server Binary",
     "downloads.serverNote": "Includes TUI, REST API daemon, and systemd unit",
     "downloads.viewLinuxPackages": "Browse Linux Packages in Releases",
@@ -314,11 +314,11 @@ const i18n = {
     // FAQ
     "faq.tag": "FAQ",
     "faq.title": "Frequently Asked Questions",
-    "faq.subtitle": "Everything you need to know before running AvariGate and EyeVPN.",
+    "faq.subtitle": "Everything you need to know before running AvariGate.",
     "faq.q1": "Why are Mieru, Hysteria 2, and AmneziaWG superior to OpenVPN or standard WireGuard?",
     "faq.a1": "Standard OpenVPN and stock WireGuard have static handshake signatures and packet sizes that modern DPI filters (TSPU, GFW) recognize instantly and throttle. Mieru cloaks traffic as regular HTTPS and rejects active probing, Hysteria 2 relies on Salamander-obfuscated QUIC with aggressive loss recovery, and AmneziaWG injects random junk padding (Jc, S1–S4, H1–H4), making streams indistinguishable from random encrypted data.",
-    "faq.q2": "What is the difference between AvariGate and EyeVPN?",
-    "faq.a2": "Under the hood, they share the exact same battle-tested core! The distinction is purely aesthetic and branding: AvariGate features a futuristic cosmic theme with a cyan particle sphere, while EyeVPN embraces an anime cyberpunk look with an interactive eye that follows your cursor and signals connection states. You can switch between all 5 themes at any time in the settings.",
+    "faq.q2": "What visual themes are available in AvariGate?",
+    "faq.a2": "AvariGate includes themes including: AvariGate (signature deep-space cyan aesthetic with an active particle sphere), DragonGate (imperial emerald jade with an intricate golden dragon). You can switch between them at any time in settings without interrupting active tunnels.",
     "faq.q3": "Does the client or server collect telemetry or analytics?",
     "faq.a3": "The source code is available on GitHub for you to inspect how the application handles data.",
     "faq.q4": "Why does macOS prompt for admin password during initial setup?",
@@ -385,8 +385,6 @@ function setLanguage(lang) {
 }
 
 function updateLocalizedImages() {
-  const isEn = currentLang === "en";
-
   // Check preview active tab
   const activeTab = document.querySelector(".preview-tab.active");
   if (activeTab) {
@@ -399,6 +397,17 @@ function updateLocalizedImages() {
   if (activeThemeBtn) {
     const themeId = activeThemeBtn.getAttribute("data-theme-id");
     updateThemeDisplay(themeId);
+  }
+
+  // Check server TUI caption
+  const activeTuiTab = document.querySelector(".tui-tab.active");
+  if (activeTuiTab) {
+    const tuiKey = activeTuiTab.getAttribute("data-tui");
+    const data = serverTuiData[tuiKey];
+    const tuiCaption = document.getElementById("tui-caption");
+    if (data && tuiCaption && i18n[currentLang] && i18n[currentLang][data.captionKey]) {
+      tuiCaption.textContent = i18n[currentLang][data.captionKey];
+    }
   }
 }
 
@@ -428,12 +437,12 @@ const previewScreens = {
     captionRu: "Сплит-туннелирование: режимы Include/Exclude, маски доменов и переключатель Bypass LAN.",
     captionEn: "Split tunneling: Include/Exclude modes, domain wildcards, and Bypass LAN switch."
   },
-  eyevpn: {
+  otfront: {
     ru: "./assets/screenshots/desktop-eyevpn.png",
     en: "./assets/screenshots/desktop-eyevpn-en.png",
-    title: "EyeVPN — Интерактивный глаз",
-    captionRu: "Тема EyeVPN: интерактивный аниме-глаз, реагирующий на состояние туннеля и курсор.",
-    captionEn: "EyeVPN Theme: interactive anime eye reacting to tunnel status and mouse movements."
+    title: "AvariGate — Тема OtFront",
+    captionRu: "Тема OtFront: неоново-пурпурная киберпанк-эстетика со стилизованным визуальным индикатором соединения.",
+    captionEn: "OtFront Theme: neon purple cyberpunk aesthetic with stylized visual connection indicator."
   },
   dragons: {
     ru: "./assets/screenshots/desktop-dragons.png",
@@ -479,7 +488,7 @@ function updatePreviewScreen(targetKey) {
 }
 
 // ==========================================================================
-// 4. Themes Showcase Data & Interactivity
+// 4. Themes Showcase Data & Interactivity (Real Verified Screenshots)
 // ==========================================================================
 
 const themeDetails = {
@@ -494,17 +503,6 @@ const themeDetails = {
     screenshotEn: "./assets/screenshots/desktop-connected-en.png",
     swatches: ["#021a1a", "#06b6d4", "#14b8a6", "#0f172a"]
   },
-  otfront: {
-    name: "EyeVPN (Anime Eye)",
-    subRu: "Интерактивный кибер-глаз OtFront",
-    subEn: "OtFront Interactive Anime Cyber-Eye",
-    descRu: "Фирменное аниме-оформление: живой глаз следит за движением вашего курсора по экрану, прищуривается при нагрузке и меняет свечение в зависимости от здоровья соединения.",
-    descEn: "Signature anime cyberpunk style: a responsive eye tracks your mouse movement across the desktop, blinks during connection transitions, and changes glow state on disconnect.",
-    logo: "./assets/logos/otfront-logo.png",
-    screenshotRu: "./assets/screenshots/desktop-eyevpn.png",
-    screenshotEn: "./assets/screenshots/desktop-eyevpn-en.png",
-    swatches: ["#170d24", "#ec4899", "#a855f7", "#3b0764"]
-  },
   dragons: {
     name: "DragonGate",
     subRu: "Императорский нефрит & золотой дракон",
@@ -516,27 +514,16 @@ const themeDetails = {
     screenshotEn: "./assets/screenshots/desktop-dragons-en.png",
     swatches: ["#061c14", "#10b981", "#f59e0b", "#064e3b"]
   },
-  pirates: {
-    name: "CorsairGate",
-    subRu: "Латунь, компас-штурвал & старинный пергамент",
-    subEn: "Nautical Helm, Brass & Weathered Parchment",
-    descRu: "Пиратская навигация: тёплые оттенки состаренной латуни, золотой компас вместо стандартной сферы и морская штурманская эстетика для настоящих исследователей сети.",
-    descEn: "Nautical corsair motif: warm aged brass hardware, a rotating maritime helm-compass, and antique parchment accents designed for daring digital voyagers.",
-    logo: "./assets/logos/pirates-logo.svg",
-    screenshotRu: "./assets/screenshots/desktop-connected.png",
-    screenshotEn: "./assets/screenshots/desktop-connected-en.png",
-    swatches: ["#1c1306", "#f59e0b", "#d97706", "#78350f"]
-  },
-  kawaii: {
-    name: "KawaiiGate",
-    subRu: "Пастельный розовый, облака & звёзды",
-    subEn: "Pastel Pink, Dreamy Clouds & Stardust",
-    descRu: "Нежная пастельная тема: мягкие розовые и лавандовые тона, пушистые облака и мерцающие звёздочки, превращающие технический VPN в милый и уютный инструмент.",
-    descEn: "Soft dreamy pastel theme: gentle cotton-candy pink and lavender gradients, fluffy cloud borders, and twinkling starlight accents bringing warmth to technical networking.",
-    logo: "./assets/logos/kawaii-logo.svg",
-    screenshotRu: "./assets/screenshots/desktop-connected.png",
-    screenshotEn: "./assets/screenshots/desktop-connected-en.png",
-    swatches: ["#1a0f1d", "#f472b6", "#c084fc", "#831843"]
+  otfront: {
+    name: "OtFront",
+    subRu: "Неоновый киберпанк & фиолетовые акценты",
+    subEn: "Neon Cyberpunk & Purple Glow",
+    descRu: "Стильное киберпанк-оформление: глубокие фиолетово-малиновые тона, контрастные неоновые линии и выразительная визуальная индикация активного соединения.",
+    descEn: "Vibrant cyberpunk aesthetic: deep purple and magenta hues, glowing neon contours, and expressive visual feedback for active tunnel states.",
+    logo: "./assets/logos/otfront-logo.png",
+    screenshotRu: "./assets/screenshots/desktop-eyevpn.png",
+    screenshotEn: "./assets/screenshots/desktop-eyevpn-en.png",
+    swatches: ["#170d24", "#ec4899", "#a855f7", "#3b0764"]
   }
 };
 
@@ -554,7 +541,6 @@ function updateThemeDisplay(themeId) {
   const themeLogo = document.getElementById("theme-logo");
   const themeScreenshot = document.getElementById("theme-screenshot");
   const themeSwatches = document.getElementById("theme-swatches");
-  const eyeBox = document.getElementById("interactive-eye-box");
 
   if (themeName) themeName.textContent = t.name;
   if (themeSub) themeSub.textContent = currentLang === "en" ? t.subEn : t.subRu;
@@ -574,80 +560,88 @@ function updateThemeDisplay(themeId) {
       themeSwatches.appendChild(span);
     });
   }
+}
 
-  // Toggle interactive eye widget
-  if (eyeBox) {
-    if (themeId === "otfront") {
-      eyeBox.style.display = "block";
-    } else {
-      eyeBox.style.display = "none";
-    }
+// ==========================================================================
+// 5. Server TUI Screens & Tabs
+// ==========================================================================
+
+const serverTuiData = {
+  dashboard: {
+    src: "./assets/screenshots/server-tui-dashboard.png",
+    title: "mieru-admin TUI — Dashboard",
+    captionKey: "server.captionDash"
+  },
+  wizard: {
+    src: "./assets/screenshots/server-tui-wizard.png",
+    title: "mieru-admin TUI — Setup Wizard",
+    captionKey: "server.captionWizard"
+  },
+  users: {
+    src: "./assets/screenshots/server-tui-users.png",
+    title: "mieru-admin TUI — User Manager",
+    captionKey: "server.captionUsers"
+  },
+  install: {
+    src: "./assets/screenshots/server-tui-install.png",
+    title: "mieru-admin TUI — Installation",
+    captionKey: "server.captionInstall"
+  },
+  hysteria: {
+    src: "./assets/screenshots/server-tui-hysteria.png",
+    title: "mieru-admin TUI — Hysteria 2",
+    captionKey: "server.captionHysteria"
+  }
+};
+
+function switchServerTui(tuiKey) {
+  const data = serverTuiData[tuiKey];
+  if (!data) return;
+
+  const tabs = document.querySelectorAll(".tui-tab");
+  tabs.forEach((t) => {
+    const isTarget = t.getAttribute("data-tui") === tuiKey;
+    t.classList.toggle("active", isTarget);
+    t.setAttribute("aria-selected", isTarget ? "true" : "false");
+  });
+
+  const points = document.querySelectorAll(".server-point[data-point-target]");
+  points.forEach((p) => {
+    const isTarget = p.getAttribute("data-point-target") === tuiKey;
+    p.classList.toggle("active", isTarget);
+  });
+
+  const tuiImg = document.getElementById("tui-screen-img");
+  const tuiTitle = document.getElementById("tui-terminal-title");
+  const tuiCaption = document.getElementById("tui-caption");
+
+  if (tuiImg) tuiImg.src = data.src;
+  if (tuiTitle) tuiTitle.textContent = data.title;
+  if (tuiCaption && i18n[currentLang] && i18n[currentLang][data.captionKey]) {
+    tuiCaption.textContent = i18n[currentLang][data.captionKey];
   }
 }
 
-// ==========================================================================
-// 5. Interactive Eye Tracker (Mouse-following anime eye)
-// ==========================================================================
-
-function initEyeTracker() {
-  const eyeImg = document.getElementById("tracking-eye-img");
-  const eyeContainer = document.getElementById("eye-container");
-  if (!eyeImg || !eyeContainer) return;
-
-  window.addEventListener("mousemove", (e) => {
-    // Only compute if eye container is visible
-    if (eyeContainer.offsetParent === null) return;
-
-    const rect = eyeContainer.getBoundingClientRect();
-    const eyeCenterX = rect.left + rect.width / 2;
-    const eyeCenterY = rect.top + rect.height / 2;
-
-    const deltaX = e.clientX - eyeCenterX;
-    const deltaY = e.clientY - eyeCenterY;
-
-    // Angle and distance
-    const angle = Math.atan2(deltaY, deltaX);
-    const maxOffset = 18; // Max px shift
-    const distance = Math.min(Math.hypot(deltaX, deltaY) / 15, maxOffset);
-
-    const moveX = Math.cos(angle) * distance;
-    const moveY = Math.sin(angle) * distance;
-
-    eyeImg.style.transform = `scale(1.15) translate(${moveX}px, ${moveY}px)`;
-  });
-}
-
-// ==========================================================================
-// 6. Server TUI Tabs
-// ==========================================================================
-
-const serverTuiImages = {
-  dashboard: "./assets/screenshots/server-tui-dashboard.png",
-  wizard: "./assets/screenshots/server-tui-wizard.png",
-  users: "./assets/screenshots/server-tui-users.png",
-  install: "./assets/screenshots/server-tui-install.png",
-  hysteria: "./assets/screenshots/server-tui-hysteria.png"
-};
-
 function initServerTuiTabs() {
   const tabs = document.querySelectorAll(".tui-tab");
-  const tuiImg = document.getElementById("tui-screen-img");
-
   tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
-      tabs.forEach((t) => t.classList.remove("active"));
-      tab.classList.add("active");
-
       const tuiKey = tab.getAttribute("data-tui");
-      if (serverTuiImages[tuiKey] && tuiImg) {
-        tuiImg.src = serverTuiImages[tuiKey];
-      }
+      switchServerTui(tuiKey);
+    });
+  });
+
+  const points = document.querySelectorAll(".server-point[data-point-target]");
+  points.forEach((pt) => {
+    pt.addEventListener("click", () => {
+      const target = pt.getAttribute("data-point-target");
+      switchServerTui(target);
     });
   });
 }
 
 // ==========================================================================
-// 7. Clipboard Helpers
+// 6. Clipboard Helpers
 // ==========================================================================
 
 function copyToClipboard(text, buttonEl, successText) {
@@ -663,7 +657,7 @@ function copyToClipboard(text, buttonEl, successText) {
 }
 
 // ==========================================================================
-// 8. Initialization & Event Listeners
+// 7. Initialization & Event Listeners
 // ==========================================================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -726,9 +720,6 @@ document.addEventListener("DOMContentLoaded", () => {
       updateThemeDisplay(themeId);
     });
   });
-
-  // Initialize Eye Tracker
-  initEyeTracker();
 
   // Initialize Server TUI tabs
   initServerTuiTabs();
