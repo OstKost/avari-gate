@@ -1,139 +1,156 @@
 /**
- * AvariGate — Landing Page Interactive Script
- * - Full bilingual support (RU / EN) with instant dynamic switching
- * - Theme selector with live palette shift and preview sync (Avari, Dragons, OtFront)
- * - Hero preview tab switcher (desktop, profiles, split tunnel, otfront, dragons, android, server)
- * - Server TUI screen viewer with tab synchronization, titles, and captions
- * - FAQ accordion & copy-to-clipboard helpers
+ * AvariGate — Official Landing Page Script
+ * - Full bilingual support (RU / EN) with persistent language preference
+ * - Dynamic GitHub latest release integration with robust offline fallback
+ * - Preserved dynamic versioning across language switches
+ * - Safe asset handling when platform build is in general releases
+ * - Client platform detection and personalized download highlights
+ * - Interactive preview tabs with verified real application screenshots
+ * - Server TUI suite walkthrough (mieru-admin)
+ * - Accessible mobile navigation drawer and FAQ accordion
+ * - Clipboard copy helpers
  */
 
 // ==========================================================================
-// 1. Bilingual Localization Dictionary (RU / EN)
+// 1. Dynamic Release & Version State
+// ==========================================================================
+
+let currentVersion = "v0.6.0";
+let hasAndroidDirectAsset = false;
+let currentLang = "ru";
+
+// ==========================================================================
+// 2. Bilingual Localization Dictionary (RU / EN)
 // ==========================================================================
 
 const i18n = {
   ru: {
+    // Meta & Common
+    "meta.title": "AvariGate — Клиент и сервер для устойчивого к блокировкам интернета",
+    "common.skipToContent": "Перейти к основному содержимому",
+    "common.copy": "Копировать",
+    "common.copied": "Скопировано!",
+    "common.copyAll": "Копировать всё",
+    "common.yourPlatform": "Ваша система",
+
     // Nav
     "nav.protocols": "Протоколы",
     "nav.features": "Возможности",
-    "nav.themes": "Темы",
     "nav.server": "Сервер",
+    "nav.themes": "Темы",
     "nav.downloads": "Скачать",
     "nav.changelog": "Релизы",
     "nav.faq": "FAQ",
-    "nav.cta": "Скачать v0.6.0",
 
     // Hero
-    "hero.badgeVersion": "Релиз v0.6.0",
-    "hero.badgeText": "Модульный UI & Строгая типизация моделей",
     "hero.title": "Приватный туннель для <span class=\"gradient-text\">свободного</span> интернета",
-    "hero.description": "AvariGate — высокоскоростной мультиплатформенный VPN-клиент на Tauri v2 + Rust и Android Compose с защитой от глубокого анализа пакетов (DPI). Объединяет Mieru, Hysteria 2 и AmneziaWG в едином приложении со сверхбыстрым failover и нулевыми привилегиями интерфейса.",
-    "hero.downloadBtn": "Скачать v0.6.0",
+    "hero.description": "AvariGate объединяет протоколы Mieru, Hysteria 2 и AmneziaWG в едином приложении для обхода блокировок. Умный failover, раздельное туннелирование и нулевые привилегии интерфейса.",
     "hero.releasesBtn": "GitHub Releases",
-    "hero.serverTitle": "Быстрая установка сервера (Ubuntu / Debian):",
-    "hero.metric1": "Протокола анти-DPI",
-    "hero.metric2": "Задержка сервера",
-    "hero.metric3": "Автопереключение failover",
-    "hero.metric4": "Изоляция секретов",
-    "hero.connected": "Подключено (24 мс)",
+    "hero.connected": "Туннель активен",
     "hero.tabConnected": "Подключение",
     "hero.tabProfiles": "Профили",
     "hero.tabSplit": "Сплит-туннель",
-    "hero.tabOtFront": "Тема OtFront",
-    "hero.tabDragons": "Тема Dragons",
+    "hero.tabDragons": "DragonGate",
     "hero.tabAndroid": "Android",
     "hero.tabServer": "Сервер TUI",
-    "hero.captionConnected": "Главный экран: статус туннеля, измерение задержки в 24 мс и таймер аптайма.",
-    "hero.captionProfiles": "Список профилей: приоритет обхода, индикация протоколов Mieru, Hysteria 2 и AmneziaWG.",
+    "hero.captionConnected": "Главный экран: статус защищённого туннеля, таймер сессии и мгновенное управление соединением.",
+    "hero.captionProfiles": "Список профилей: приоритет обхода нод, индикация протоколов Mieru, Hysteria 2 и AmneziaWG.",
     "hero.captionSplit": "Сплит-туннелирование: режимы Include/Exclude, маски доменов и переключатель Bypass LAN.",
-    "hero.captionOtFront": "Тема OtFront: неоново-пурпурная киберпанк-эстетика со стилизованным визуальным индикатором соединения.",
-    "hero.captionDragons": "Тема DragonGate: нефритовая сфера, обрамлённая восточным золотым драконом.",
+    "hero.captionDragons": "Тема DragonGate: императорский изумрудный нефрит с золотым драконом.",
     "hero.captionAndroid": "Android-клиент: капсула навигации, per-app маршрутизация и CameraX QR-сканер.",
     "hero.captionServer": "Консоль mieru-admin: дашборд состояния служб и портов прямо в терминале.",
 
     // Protocols
     "protocols.tag": "Анти-DPI Арсенал",
-    "protocols.title": "Триада передовых протоколов обхода блокировок",
-    "protocols.subtitle": "Обычные VPN протоколы блокируются эвристиками и DPI за секунды. AvariGate объединяет три независимых решения, специально спроектированных для работы в агрессивных цензурируемых сетях.",
-    "protocols.mieruDesc": "Мультиплексированный туннель с маскировкой трафика под случайный шум и надёжной защитой от активного зондирования со стороны DPI-систем (GFW, ТСПУ).",
+    "protocols.title": "Триада протоколов для обхода цензуры",
+    "protocols.subtitle": "Обычные VPN-протоколы блокируются по сигнатурам и эвристикам. AvariGate объединяет три независимых решения, специально разработанных для работы в сетях с глубоким анализом пакетов (ТСПУ, GFW).",
+    "protocols.mieruDesc": "Мультиплексированный туннель с маскировкой трафика под случайный шум и защитой от активного зондирования со стороны DPI-систем.",
     "protocols.mieruFeat1": "Анти-сканирование: не отвечает на проверочные запросы цензора",
     "protocols.mieruFeat2": "Мультиплексирование потоков внутри одного TCP-соединения",
     "protocols.mieruFeat3": "Двойная изоляция паролей mita sha256 + 0x00 salt",
-    "protocols.mieruBestFor": "Идеально для: самых строгих DPI и блокировок протоколов",
-    "protocols.hysteriaDesc": "Молниеносный протокол поверх кастомного UDP/QUIC с обфускацией Salamander. Выжимает максимум скорости даже при высоких потерях пакетов и троттлинге провайдером.",
-    "protocols.hysteriaFeat1": "Обфускация Salamander: трафик выглядит как произвольный UDP",
-    "protocols.hysteriaFeat2": "Маскировка SNI и самоподписанные ECDSA сертификаты",
-    "protocols.hysteriaFeat3": "Борьба с потерями: Brutal Congestion Control до 20–30% потерь",
-    "protocols.hysteriaBestFor": "Идеально для: нестабильных мобильных сетей и высоких скоростей",
-    "protocols.amneziaDesc": "Продвинутая обфускация WireGuard v3.1. Защищает сигнатуры пакетов при рукопожатии и передаче данных, исключая блокировку по WireGuard-паттернам.",
+    "protocols.mieruBestFor": "Идеально для: агрессивных блокировок протоколов и ТСПУ",
+    "protocols.hysteriaDesc": "Быстрый протокол поверх модифицированного UDP/QUIC с обфускацией Salamander. Обеспечивает высокую скорость даже при ощутимых потерях пакетов.",
+    "protocols.hysteriaFeat1": "Обфускация Salamander: трафик неотличим от произвольного UDP",
+    "protocols.hysteriaFeat2": "Маскировка SNI и самоподписанные сертификаты ECDSA",
+    "protocols.hysteriaFeat3": "Компенсация потерь: Brutal Congestion Control при нестабильной сети",
+    "protocols.hysteriaBestFor": "Идеально для: мобильных сетей с потерями и потокового видео",
+    "protocols.amneziaDesc": "Продвинутая обфускация WireGuard v3.1. Защищает заголовки пакетов при рукопожатии и передаче данных, исключая детектирование по стандартным сигнатурам.",
     "protocols.amneziaFeat1": "Рандомизация заголовков: параметры Jc, Jmin/Jmax, S1–S4",
     "protocols.amneziaFeat2": "Хеширование инициализации H1–H4 и I1–I5",
     "protocols.amneziaFeat3": "Поддержка стандартных WireGuard .conf файлов без правок",
-    "protocols.amneziaBestFor": "Идеально для: минимального пинга, игр и стриминга",
+    "protocols.amneziaBestFor": "Идеально для: минимального пинга, игр и прямого туннелирования",
 
     // Features
-    "features.tag": "Инженерия & Надёжность",
-    "features.title": "Создан для непрерывной связи и защиты соединения",
-    "features.subtitle": "Мы не просто завернули стороннее ядро в веб-обёртку: каждый уровень клиента и сервера спроектирован с упором на стабильность соединения и нулевое доверие к привилегиям.",
+    "features.tag": "Инженерия & Безопасность",
+    "features.title": "Создан для непрерывной связи и строгой изоляции",
+    "features.subtitle": "Каждый уровень клиента и сервера спроектирован с упором на стабильность соединения и нулевое доверие к привилегиям графического интерфейса.",
     "features.failoverTitle": "Интеллектуальный Failover",
-    "features.failoverDesc": "При сбое ноды клиент выполняет до 3 полных обходов резервных профилей с паузами 15 секунд и подключается к первому доступному серверу. Никаких обрывов связи без предупреждения.",
+    "features.failoverDesc": "При сбое ноды клиент выполняет до 3 циклов проверки резервных профилей с паузами 15 секунд и подключается к первому доступному серверу.",
     "features.splitTitle": "Раздельное туннелирование",
-    "features.splitDesc": "Режимы Include и Exclude. Маршрутизация по маскам доменов (*.ru, gosuslugi.ru) и CIDR-подсетям. Встроенный переключатель Bypass LAN для локальных принтеров и NAS.",
+    "features.splitDesc": "Режимы Include и Exclude. Маршрутизация по маскам доменов (*.ru, gosuslugi.ru) и CIDR-подсетям. Встроенный переключатель Bypass LAN для домашней сети.",
     "features.perAppTitle": "Per-App Split (Android)",
-    "features.perAppDesc": "На мобильных устройствах выбирайте приложения вручную: банкинг напрямую, а мессенджеры и браузер — через защищённый туннель с нулевой утечкой DNS.",
+    "features.perAppDesc": "На мобильных устройствах выбирайте приложения вручную: локальные сервисы идут напрямую, а мессенджеры и браузер — через защищённый туннель.",
     "features.privilegeTitle": "Разделение привилегий",
-    "features.privilegeDesc": "UI работает без прав администратора. Сетевые маршруты и TUN настраиваются демоном mieru-helper через Unix сокет с проверкой UID/PID. Пароли хранятся с правами 0600.",
+    "features.privilegeDesc": "Интерфейс работает без прав администратора. Сетевые маршруты и адаптер TUN настраиваются демоном mieru-helper через локальный сокет с правами 0600.",
     "features.qrTitle": "Мгновенный QR-импорт",
     "features.qrDesc": "Серверный TUI генерирует ASCII QR-код прямо в вашем SSH-терминале. Сканируйте его встроенным сканером CameraX + ZXing в Android-клиенте за 1 секунду.",
     "features.cleanupTitle": "Чистое завершение сессий",
-    "features.cleanupDesc": "Никакого \"отвалившегося интернета\" после закрытия клиента: при отключении приложение корректно останавливает ядро и восстанавливает системный DNS и таблицу маршрутов.",
-
-    // Themes
-    "themes.tag": "Кастомизация",
-    "themes.title": "Авторские темы оформления — выберите свой стиль",
-    "themes.subtitle": "Интерфейс не обязан быть скучным серым окном. Переключайте стили одним кликом: тема меняет эстетику и акценты, сохраняя все ваши профили и настройки в полной неприкосновенности.",
-    "themes.palette": "Палитра:",
+    "features.cleanupDesc": "Никаких потерь интернет-соединения после закрытия: при отключении клиент корректно останавливает ядро и восстанавливает системные DNS и таблицу маршрутов.",
 
     // Server
-    "server.tag": "Серверная часть",
+    "server.tag": "Серверный стек",
     "server.title": "Менеджер mieru-admin: всё в одном бинарнике",
-    "server.subtitle": "Никаких сотен зависимостей или разрозненных bash-скриптов. Статический Go-бинарник устанавливает systemd службу, разворачивает протоколы и даёт удобный интерактивный TUI прямо в SSH.",
+    "server.subtitle": "Никаких сложных зависимостей и хрупких скриптов. Статический Go-бинарник устанавливает systemd службу, разворачивает стек протоколов и предоставляет интерактивный TUI прямо в SSH-терминале.",
+    "server.serverTitle": "Быстрая установка сервера (Ubuntu / Debian):",
     "server.wizardTitle": "5-шаговый мастер с проверкой diff",
     "server.wizardDesc": "Мастер настройки валидирует конфиг до применения. На 5-м шаге вы видите точный unified diff. При ошибке службы система автоматически откатывается на предыдущую ревизию.",
     "server.qrExportTitle": "Экспорт профилей с QR в терминале",
     "server.qrExportDesc": "Создавайте пользователей Mieru, Hysteria 2 и AmneziaWG в TUI. Конфигурация выводится в формате hy2://, wireguard .conf и в виде чистого ASCII QR прямо в окно терминала.",
     "server.securityTitle": "Вендоринг и проверка SHA-256",
-    "server.securityDesc": "В v0.6.0 устранены сетевые curl|bash уязвимости: скрипты установки AmneziaWG встроены через //go:embed и проверяются по криптографическому SHA-256 хэшу перед запуском.",
-    "server.apiTitle": "Локальный REST API + systemd",
-    "server.apiDesc": "Служба слушает исключительно 127.0.0.1:9081 с авторизацией по Bearer-токену с правами 0600. Полная готовность для автоматизации и интеграции с Ansible или CI/CD.",
-    "server.tuiDash": "Главный экран",
-    "server.tuiWizard": "Мастер настройки",
+    "server.securityDesc": "Скрипты установки AmneziaWG встроены в бинарник через //go:embed и проверяются по криптографическому SHA-256 хэшу перед запуском, устраняя сетевые риски.",
+    "server.apiTitle": "Дашборд состояния и REST API",
+    "server.apiDesc": "Мониторинг портов и служб в реальном времени. Встроенный loopback REST API (доступен только локально через Bearer-токен) позволяет автоматизировать управление нодой.",
+    "server.tuiWizard": "Мастер",
+    "server.tuiDash": "Дашборд",
     "server.tuiUsers": "Пользователи",
     "server.tuiInstall": "Установка",
     "server.tuiHysteria": "Hysteria 2",
-    "server.captionDash": "Главный дашборд: мониторинг статуса служб Mieru, Hysteria 2 и AmneziaWG, открытых портов и системных ресурсов.",
-    "server.captionWizard": "Пошаговый мастер настройки: 5 простых шагов конфигурации портов, ключей и сертификатов с валидацией diff.",
-    "server.captionUsers": "Управление пользователями: генерация учетных записей, лимитов и экспорт конфигураций hy2:// и .conf.",
-    "server.captionInstall": "Скрипт развертывания: автоматическая установка зависимостей и systemd-сервисов с SHA-256 проверкой.",
-    "server.captionHysteria": "Конфигурация Hysteria 2: управление портами Salamander, самоподписанными сертификатами и Brutal CC.",
+    "server.captionWizard": "Пошаговый мастер настройки: автоматический выбор портов, протоколов и валидация перед сохранением.",
+    "server.captionDash": "Консоль дашборда: состояние демонов Mieru, Hysteria 2 и AmneziaWG, статистика соединений.",
+    "server.captionUsers": "Управление пользователями: генерация паролей, экспорт профилей и моментальный вывод ASCII QR-кода в терминале.",
+    "server.captionInstall": "Установка компонентов: вендоринг скриптов AWG с проверкой контрольной суммы SHA-256.",
+    "server.captionHysteria": "Настройка Hysteria 2: управление параметрами QUIC Salamander, генерация TLS-сертификатов.",
+
+    // Themes
+    "themes.tag": "Кастомизация",
+    "themes.title": "Авторские темы оформления интерфейса",
+    "themes.subtitle": "Интерфейс приложения адаптируется под ваше настроение. Переключайте визуальные стили одним кликом: тема меняет эстетику, сохраняя настройки и профили в полной безопасности.",
+    "themes.palette": "Палитра:",
 
     // Downloads
     "downloads.tag": "Официальные сборки",
-    "downloads.title": "Скачать AvariGate v0.6.0",
-    "downloads.subtitle": "Все пакеты собраны напрямую из открытого исходного кода. Без встроенной рекламы, без трекеров и без ограничений по скорости.",
+    "downloads.title": "Скачать AvariGate для ваших устройств",
+    "downloads.subtitle": "Официальные публичные релизы из репозитория OstKost/avari-gate. Каждая сборка проверена контрольными суммами SHA-256.",
     "downloads.appleSilicon": "macOS Apple Silicon",
     "downloads.androidBadge": "Android 8.0+",
     "downloads.serverBadge": "Linux Server",
     "downloads.linuxDesktopBadge": "Linux Desktop",
     "downloads.downloadDmgAvari": "Скачать .DMG (AvariGate)",
-    "downloads.downloadApkAvari": "Скачать .APK (AvariGate)",
+    "downloads.downloadApkAvari": "Смотреть релиз Android",
     "downloads.downloadServer": "Скачать бинарник сервера",
-    "downloads.serverNote": "Включает TUI, REST API daemon и systemd unit",
     "downloads.viewLinuxPackages": "Смотреть пакеты в Releases",
+    "downloads.macosNote": "Релизный .DMG с ad-hoc подписью и launchd-демоном",
+    "downloads.androidNote": "ARM64 и x86_64 сборка с системным VpnService",
+    "downloads.androidFileNote": "Сборка в GitHub Releases",
+    "downloads.serverNote": "Включает TUI, REST API daemon и systemd unit",
     "downloads.linuxPackagesNote": "Стабильные сборки desktop для Linux",
     "downloads.platformStatusTitle": "Честный статус платформ и архитектур:",
-    "downloads.sha256Title": "Контрольные суммы SHA-256 (Релиз v0.6.0):",
     "downloads.shaCheckCmd": "Проверка в терминале:",
+
+    // Statuses
+    "status.ready": "Готово",
+    "status.inProgress": "В разработке",
+    "status.planned": "В планах",
 
     // Changelog
     "changelog.tag": "История развития",
@@ -143,236 +160,273 @@ const i18n = {
     // Architecture
     "arch.tag": "Архитектурная схема",
     "arch.title": "Принцип нулевого доверия к интерфейсу",
-    "arch.subtitle": "Вредоносный скрипт или взлом UI не смогут захватить систему: сетевые интерфейсы изолированы в отдельном демоне.",
+    "arch.subtitle": "Вредоносный код или компрометация UI не могут захватить систему: сетевые адаптеры изолированы в отдельном системном сервисе.",
 
     // FAQ
     "faq.tag": "Ответы на вопросы",
     "faq.title": "Часто задаваемые вопросы",
     "faq.subtitle": "Всё, что вам нужно знать перед установкой AvariGate.",
     "faq.q1": "Чем Mieru, Hysteria 2 и AmneziaWG лучше обычного OpenVPN или WireGuard?",
-    "faq.a1": "Стандартные протоколы OpenVPN и базовый WireGuard имеют легко детектируемые сигнатуры рукопожатия и заголовков, которые мгновенно распознаются современными системами DPI (ТСПУ, GFW) и глушатся. Mieru маскирует трафик под HTTPS и блокирует активные зонды, Hysteria 2 использует обфусцированный QUIC Salamander с компенсацией потерь, а AmneziaWG добавляет рандомизацию заголовков и мусорные байты (Jc, S1–S4, H1–H4), делая пакеты неотличимыми от случайного шифрованного трафика.",
+    "faq.a1": "Стандартные протоколы OpenVPN и базовый WireGuard имеют фиксированные сигнатуры рукопожатия, которые мгновенно распознаются DPI-системами (ТСПУ, GFW) и блокируются. Mieru маскирует трафик под случайный шум и не отвечает на активные зонды цензора, Hysteria 2 использует модифицированный QUIC Salamander с компенсацией потерь, а AmneziaWG рандомизирует заголовки (Jc, S1–S4, H1–H4), делая пакеты неотличимыми от произвольного шифрованного трафика.",
     "faq.q2": "Какие темы оформления доступны в AvariGate?",
-    "faq.a2": "В клиенте AvariGate встроены темы оформления: AvariGate (фирменная кибер-космическая тема с неоновой бирюзовой сферой частиц), DragonGate (императорский изумрудный нефрит с золотым китайским драконом). Вы можете переключать их в любой момент в настройках приложения без перезапуска соединения.",
+    "faq.a2": "В клиенте AvariGate встроены темы оформления: AvariGate (фирменная кибер-космическая тема с неоновой бирюзовой сферой частиц), DragonGate (императорский изумрудный нефрит с золотым драконом), CorsairGate и KawaiiGate. Вы можете переключать их в любой момент в настройках приложения без перезапуска соединения.",
     "faq.q3": "Собирает ли клиент или сервер аналитику и логи?",
-    "faq.a3": "Исходный код открыт на GitHub. Вы можете самостоятельно изучить работу приложения и его обработку данных.",
+    "faq.a3": "Нет. Приложение и сервер не содержат телеметрии, трекеров и аналитики. Исходный код открыт на GitHub в публичном репозитории OstKost/avari-gate, где вы можете самостоятельно убедиться в чистоте кода.",
     "faq.q4": "Зачем при установке на macOS нужен пароль администратора?",
-    "faq.a4": "Операционные системы не позволяют обычным непривилегированным программам создавать виртуальные сетевые адаптеры (TUN) и менять системные маршруты. Для этого AvariGate один раз устанавливает легковесный системный демон mieru-helper в launchd через стандартный диалог macOS. Сам GUI-клиент работает от обычного пользователя и общается с демоном через локальный Unix-сокет.",
+    "faq.a4": "Операционные системы не позволяют непривилегированным программам создавать виртуальные сетевые адаптеры (TUN) и менять системные маршруты. Для этого AvariGate один раз устанавливает легковесный системный демон mieru-helper в launchd через стандартный диалог macOS. Сам GUI-клиент работает от обычного пользователя и общается с демоном через локальный Unix-сокет.",
     "faq.q5": "Могу ли я развернуть сервер на собственном VPS?",
-    "faq.a5": "Да, именно для этого создан mieru-admin! Достаточно арендовать любой виртуальный сервер на Ubuntu 24.04 LTS или Debian 13, скачать архив утилиты и выполнить «sudo ./mieru-admin setup». Пошаговый мастер проведёт вас через настройку за 2 минуты, проверит diff конфига и покажет QR-код для моментального подключения с телефона или ноутбука.",
+    "faq.a5": "Да, именно для этого создан mieru-admin! Достаточно арендовать любой виртуальный сервер на Ubuntu 24.04 LTS или Debian 13, скачать архив утилиты и выполнить «sudo ./mieru-admin setup». Пошаговый мастер проведёт вас через настройку за пару минут, проверит diff конфига и покажет QR-код для моментального подключения с телефона или ноутбука.",
     "faq.q6": "Когда ожидать версии для Windows и iOS?",
-    "faq.a6": "Для Windows уже написана служба AvariGateHelper, модуль очистки DNS/маршрутов и алгоритм автопереключения; сейчас завершается сборка и стендовые сетевые испытания. Для iOS подготовлен архитектурный план на базе NetworkExtension API. Мы не обещаем релизов до того, как они пройдут строгую сетевую приёмку. Следите за обновлениями в GitHub Releases!",
+    "faq.a6": "Для Windows уже написана служба AvariGateHelper, модуль очистки DNS/маршрутов и алгоритм автопереключения; сейчас завершается сборка и стендовые сетевые испытания. Для iOS подготовлен архитектурный план на базе NetworkExtension API. Мы публикуем релизы только после прохождения строгой сетевой приёмки. Следите за обновлениями в GitHub Releases!",
 
-    // CTA & Footer
-    "cta.title": "Готовы вернуть себе свободный и быстрый интернет?",
-    "cta.subtitle": "Скачайте AvariGate прямо сейчас или разверните собственный сервер mieru-admin за 2 минуты.",
-    "footer.desc": "Свободный, быстрый и мультипротокольный VPN-стек.",
+    // CTA
+    "cta.title": "Готовы вернуть себе свободный интернет?",
+    "cta.subtitle": "Скачайте AvariGate прямо сейчас или разверните собственный сервер mieru-admin за пару минут.",
+
+    // Footer
+    "footer.desc": "Мультипротокольный клиент и серверный стек для устойчивой связи в условиях сетевых ограничений.",
     "footer.license": "Лицензия:",
     "footer.colNav": "Навигация",
     "footer.colResources": "Ресурсы",
     "footer.colTech": "Технологии",
-    "footer.disclaimer": "Проект не аффилирован с коммерческими VPN-провайдерами. Скриншоты сняты с реального интерфейса на демо-данных.",
-
-    // Common
-    "common.copy": "Копировать",
-    "common.copied": "Скопировано!",
-    "common.copyAll": "Копировать всё"
+    "footer.disclaimer": "Проект не аффилирован с коммерческими VPN-провайдерами. Скриншоты сняты с реального интерфейса приложения на демонстрационных данных."
   },
 
   en: {
+    // Meta & Common
+    "meta.title": "AvariGate — Censorship-Resistant VPN Client & Server Stack",
+    "common.skipToContent": "Skip to main content",
+    "common.copy": "Copy",
+    "common.copied": "Copied!",
+    "common.copyAll": "Copy all",
+    "common.yourPlatform": "Your Platform",
+
     // Nav
     "nav.protocols": "Protocols",
     "nav.features": "Features",
-    "nav.themes": "Themes",
     "nav.server": "Server",
+    "nav.themes": "Themes",
     "nav.downloads": "Downloads",
     "nav.changelog": "Releases",
     "nav.faq": "FAQ",
-    "nav.cta": "Download v0.6.0",
 
     // Hero
-    "hero.badgeVersion": "Release v0.6.0",
-    "hero.badgeText": "Modular UI Architecture & Typed Models",
     "hero.title": "A Private Tunnel for an <span class=\"gradient-text\">Open Internet</span>",
-    "hero.description": "AvariGate is a high-performance cross-platform VPN client built with Tauri v2 + Rust and Android Compose, engineered to bypass Deep Packet Inspection (DPI). Combines Mieru, Hysteria 2, and AmneziaWG into a single unified client with rapid failover and zero UI privilege exposure.",
-    "hero.downloadBtn": "Download v0.6.0",
+    "hero.description": "AvariGate combines Mieru, Hysteria 2, and AmneziaWG protocols into a unified client with zero interface privileges. Robust protocol-level censorship resistance, automated failover on node outage, and split tunneling.",
     "hero.releasesBtn": "GitHub Releases",
-    "hero.serverTitle": "Quick server installation (Ubuntu / Debian):",
-    "hero.metric1": "Anti-DPI Protocols",
-    "hero.metric2": "Server Latency",
-    "hero.metric3": "Failover Retry Passes",
-    "hero.metric4": "Secret Permission Isolation",
-    "hero.connected": "Connected (24 ms)",
+    "hero.connected": "Tunnel Active",
     "hero.tabConnected": "Connection",
     "hero.tabProfiles": "Profiles",
     "hero.tabSplit": "Split Tunnel",
-    "hero.tabOtFront": "OtFront Theme",
-    "hero.tabDragons": "Dragons Theme",
+    "hero.tabDragons": "DragonGate",
     "hero.tabAndroid": "Android",
     "hero.tabServer": "Server TUI",
-    "hero.captionConnected": "Main screen: live tunnel status, latency measurement (24 ms), and uptime counter.",
+    "hero.captionConnected": "Main screen: live tunnel status, session uptime counter, and instant connection toggle.",
     "hero.captionProfiles": "Profiles screen: priority order, protocol badges for Mieru, Hysteria 2, and AmneziaWG.",
     "hero.captionSplit": "Split tunneling: Include/Exclude modes, domain wildcards, and Bypass LAN switch.",
-    "hero.captionOtFront": "OtFront Theme: neon purple cyberpunk aesthetic with stylized visual connection indicator.",
-    "hero.captionDragons": "DragonGate Theme: emerald jade orb encircled by an imperial golden dragon.",
+    "hero.captionDragons": "DragonGate Theme: imperial emerald jade orb encircled by an ancient golden dragon.",
     "hero.captionAndroid": "Android client: floating capsule navbar, per-app routing, and CameraX QR scanner.",
     "hero.captionServer": "mieru-admin TUI: service and port dashboard directly inside your SSH terminal.",
 
     // Protocols
     "protocols.tag": "Anti-DPI Arsenal",
-    "protocols.title": "Triad of Next-Gen Censorship-Bypassing Protocols",
-    "protocols.subtitle": "Standard VPN protocols get blocked by DPI heuristics in seconds. AvariGate integrates three independent solutions designed specifically to thrive inside hostile censored networks.",
-    "protocols.mieruDesc": "Multiplexed tunnel cloaking traffic as random noise with strict defense against active scanning from DPI firewalls (GFW, TSPU).",
-    "protocols.mieruFeat1": "Active probing defense: completely silent to censor inspection queries",
-    "protocols.mieruFeat2": "Connection multiplexing inside a single continuous TCP stream",
-    "protocols.mieruFeat3": "Double password isolation with mita sha256 + 0x00 salt hashing",
-    "protocols.mieruBestFor": "Best for: extreme DPI firewalls and strict protocol blocks",
-    "protocols.hysteriaDesc": "Blazing-fast protocol powered by custom QUIC over UDP with Salamander obfuscation. Squeezes maximum throughput across lossy, throttled cellular networks.",
-    "protocols.hysteriaFeat1": "Salamander obfuscation: traffic appears as arbitrary UDP packets",
+    "protocols.title": "Triad of Censorship-Bypassing Protocols",
+    "protocols.subtitle": "Standard VPN protocols are filtered by handshake signatures and heuristics within seconds. AvariGate unifies three independent solutions engineered specifically for aggressive DPI networks.",
+    "protocols.mieruDesc": "Multiplexed tunnel masking traffic as random noise with robust protection against active probing from DPI censors.",
+    "protocols.mieruFeat1": "Anti-probing: silently drops hostile inspector probes without responding",
+    "protocols.mieruFeat2": "Stream multiplexing over a single persistent TCP connection",
+    "protocols.mieruFeat3": "Dual password salt isolation (mita SHA-256 + 0x00 salt)",
+    "protocols.mieruBestFor": "Ideal for: strict state firewalls and active DPI probing",
+    "protocols.hysteriaDesc": "High-velocity protocol over modified UDP/QUIC with Salamander obfuscation. Delivers peak throughput even under substantial packet loss.",
+    "protocols.hysteriaFeat1": "Salamander obfuscation: traffic appears as arbitrary UDP datagrams",
     "protocols.hysteriaFeat2": "SNI spoofing and self-signed ECDSA certificates",
-    "protocols.hysteriaFeat3": "Brutal Congestion Control: conquers 20–30% packet loss environments",
-    "protocols.hysteriaBestFor": "Best for: congested mobile connections and 4K streaming",
-    "protocols.amneziaDesc": "Enhanced WireGuard v3.1 obfuscation. Randomizes packet headers during handshakes and payload transfers, rendering WireGuard DPI signatures unrecognizable.",
-    "protocols.amneziaFeat1": "Header randomization: Jc, Jmin/Jmax, S1–S4 junk byte padding",
-    "protocols.amneziaFeat2": "Session initialization hashing with H1–H4 and I1–I5 keys",
-    "protocols.amneziaFeat3": "100% compatible with standard WireGuard .conf files without edits",
-    "protocols.amneziaBestFor": "Best for: low-latency online gaming and voice calls",
+    "protocols.hysteriaFeat3": "Loss mitigation: Brutal Congestion Control for unstable mobile networks",
+    "protocols.hysteriaBestFor": "Ideal for: lossy mobile links and high-bandwidth streaming",
+    "protocols.amneziaDesc": "Advanced WireGuard v3.1 obfuscation. Randomizes packet headers during handshakes and transmission, eliminating standard signature detection.",
+    "protocols.amneziaFeat1": "Header randomization: Jc, Jmin/Jmax, S1–S4 parameters",
+    "protocols.amneziaFeat2": "Handshake initialization hashing: H1–H4 and I1–I5",
+    "protocols.amneziaFeat3": "Seamless compatibility with standard WireGuard .conf files",
+    "protocols.amneziaBestFor": "Ideal for: minimal latency, gaming, and direct wire-speed tunneling",
 
     // Features
-    "features.tag": "Engineering & Reliability",
-    "features.title": "Engineered for Continuous Uptime & Zero-Trust Security",
-    "features.subtitle": "We didn't just wrap a third-party core in web views: every layer of the client and server is designed around connection stability and privilege minimization.",
+    "features.tag": "Engineering & Security",
+    "features.title": "Engineered for Unbroken Uptime and Strict Privilege Isolation",
+    "features.subtitle": "Every layer of the client and server stack is designed with resilience and zero interface privilege exposure in mind.",
     "features.failoverTitle": "Intelligent Failover",
-    "features.failoverDesc": "If an active node degrades, the client automatically executes up to 3 full passes across backup profiles with 15-second pauses, seamlessly connecting to the first responsive node.",
-    "features.splitTitle": "Flexible Split Tunneling",
-    "features.splitDesc": "Include and Exclude routing modes. Rule configuration by domain wildcards (*.ru, gosuslugi.ru) and CIDR subnets. Built-in Bypass LAN switch for local printers and NAS.",
-    "features.perAppTitle": "Per-App Split Routing (Android)",
-    "features.perAppDesc": "Select specific Android applications: banking apps run directly through your local ISP, while messengers and browsers stay securely tunneled with zero DNS leaks.",
-    "features.privilegeTitle": "Strict Privilege Separation",
-    "features.privilegeDesc": "The graphical UI runs completely without root privileges. Network routing and TUN creation are managed by mieru-helper over a Unix domain socket verifying UID/PID. 0600 secret permissions.",
-    "features.qrTitle": "Instant QR Pairing",
-    "features.qrDesc": "The server TUI renders high-contrast ASCII QR codes straight into your SSH terminal. Scan with CameraX + ZXing on your phone to configure the client in 1 second.",
-    "features.cleanupTitle": "Atomic Network Cleanup",
-    "features.cleanupDesc": "No broken DNS or severed internet when closing the app: disconnecting shuts down the child core cleanly, restoring your system DNS and routing tables.",
-
-    // Themes
-    "themes.tag": "Customization",
-    "themes.title": "Custom Visual Themes — Match Your Style",
-    "themes.subtitle": "Your VPN interface doesn't need to look like a drab 90s utility. Switch aesthetics with one click: themes transform graphics and accents while leaving your profiles untouched.",
-    "themes.palette": "Palette:",
+    "features.failoverDesc": "When a node fails, the client executes up to 3 passes across backup profiles with 15-second pauses, switching to the first responsive server automatically.",
+    "features.splitTitle": "Split Tunneling",
+    "features.splitDesc": "Include and Exclude modes. Domain wildcard routing (*.ru, gosuslugi.ru) and CIDR subnets. Integrated Bypass LAN toggle for home networks and printers.",
+    "features.perAppTitle": "Per-App Split (Android)",
+    "features.perAppDesc": "Select which apps route through the VPN: route local banking directly while securing messengers and browsers through the encrypted tunnel.",
+    "features.privilegeTitle": "Privilege Separation",
+    "features.privilegeDesc": "UI runs as a standard unprivileged user. Network routes and TUN devices are managed by mieru-helper via a local socket with 0600 file permissions.",
+    "features.qrTitle": "Instant QR Import",
+    "features.qrDesc": "The server TUI prints an ASCII QR code directly into your SSH terminal. Scan it with the CameraX + ZXing scanner in Android in under 1 second.",
+    "features.cleanupTitle": "Clean Session Cleanup",
+    "features.cleanupDesc": "No disconnected network traps after closing the app: upon disconnect, the client stops the core and cleanly restores system DNS and routing tables.",
 
     // Server
     "server.tag": "Server Suite",
-    "server.title": "mieru-admin Manager: All-in-One Static Binary",
-    "server.subtitle": "No Python dependencies or messy shell scripts. A standalone Go binary installs the systemd unit, manages protocol daemons, and provides an interactive TUI directly in your terminal.",
-    "server.wizardTitle": "5-Step Wizard with Diff Preview",
-    "server.wizardDesc": "The setup wizard validates configurations before committing. Step 5 shows a unified diff. If service restart fails, the manager automatically rolls back to the previous backup.",
-    "server.qrExportTitle": "Terminal Profile Export with QR",
-    "server.qrExportDesc": "Create Mieru, Hysteria 2, and AmneziaWG users via TUI. Configurations are rendered as hy2:// links, wireguard .conf, and crisp ASCII QR codes in your terminal.",
-    "server.securityTitle": "Vendored Scripts with SHA-256",
-    "server.securityDesc": "Eliminated curl|bash supply-chain vectors in v0.6.0: AmneziaWG installers are vendored via //go:embed and cryptographically verified against SHA-256 before root execution.",
-    "server.apiTitle": "Loopback REST API + systemd",
-    "server.apiDesc": "Listens strictly on 127.0.0.1:9081 authenticated with 0600 Bearer tokens. Ready for automation scripts, Ansible playbooks, and continuous deployment workflows.",
+    "server.title": "mieru-admin Manager: All-in-One Binary",
+    "server.subtitle": "No fragile scripts or dependency hell. A static Go binary installs the systemd unit, provisions protocol engines, and provides an interactive TUI in your SSH session.",
+    "server.serverTitle": "Quick server installation (Ubuntu / Debian):",
+    "server.wizardTitle": "5-Step Wizard with Diff Review",
+    "server.wizardDesc": "The setup wizard validates configuration before applying. Step 5 displays an exact unified diff. Automatic rollback occurs if the service check fails.",
+    "server.qrExportTitle": "Profile Export with Terminal QR",
+    "server.qrExportDesc": "Create Mieru, Hysteria 2, and AmneziaWG credentials in the TUI. Exports hy2:// URLs, WireGuard .conf files, and clean ASCII QR codes directly to the terminal.",
+    "server.securityTitle": "Vendoring & SHA-256 Validation",
+    "server.securityDesc": "AmneziaWG setup scripts are vendored via //go:embed and checked against cryptographic SHA-256 digests before root execution, eliminating remote download risks.",
+    "server.apiTitle": "Dashboard & Loopback REST API",
+    "server.apiDesc": "Real-time daemon and port monitoring. The built-in loopback REST API (accessible locally with a Bearer token) enables automated node operations.",
+    "server.tuiWizard": "Wizard",
     "server.tuiDash": "Dashboard",
-    "server.tuiWizard": "Setup Wizard",
-    "server.tuiUsers": "User Manager",
-    "server.tuiInstall": "Installer",
+    "server.tuiUsers": "Users",
+    "server.tuiInstall": "Install",
     "server.tuiHysteria": "Hysteria 2",
-    "server.captionDash": "Main dashboard: real-time monitoring of Mieru, Hysteria 2, AmneziaWG service statuses, open ports, and system resources.",
-    "server.captionWizard": "Setup wizard: 5 easy steps for ports, keys, and certificates with unified diff validation.",
-    "server.captionUsers": "User manager: create profiles, credentials, and export hy2:// links and WireGuard configs.",
-    "server.captionInstall": "Automated deployment: install dependencies and systemd service with strict SHA-256 validation.",
-    "server.captionHysteria": "Hysteria 2 configuration: manage Salamander ports, ECDSA certificates, and Brutal CC settings.",
+    "server.captionWizard": "Interactive setup wizard: automated port suggestions, protocol selection, and diff validation before commit.",
+    "server.captionDash": "Service dashboard: live status of Mieru, Hysteria 2, and AmneziaWG daemons and port bindings.",
+    "server.captionUsers": "User manager: create credentials, export configuration, and render terminal ASCII QR codes.",
+    "server.captionInstall": "Component provisioning: vendored AWG installation scripts verified with cryptographic SHA-256 digests.",
+    "server.captionHysteria": "Hysteria 2 configuration: customize QUIC Salamander ports, certificates, and bandwidth controls.",
+
+    // Themes
+    "themes.tag": "Customization",
+    "themes.title": "Signature Interface Visual Themes",
+    "themes.subtitle": "The client adapts to your visual style. Switch themes with one click: aesthetics shift instantly while keeping your profiles, keys, and settings intact.",
+    "themes.palette": "Palette:",
 
     // Downloads
-    "downloads.tag": "Official Builds",
-    "downloads.title": "Download AvariGate v0.6.0",
-    "downloads.subtitle": "Every package is built directly from open-source code. Zero ads, zero trackers, and unrestricted throughput.",
+    "downloads.tag": "Official Releases",
+    "downloads.title": "Download AvariGate for Your Devices",
+    "downloads.subtitle": "Official public builds published in the OstKost/avari-gate repository. Every package is cryptographically verified by SHA-256 checksums.",
     "downloads.appleSilicon": "macOS Apple Silicon",
     "downloads.androidBadge": "Android 8.0+",
     "downloads.serverBadge": "Linux Server",
     "downloads.linuxDesktopBadge": "Linux Desktop",
     "downloads.downloadDmgAvari": "Download .DMG (AvariGate)",
-    "downloads.downloadApkAvari": "Download .APK (AvariGate)",
+    "downloads.downloadApkAvari": "View Android Release",
     "downloads.downloadServer": "Download Server Binary",
-    "downloads.serverNote": "Includes TUI, REST API daemon, and systemd unit",
-    "downloads.viewLinuxPackages": "Browse Linux Packages in Releases",
-    "downloads.linuxPackagesNote": "Stable desktop packages for Linux",
+    "downloads.viewLinuxPackages": "View Packages in Releases",
+    "downloads.macosNote": "Release .DMG with ad-hoc signing and launchd helper",
+    "downloads.androidNote": "ARM64 & x86_64 build using native Android VpnService",
+    "downloads.androidFileNote": "Release in GitHub Releases",
+    "downloads.serverNote": "Includes TUI, local REST API daemon, and systemd unit",
+    "downloads.linuxPackagesNote": "Stable desktop builds for Linux distributions",
     "downloads.platformStatusTitle": "Honest Platform & Architecture Status:",
-    "downloads.sha256Title": "SHA-256 Checksums (Release v0.6.0):",
     "downloads.shaCheckCmd": "Verify in terminal:",
+
+    // Statuses
+    "status.ready": "Ready",
+    "status.inProgress": "In Progress",
+    "status.planned": "Roadmapped",
 
     // Changelog
     "changelog.tag": "Release History",
     "changelog.title": "Verified Project Release Timeline",
-    "changelog.subtitle": "Every listed change is backed by real source code, passing unit tests, and live network verifications in the repository.",
+    "changelog.subtitle": "Every bullet is backed by actual commit history, unit tests, and live network verifications in the repository.",
 
     // Architecture
     "arch.tag": "Architecture Diagram",
-    "arch.title": "Principle of Zero Privilege in User Interface",
-    "arch.subtitle": "Even a compromised UI cannot breach your system: network interfaces and TUN devices are strictly isolated in a hardened helper daemon.",
+    "arch.title": "Zero-Trust Architecture for UI",
+    "arch.subtitle": "Compromised UI scripts cannot escalate privileges: network interfaces are isolated in a separate background system service.",
 
     // FAQ
     "faq.tag": "FAQ",
     "faq.title": "Frequently Asked Questions",
-    "faq.subtitle": "Everything you need to know before running AvariGate.",
-    "faq.q1": "Why are Mieru, Hysteria 2, and AmneziaWG superior to OpenVPN or standard WireGuard?",
-    "faq.a1": "Standard OpenVPN and stock WireGuard have static handshake signatures and packet sizes that modern DPI filters (TSPU, GFW) recognize instantly and throttle. Mieru cloaks traffic as regular HTTPS and rejects active probing, Hysteria 2 relies on Salamander-obfuscated QUIC with aggressive loss recovery, and AmneziaWG injects random junk padding (Jc, S1–S4, H1–H4), making streams indistinguishable from random encrypted data.",
-    "faq.q2": "What visual themes are available in AvariGate?",
-    "faq.a2": "AvariGate includes themes including: AvariGate (signature deep-space cyan aesthetic with an active particle sphere), DragonGate (imperial emerald jade with an intricate golden dragon). You can switch between them at any time in settings without interrupting active tunnels.",
+    "faq.subtitle": "Everything you need to know before installing AvariGate.",
+    "faq.q1": "Why are Mieru, Hysteria 2, and AmneziaWG better than standard WireGuard or OpenVPN?",
+    "faq.a1": "Standard OpenVPN and plain WireGuard have identifiable handshake signatures that are detected and throttled by modern DPI systems (such as TSPU and GFW). Mieru masks data as random noise and ignores hostile probes, Hysteria 2 utilizes loss-resistant QUIC Salamander, and AmneziaWG randomizes header magic bytes (Jc, S1–S4, H1–H4), rendering packets indistinguishable from arbitrary encrypted traffic.",
+    "faq.q2": "What visual themes are included in AvariGate?",
+    "faq.a2": "AvariGate includes several built-in themes: AvariGate (signature cosmic cyber aesthetic with electric cyan particle sphere), DragonGate (imperial emerald jade and ancient golden dragon), CorsairGate, and KawaiiGate. You can switch between them anytime in settings without restarting the connection.",
     "faq.q3": "Does the client or server collect telemetry or analytics?",
-    "faq.a3": "The source code is available on GitHub for you to inspect how the application handles data.",
-    "faq.q4": "Why does macOS prompt for admin password during initial setup?",
-    "faq.a4": "Modern operating systems require elevated privileges to create virtual network adapters (utun) and adjust system routing tables. AvariGate installs a minimal launchd daemon (mieru-helper) once via the standard macOS authorization dialog. The main application window runs with normal user permissions and communicates over a Unix domain socket.",
-    "faq.q5": "Can I install mieru-admin on my own VPS?",
-    "faq.a5": "Yes, that is the primary purpose of mieru-admin! Spin up any virtual machine running Ubuntu 24.04 LTS or Debian 13, download the archive, and run 'sudo ./mieru-admin setup'. The interactive 5-step wizard will configure ports, check diffs, and generate QR codes for immediate smartphone connection in under 2 minutes.",
-    "faq.q6": "When will Windows and iOS versions be available?",
-    "faq.a6": "For Windows, the AvariGateHelper service, named pipe IPC, and routing cleanup are written and undergoing live test verification. For iOS, an architecture plan utilizing NetworkExtension API is prepared. We do not release unverified builds; watch GitHub Releases for updates!",
+    "faq.a3": "No. The application and server do not contain any telemetry, trackers, or analytical logging. The source code is publicly accessible on GitHub in the OstKost/avari-gate repository for independent verification.",
+    "faq.q4": "Why does macOS require an administrator password upon first launch?",
+    "faq.a4": "Operating systems restrict standard unprivileged applications from creating virtual network adapters (TUN) and altering routing tables. AvariGate installs a minimal launchd daemon (mieru-helper) once via the standard macOS authorization dialog. The UI continues to run under your standard user account, communicating with the helper via a local Unix socket.",
+    "faq.q5": "Can I deploy the server on my own VPS?",
+    "faq.a5": "Yes, that is the exact purpose of mieru-admin. Rent any virtual private server running Ubuntu 24.04 LTS or Debian 13, download the archive, and run «sudo ./mieru-admin setup». The step-by-step wizard configures the stack in minutes and prints an ASCII QR code for instant client onboarding.",
+    "faq.q6": "When can we expect versions for Windows and iOS?",
+    "faq.a6": "For Windows, the AvariGateHelper service, DNS/route cleanup, and auto-failover are already implemented; final build packaging and network validation are currently underway. For iOS, a NetworkExtension architectural plan is completed. We only publish builds after passing rigorous network smoke tests. Track progress in GitHub Releases!",
 
-    // CTA & Footer
-    "cta.title": "Ready to reclaim an unrestricted, censorship-free internet?",
-    "cta.subtitle": "Download AvariGate right now or deploy your own mieru-admin server in 2 minutes.",
-    "footer.desc": "Fast, resilient, censorship-resistant multi-protocol VPN stack.",
+    // CTA
+    "cta.title": "Ready to reclaim an open internet?",
+    "cta.subtitle": "Download AvariGate today or set up your own mieru-admin server in just a few minutes.",
+
+    // Footer
+    "footer.desc": "Multi-protocol censorship-resistant VPN client and server stack.",
     "footer.license": "License:",
     "footer.colNav": "Navigation",
     "footer.colResources": "Resources",
     "footer.colTech": "Technologies",
-    "footer.disclaimer": "Not affiliated with commercial VPN providers. Screenshots captured on real app with demo data.",
-
-    // Common
-    "common.copy": "Copy",
-    "common.copied": "Copied!",
-    "common.copyAll": "Copy All"
+    "footer.disclaimer": "This project is not affiliated with commercial VPN providers. All screenshots are captured from the live application with demo data."
   }
 };
 
 // ==========================================================================
-// 2. Language State Management
+// 3. Language & Dynamic Version Formatting
 // ==========================================================================
 
-let currentLang = localStorage.getItem("preferred_lang") || "ru";
+try {
+  const savedLang = localStorage.getItem("avarigate_lang");
+  if (savedLang === "ru" || savedLang === "en") {
+    currentLang = savedLang;
+  } else {
+    const navLang = navigator.language || navigator.userLanguage || "ru";
+    if (navLang.startsWith("en")) {
+      currentLang = "en";
+    }
+  }
+} catch (e) {}
+
+function updateVersionElements() {
+  const navCtaBtn = document.getElementById("nav-cta-btn");
+  if (navCtaBtn) {
+    navCtaBtn.textContent = currentLang === "en" ? `Download ${currentVersion}` : `Скачать ${currentVersion}`;
+  }
+
+  const mobileDrawerCta = document.getElementById("mobile-drawer-cta");
+  if (mobileDrawerCta) {
+    mobileDrawerCta.textContent = currentLang === "en" ? `Download ${currentVersion}` : `Скачать ${currentVersion}`;
+  }
+
+  const heroDownloadLabel = document.getElementById("hero-download-label");
+  if (heroDownloadLabel) {
+    heroDownloadLabel.textContent = currentLang === "en" ? `Download AvariGate (${currentVersion})` : `Скачать AvariGate (${currentVersion})`;
+  }
+
+  const bottomCtaDownload = document.getElementById("bottom-cta-download");
+  if (bottomCtaDownload) {
+    bottomCtaDownload.textContent = currentLang === "en" ? `Download ${currentVersion}` : `Скачать ${currentVersion}`;
+  }
+
+  const shaTitle = document.getElementById("sha256-title");
+  if (shaTitle) {
+    shaTitle.textContent = currentLang === "en"
+      ? `SHA-256 Checksums (Release ${currentVersion}):`
+      : `Контрольные суммы SHA-256 (Релиз ${currentVersion}):`;
+  }
+
+  // Update Android button label based on asset availability
+  const btnAndroidLabel = document.getElementById("btn-download-android-label");
+  if (btnAndroidLabel) {
+    if (hasAndroidDirectAsset) {
+      btnAndroidLabel.textContent = currentLang === "en" ? "Download .APK (AvariGate)" : "Скачать .APK (AvariGate)";
+    } else {
+      btnAndroidLabel.textContent = currentLang === "en" ? "View Android Release" : "Смотреть релиз Android";
+    }
+  }
+}
 
 function setLanguage(lang) {
   if (!i18n[lang]) return;
   currentLang = lang;
-  localStorage.setItem("preferred_lang", lang);
 
-  // Update HTML lang attribute
-  document.documentElement.lang = lang;
+  try {
+    localStorage.setItem("avarigate_lang", lang);
+  } catch (e) {}
 
-  // Update switcher labels
-  const langCurrent = document.getElementById("lang-current");
-  const langOther = document.getElementById("lang-other");
-  if (langCurrent && langOther) {
-    if (lang === "ru") {
-      langCurrent.textContent = "RU";
-      langOther.textContent = "EN";
-    } else {
-      langCurrent.textContent = "EN";
-      langOther.textContent = "RU";
-    }
-  }
+  document.documentElement.setAttribute("lang", lang);
 
-  // Update all [data-i18n] nodes
+  // Update all elements with data-i18n
   document.querySelectorAll("[data-i18n]").forEach((el) => {
     const key = el.getAttribute("data-i18n");
     if (i18n[lang] && i18n[lang][key]) {
@@ -380,90 +434,94 @@ function setLanguage(lang) {
     }
   });
 
-  // Update screenshot images that have localized versions
-  updateLocalizedImages();
-}
+  // Update language indicator toggle buttons
+  const langCurrent = document.getElementById("lang-current");
+  const langOther = document.getElementById("lang-other");
+  if (langCurrent && langOther) {
+    if (lang === "ru") {
+      langCurrent.textContent = "RU";
+      langCurrent.classList.add("active-lang");
+      langOther.textContent = "EN";
+      langOther.classList.remove("active-lang");
+    } else {
+      langCurrent.textContent = "RU";
+      langCurrent.classList.remove("active-lang");
+      langOther.textContent = "EN";
+      langOther.classList.add("active-lang");
+    }
+  }
 
-function updateLocalizedImages() {
-  // Check preview active tab
+  // Apply dynamic version labels (preserves fetched version across switches)
+  updateVersionElements();
+
+  // Update active preview screen screenshot for current language
   const activeTab = document.querySelector(".preview-tab.active");
   if (activeTab) {
     const target = activeTab.getAttribute("data-target");
     updatePreviewScreen(target);
   }
 
-  // Check theme preview
+  // Update theme showcase screenshot
   const activeThemeBtn = document.querySelector(".theme-btn.active");
   if (activeThemeBtn) {
     const themeId = activeThemeBtn.getAttribute("data-theme-id");
     updateThemeDisplay(themeId);
   }
 
-  // Check server TUI caption
+  // Update active server TUI caption
   const activeTuiTab = document.querySelector(".tui-tab.active");
   if (activeTuiTab) {
     const tuiKey = activeTuiTab.getAttribute("data-tui");
-    const data = serverTuiData[tuiKey];
-    const tuiCaption = document.getElementById("tui-caption");
-    if (data && tuiCaption && i18n[currentLang] && i18n[currentLang][data.captionKey]) {
-      tuiCaption.textContent = i18n[currentLang][data.captionKey];
-    }
+    switchServerTui(tuiKey);
   }
 }
 
 // ==========================================================================
-// 3. Hero Preview Screen Tabs
+// 4. Hero Preview Screens (Real Application Screenshots Only)
 // ==========================================================================
 
 const previewScreens = {
   connected: {
     ru: "./assets/screenshots/desktop-connected.png",
     en: "./assets/screenshots/desktop-connected-en.png",
-    title: "AvariGate — Frankfurt 01 (Mieru)",
-    captionRu: "Главный экран: статус туннеля, измерение задержки в 24 мс и таймер аптайма.",
-    captionEn: "Main screen: live tunnel status, latency measurement (24 ms), and uptime counter."
+    titleRu: "AvariGate — Подключение (Mieru mita)",
+    titleEn: "AvariGate — Connected (Mieru mita)",
+    captionKey: "hero.captionConnected"
   },
   profiles: {
-    ru: "./assets/screenshots/desktop-profiles-031.png",
-    en: "./assets/screenshots/desktop-profiles-031-en.png",
-    title: "AvariGate — Список профилей",
-    captionRu: "Список профилей: приоритет обхода, индикация протоколов Mieru, Hysteria 2 и AmneziaWG.",
-    captionEn: "Profiles screen: priority order, protocol badges for Mieru, Hysteria 2, and AmneziaWG."
+    ru: "./assets/screenshots/desktop-profiles.png",
+    en: "./assets/screenshots/desktop-profiles-en.png",
+    titleRu: "AvariGate — Список профилей",
+    titleEn: "AvariGate — Profiles & Protocols",
+    captionKey: "hero.captionProfiles"
   },
   splittunnel: {
     ru: "./assets/screenshots/desktop-split-tunneling.png",
     en: "./assets/screenshots/desktop-split-tunneling-en.png",
-    title: "AvariGate — Сплит-туннелирование",
-    captionRu: "Сплит-туннелирование: режимы Include/Exclude, маски доменов и переключатель Bypass LAN.",
-    captionEn: "Split tunneling: Include/Exclude modes, domain wildcards, and Bypass LAN switch."
-  },
-  otfront: {
-    ru: "./assets/screenshots/desktop-eyevpn.png",
-    en: "./assets/screenshots/desktop-eyevpn-en.png",
-    title: "AvariGate — Тема OtFront",
-    captionRu: "Тема OtFront: неоново-пурпурная киберпанк-эстетика со стилизованным визуальным индикатором соединения.",
-    captionEn: "OtFront Theme: neon purple cyberpunk aesthetic with stylized visual connection indicator."
+    titleRu: "AvariGate — Сплит-туннелирование",
+    titleEn: "AvariGate — Split Tunneling",
+    captionKey: "hero.captionSplit"
   },
   dragons: {
     ru: "./assets/screenshots/desktop-dragons.png",
     en: "./assets/screenshots/desktop-dragons-en.png",
-    title: "DragonGate — Императорский нефрит",
-    captionRu: "Тема DragonGate: нефритовая сфера, обрамлённая восточным золотым драконом.",
-    captionEn: "DragonGate Theme: emerald jade orb encircled by an imperial golden dragon."
+    titleRu: "AvariGate — Тема DragonGate",
+    titleEn: "AvariGate — DragonGate Theme",
+    captionKey: "hero.captionDragons"
   },
   android: {
     ru: "./assets/screenshots/android-overview.png",
     en: "./assets/screenshots/android-overview-en.png",
-    title: "AvariGate Android",
-    captionRu: "Android-клиент: капсула навигации, per-app маршрутизация и CameraX QR-сканер.",
-    captionEn: "Android client: floating capsule navbar, per-app routing, and CameraX QR scanner."
+    titleRu: "AvariGate Android",
+    titleEn: "AvariGate Android Client",
+    captionKey: "hero.captionAndroid"
   },
   server: {
     ru: "./assets/screenshots/server-tui-dashboard.png",
     en: "./assets/screenshots/server-tui-dashboard.png",
-    title: "mieru-admin TUI (Linux Server)",
-    captionRu: "Консоль mieru-admin: дашборд состояния служб и портов прямо в терминале.",
-    captionEn: "mieru-admin TUI: service and port dashboard directly inside your SSH terminal."
+    titleRu: "mieru-admin TUI (Linux Server)",
+    titleEn: "mieru-admin TUI (Linux Server)",
+    captionKey: "hero.captionServer"
   }
 };
 
@@ -478,17 +536,17 @@ function updatePreviewScreen(targetKey) {
   const imgSrc = (currentLang === "en" && data.en) ? data.en : data.ru;
   if (previewImg) previewImg.src = imgSrc;
 
-  if (previewCaption) {
-    previewCaption.textContent = currentLang === "en" ? data.captionEn : data.captionRu;
+  if (previewCaption && i18n[currentLang] && i18n[currentLang][data.captionKey]) {
+    previewCaption.innerHTML = i18n[currentLang][data.captionKey];
   }
 
   if (previewTitle) {
-    previewTitle.textContent = data.title;
+    previewTitle.textContent = currentLang === "en" ? data.titleEn : data.titleRu;
   }
 }
 
 // ==========================================================================
-// 4. Themes Showcase Data & Interactivity (Real Verified Screenshots)
+// 5. Themes Showcase (AvariGate & DragonGate)
 // ==========================================================================
 
 const themeDetails = {
@@ -496,8 +554,8 @@ const themeDetails = {
     name: "AvariGate",
     subRu: "Кибер-сфера частиц & глубокий космос",
     subEn: "Cosmic Particle Sphere & Deep Space",
-    descRu: "Классическое оформление AvariGate: тёмная космическая палитра, неоновые бирюзовые акценты и анимированная центральная сфера состояния с волнами активности при передаче трафика.",
-    descEn: "Signature AvariGate aesthetic: deep cosmic slate backdrop, luminous cyan-teal particle accents, and an animated central status orb with ripple waves reacting to active bandwidth.",
+    descRu: "Классическое оформление AvariGate: тёмная космическая палитра, неоновые бирюзовые акценты и анимированная центральная сфера состояния с визуализацией активности трафика.",
+    descEn: "Signature AvariGate aesthetic: deep cosmic slate backdrop, luminous cyan-teal particle accents, and an animated central status orb reacting to active bandwidth.",
     logo: "./assets/icons/icon.png",
     screenshotRu: "./assets/screenshots/desktop-connected.png",
     screenshotEn: "./assets/screenshots/desktop-connected-en.png",
@@ -507,23 +565,12 @@ const themeDetails = {
     name: "DragonGate",
     subRu: "Императорский нефрит & золотой дракон",
     subEn: "Imperial Jade & Ancient Golden Dragon",
-    descRu: "Восточная кибер-эстетика: глубокий изумрудный нефрит, акценты имперского золота и анимированный китайский дракон, кольцом охватывающий центральную сферу подключения.",
-    descEn: "Oriental cyber-fantasy theme: deep emerald jade tones, imperial gold borders, and an ornate dragon coiled majestically around the central status sphere.",
+    descRu: "Восточная кибер-эстетика: глубокий изумрудный нефрит, акценты имперского золота и китайский золотой дракон, кольцом охватывающий центральную сферу подключения.",
+    descEn: "Oriental cyber-fantasy theme: deep emerald jade tones, imperial gold borders, and an ornate golden dragon coiled around the central status sphere.",
     logo: "./assets/logos/dragons-logo.svg",
     screenshotRu: "./assets/screenshots/desktop-dragons.png",
     screenshotEn: "./assets/screenshots/desktop-dragons-en.png",
     swatches: ["#061c14", "#10b981", "#f59e0b", "#064e3b"]
-  },
-  otfront: {
-    name: "OtFront",
-    subRu: "Неоновый киберпанк & фиолетовые акценты",
-    subEn: "Neon Cyberpunk & Purple Glow",
-    descRu: "Стильное киберпанк-оформление: глубокие фиолетово-малиновые тона, контрастные неоновые линии и выразительная визуальная индикация активного соединения.",
-    descEn: "Vibrant cyberpunk aesthetic: deep purple and magenta hues, glowing neon contours, and expressive visual feedback for active tunnel states.",
-    logo: "./assets/logos/otfront-logo.png",
-    screenshotRu: "./assets/screenshots/desktop-eyevpn.png",
-    screenshotEn: "./assets/screenshots/desktop-eyevpn-en.png",
-    swatches: ["#170d24", "#ec4899", "#a855f7", "#3b0764"]
   }
 };
 
@@ -531,10 +578,8 @@ function updateThemeDisplay(themeId) {
   const t = themeDetails[themeId];
   if (!t) return;
 
-  // Apply data-theme on root HTML for live color shift!
   document.documentElement.setAttribute("data-theme", themeId);
 
-  // Update theme card elements
   const themeName = document.getElementById("theme-name");
   const themeSub = document.getElementById("theme-sub");
   const themeDesc = document.getElementById("theme-desc");
@@ -550,46 +595,41 @@ function updateThemeDisplay(themeId) {
   const shot = (currentLang === "en" && t.screenshotEn) ? t.screenshotEn : t.screenshotRu;
   if (themeScreenshot) themeScreenshot.src = shot;
 
-  // Swatches
   if (themeSwatches) {
     themeSwatches.innerHTML = "";
     t.swatches.forEach((color) => {
       const span = document.createElement("span");
       span.className = "swatch";
       span.style.backgroundColor = color;
+      span.title = color;
       themeSwatches.appendChild(span);
     });
   }
 }
 
 // ==========================================================================
-// 5. Server TUI Screens & Tabs
+// 6. Server TUI Screens & Tabs (mieru-admin)
 // ==========================================================================
 
 const serverTuiData = {
-  dashboard: {
-    src: "./assets/screenshots/server-tui-dashboard.png",
-    title: "mieru-admin TUI — Dashboard",
-    captionKey: "server.captionDash"
-  },
   wizard: {
     src: "./assets/screenshots/server-tui-wizard.png",
-    title: "mieru-admin TUI — Setup Wizard",
     captionKey: "server.captionWizard"
+  },
+  dashboard: {
+    src: "./assets/screenshots/server-tui-dashboard.png",
+    captionKey: "server.captionDash"
   },
   users: {
     src: "./assets/screenshots/server-tui-users.png",
-    title: "mieru-admin TUI — User Manager",
     captionKey: "server.captionUsers"
   },
   install: {
     src: "./assets/screenshots/server-tui-install.png",
-    title: "mieru-admin TUI — Installation",
     captionKey: "server.captionInstall"
   },
   hysteria: {
     src: "./assets/screenshots/server-tui-hysteria.png",
-    title: "mieru-admin TUI — Hysteria 2",
     captionKey: "server.captionHysteria"
   }
 };
@@ -612,13 +652,11 @@ function switchServerTui(tuiKey) {
   });
 
   const tuiImg = document.getElementById("tui-screen-img");
-  const tuiTitle = document.getElementById("tui-terminal-title");
   const tuiCaption = document.getElementById("tui-caption");
 
   if (tuiImg) tuiImg.src = data.src;
-  if (tuiTitle) tuiTitle.textContent = data.title;
   if (tuiCaption && i18n[currentLang] && i18n[currentLang][data.captionKey]) {
-    tuiCaption.textContent = i18n[currentLang][data.captionKey];
+    tuiCaption.innerHTML = i18n[currentLang][data.captionKey];
   }
 }
 
@@ -637,34 +675,206 @@ function initServerTuiTabs() {
       const target = pt.getAttribute("data-point-target");
       switchServerTui(target);
     });
+    pt.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        const target = pt.getAttribute("data-point-target");
+        switchServerTui(target);
+      }
+    });
   });
 }
 
 // ==========================================================================
-// 6. Clipboard Helpers
+// 7. Dynamic GitHub Latest Releases with Fallback
+// ==========================================================================
+
+const GITHUB_API_LATEST = "https://api.github.com/repos/OstKost/avari-gate/releases/latest";
+
+function formatBytes(bytes) {
+  if (bytes === 0) return "0 Б";
+  const k = 1024;
+  const sizes = ["Б", "КБ", "МБ", "ГБ"];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + " " + sizes[i];
+}
+
+async function fetchLatestRelease() {
+  try {
+    const response = await fetch(GITHUB_API_LATEST, {
+      headers: { Accept: "application/vnd.github.v3+json" }
+    });
+    if (!response.ok) return;
+
+    const data = await response.json();
+    if (data.tag_name) {
+      currentVersion = data.tag_name;
+      updateVersionElements();
+    }
+
+    const assets = data.assets || [];
+
+    // macOS DMG (AvariGate only)
+    const macAsset = assets.find((a) => a.name.includes("AvariGate") && a.name.endsWith(".dmg"));
+    if (macAsset) {
+      const btnMac = document.getElementById("btn-download-macos");
+      const nameMac = document.getElementById("file-macos-name");
+      const sizeMac = document.getElementById("file-macos-size");
+      if (btnMac) btnMac.href = macAsset.browser_download_url;
+      if (nameMac) nameMac.textContent = macAsset.name;
+      if (sizeMac) sizeMac.textContent = formatBytes(macAsset.size);
+    }
+
+    // Android APK (Check if dedicated AvariGate APK exists)
+    const androidAsset = assets.find((a) => a.name.includes("AvariGate") && a.name.endsWith(".apk"));
+    const btnAndroid = document.getElementById("btn-download-android");
+    const nameAndroid = document.getElementById("file-android-name");
+    const sizeAndroid = document.getElementById("file-android-size");
+
+    if (androidAsset) {
+      hasAndroidDirectAsset = true;
+      if (btnAndroid) btnAndroid.href = androidAsset.browser_download_url;
+      if (nameAndroid) nameAndroid.textContent = androidAsset.name;
+      if (sizeAndroid) sizeAndroid.textContent = formatBytes(androidAsset.size);
+    } else {
+      hasAndroidDirectAsset = false;
+      if (btnAndroid) btnAndroid.href = data.html_url || "https://github.com/OstKost/avari-gate/releases/latest";
+      if (nameAndroid) {
+        nameAndroid.textContent = currentLang === "en" ? "Release in GitHub Releases" : "Сборка в GitHub Releases";
+      }
+    }
+    updateVersionElements();
+
+    // Linux Server tar.gz (AvariGate-admin)
+    const serverAsset = assets.find((a) => a.name.includes("admin-linux") && a.name.endsWith(".tar.gz"));
+    if (serverAsset) {
+      const btnServer = document.getElementById("btn-download-server");
+      const nameServer = document.getElementById("file-server-name");
+      const sizeServer = document.getElementById("file-server-size");
+      if (btnServer) btnServer.href = serverAsset.browser_download_url;
+      if (nameServer) nameServer.textContent = serverAsset.name;
+      if (sizeServer) sizeServer.textContent = formatBytes(serverAsset.size);
+
+      const quickCode = document.getElementById("quick-cmd-code");
+      if (quickCode) {
+        quickCode.textContent = `curl -fsSL -O ${serverAsset.browser_download_url} && tar -xzf ${serverAsset.name} && sudo ./mieru-admin setup`;
+      }
+    }
+  } catch (err) {
+    console.warn("GitHub Release API unavailable, using verified fallback release assets.", err);
+  }
+}
+
+// ==========================================================================
+// 8. Client Platform Detection & Download Highlight
+// ==========================================================================
+
+function detectUserPlatform() {
+  const userAgent = navigator.userAgent || "";
+  const platform = navigator.platform || "";
+
+  let detected = null;
+
+  if (/Mac|iPhone|iPad/i.test(platform) || /Macintosh/i.test(userAgent)) {
+    detected = "macos";
+  } else if (/Android/i.test(userAgent)) {
+    detected = "android";
+  } else if (/Linux/i.test(platform) || /Linux/i.test(userAgent)) {
+    detected = "linux";
+  } else if (/Win/i.test(platform) || /Windows/i.test(userAgent)) {
+    detected = "windows";
+  }
+
+  if (detected === "macos") {
+    const cardMac = document.getElementById("card-macos");
+    if (cardMac) {
+      cardMac.classList.add("user-platform");
+      addPlatformBadge(cardMac);
+    }
+    const heroBtn = document.getElementById("hero-download-btn");
+    if (heroBtn) {
+      heroBtn.href = "#card-macos";
+    }
+  } else if (detected === "android") {
+    const cardAndroid = document.getElementById("card-android");
+    if (cardAndroid) {
+      cardAndroid.classList.add("user-platform");
+      addPlatformBadge(cardAndroid);
+    }
+    const heroBtn = document.getElementById("hero-download-btn");
+    if (heroBtn) {
+      heroBtn.href = "#card-android";
+    }
+  } else if (detected === "linux") {
+    const cardLinux = document.getElementById("card-linux");
+    if (cardLinux) {
+      cardLinux.classList.add("user-platform");
+      addPlatformBadge(cardLinux);
+    }
+  }
+}
+
+function addPlatformBadge(cardElement) {
+  const existingBadge = cardElement.querySelector(".platform-detected-pill");
+  if (existingBadge) return;
+
+  const pill = document.createElement("span");
+  pill.className = "platform-detected-pill";
+  pill.style.cssText = "position:absolute; top:-10px; right:16px; background:var(--accent); color:#030712; font-size:11px; font-weight:800; padding:3px 10px; border-radius:9999px; box-shadow:0 0 10px var(--accent-glow);";
+  pill.textContent = currentLang === "en" ? "★ Your Platform" : "★ Ваша система";
+  cardElement.appendChild(pill);
+}
+
+// ==========================================================================
+// 9. Clipboard Copy Helpers
 // ==========================================================================
 
 function copyToClipboard(text, buttonEl, successText) {
-  navigator.clipboard.writeText(text).then(() => {
+  if (!navigator.clipboard) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.position = "fixed";
+    textArea.style.opacity = "0";
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+      document.execCommand("copy");
+      showSuccess();
+    } catch (e) {
+      console.error("ExecCommand copy failed", e);
+    }
+    document.body.removeChild(textArea);
+    return;
+  }
+
+  navigator.clipboard.writeText(text).then(showSuccess).catch((err) => {
+    console.error("Clipboard copy failed: ", err);
+  });
+
+  function showSuccess() {
     const originalHtml = buttonEl.innerHTML;
     buttonEl.innerHTML = `✓ ${successText}`;
     setTimeout(() => {
       buttonEl.innerHTML = originalHtml;
-    }, 2000);
-  }).catch((err) => {
-    console.error("Clipboard copy failed: ", err);
-  });
+    }, 2200);
+  }
 }
 
 // ==========================================================================
-// 7. Initialization & Event Listeners
+// 10. Initialization & Event Listeners
 // ==========================================================================
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Set initial language
+  // Apply initial language & version labels
   setLanguage(currentLang);
 
-  // Language switcher toggle
+  // Platform detection
+  detectUserPlatform();
+
+  // Async release fetch
+  fetchLatestRelease();
+
+  // Language switcher button
   const langToggle = document.getElementById("lang-toggle");
   if (langToggle) {
     langToggle.addEventListener("click", () => {
@@ -673,23 +883,35 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Mobile drawer toggle
+  // Mobile drawer toggle & accessibility
   const mobileBtn = document.getElementById("mobile-menu-btn");
   const mobileDrawer = document.getElementById("mobile-drawer");
   if (mobileBtn && mobileDrawer) {
     mobileBtn.addEventListener("click", () => {
-      mobileDrawer.classList.toggle("open");
+      const isOpen = mobileDrawer.classList.toggle("open");
+      mobileBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      mobileDrawer.setAttribute("aria-hidden", isOpen ? "false" : "true");
     });
 
-    // Close on link click
     mobileDrawer.querySelectorAll(".mobile-link, a").forEach((link) => {
       link.addEventListener("click", () => {
         mobileDrawer.classList.remove("open");
+        mobileBtn.setAttribute("aria-expanded", "false");
+        mobileDrawer.setAttribute("aria-hidden", "true");
       });
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && mobileDrawer.classList.contains("open")) {
+        mobileDrawer.classList.remove("open");
+        mobileBtn.setAttribute("aria-expanded", "false");
+        mobileDrawer.setAttribute("aria-hidden", "true");
+        mobileBtn.focus();
+      }
     });
   }
 
-  // Navbar scroll detection
+  // Sticky Navbar scroll state
   const navbar = document.getElementById("navbar");
   window.addEventListener("scroll", () => {
     if (window.scrollY > 40) {
@@ -697,14 +919,18 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       navbar.classList.remove("scrolled");
     }
-  });
+  }, { passive: true });
 
   // Hero Preview tabs
   const previewTabs = document.querySelectorAll(".preview-tab");
   previewTabs.forEach((tab) => {
     tab.addEventListener("click", () => {
-      previewTabs.forEach((t) => t.classList.remove("active"));
+      previewTabs.forEach((t) => {
+        t.classList.remove("active");
+        t.setAttribute("aria-selected", "false");
+      });
       tab.classList.add("active");
+      tab.setAttribute("aria-selected", "true");
       const target = tab.getAttribute("data-target");
       updatePreviewScreen(target);
     });
@@ -714,8 +940,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const themeBtns = document.querySelectorAll(".theme-btn");
   themeBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
-      themeBtns.forEach((b) => b.classList.remove("active"));
+      themeBtns.forEach((b) => {
+        b.classList.remove("active");
+        b.setAttribute("aria-selected", "false");
+      });
       btn.classList.add("active");
+      btn.setAttribute("aria-selected", "true");
       const themeId = btn.getAttribute("data-theme-id");
       updateThemeDisplay(themeId);
     });
@@ -731,10 +961,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (questionBtn) {
       questionBtn.addEventListener("click", () => {
         const isOpen = item.classList.contains("open");
-        // Close all
-        faqItems.forEach((i) => i.classList.remove("open"));
+        faqItems.forEach((i) => {
+          i.classList.remove("open");
+          const btn = i.querySelector(".faq-question");
+          if (btn) btn.setAttribute("aria-expanded", "false");
+        });
+
         if (!isOpen) {
           item.classList.add("open");
+          questionBtn.setAttribute("aria-expanded", "true");
         }
       });
     }
@@ -744,7 +979,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const copyQuickCmd = document.getElementById("copy-quick-cmd");
   if (copyQuickCmd) {
     copyQuickCmd.addEventListener("click", () => {
-      const cmd = "curl -fsSL -O https://github.com/OstKost/avari-gate/releases/download/v0.6.0/AvariGate-admin-linux-amd64.tar.gz && tar -xzf AvariGate-admin-linux-amd64.tar.gz && sudo ./mieru-admin setup";
+      const codeEl = document.getElementById("quick-cmd-code");
+      const cmd = codeEl ? codeEl.textContent : "curl -fsSL -O https://github.com/OstKost/avari-gate/releases/download/v0.6.0/AvariGate-admin-linux-amd64.tar.gz && tar -xzf AvariGate-admin-linux-amd64.tar.gz && sudo ./mieru-admin setup";
       const successMsg = currentLang === "en" ? "Copied!" : "Скопировано!";
       copyToClipboard(cmd, copyQuickCmd, successMsg);
     });

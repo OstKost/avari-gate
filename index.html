@@ -3,36 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AvariGate — Клиент и сервер для свободного интернета</title>
-  <meta name="description" content="Мультиплатформенный клиент и серверный стек с поддержкой Mieru, Hysteria 2 и AmneziaWG. Непробиваемая защита от DPI, умный failover, сплит-туннелирование и авторские темы оформления.">
-  <meta name="keywords" content="VPN, Mieru, Hysteria 2, AmneziaWG, WireGuard, DPI bypass, Censorship resistance, Rust, Tauri, Android Compose">
+  <title data-i18n="meta.title">AvariGate — Клиент и сервер для устойчивого к блокировкам интернета</title>
+  <meta name="description" content="Мультиплатформенный клиент и серверный стек с поддержкой Mieru, Hysteria 2 и AmneziaWG. Защита от блокировок по протоколам, умный failover, раздельное туннелирование и нулевые привилегии интерфейса.">
+  <meta name="keywords" content="VPN, Mieru, Hysteria 2, AmneziaWG, WireGuard, DPI bypass, Censorship resistance, Rust, Tauri, Android Compose, mieru-admin">
   
   <!-- OpenGraph / Social -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="AvariGate — Мультипротокольный VPN-клиент">
-  <meta property="og:description" content="Mieru (mita 3.38), Hysteria 2 (Salamander QUIC) и AmneziaWG 3.1. Клиенты для macOS, Android и Linux Server.">
+  <meta property="og:title" content="AvariGate — Мультипротокольный VPN-стек">
+  <meta property="og:description" content="Mieru (mita 3.38), Hysteria 2 (QUIC Salamander) и AmneziaWG 3.1. Клиенты для macOS, Android и Linux Server с нулевыми привилегиями интерфейса.">
   <meta property="og:image" content="./assets/screenshots/desktop-connected.png">
+  <meta name="theme-color" content="#060911">
   
   <link rel="icon" type="image/png" href="./assets/icons/favicon.png">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
+  <!-- Accessibility Skip Link -->
+  <a href="#main-content" class="skip-link" data-i18n="common.skipToContent">Перейти к основному содержимому</a>
 
   <!-- Navigation -->
   <header class="navbar" id="navbar">
     <div class="nav-container">
-      <a href="#hero" class="nav-brand">
-        <img src="./assets/icons/icon.png" alt="AvariGate Logo" class="brand-logo" id="brand-logo">
+      <a href="#hero" class="nav-brand" aria-label="AvariGate Home">
+        <img src="./assets/icons/icon.png" alt="AvariGate Logo" class="brand-logo" id="brand-logo" width="36" height="36">
         <div class="brand-text">
           <span class="brand-title">AvariGate</span>
         </div>
       </a>
 
-      <nav class="nav-links" id="nav-links">
+      <nav class="nav-links" id="nav-links" aria-label="Main Navigation">
         <a href="#protocols" data-i18n="nav.protocols">Протоколы</a>
         <a href="#features" data-i18n="nav.features">Возможности</a>
-        <a href="#themes" data-i18n="nav.themes">Темы</a>
         <a href="#server" data-i18n="nav.server">Сервер</a>
+        <a href="#themes" data-i18n="nav.themes">Темы</a>
         <a href="#downloads" data-i18n="nav.downloads">Скачать</a>
         <a href="#changelog" data-i18n="nav.changelog">Релизы</a>
         <a href="#faq" data-i18n="nav.faq">FAQ</a>
@@ -40,169 +43,116 @@
 
       <div class="nav-actions">
         <!-- Language Switcher -->
-        <button class="lang-switch-btn" id="lang-toggle" aria-label="Toggle language">
+        <button class="lang-switch-btn" id="lang-toggle" type="button" aria-label="Переключить язык (RU / EN)">
           <span class="lang-indicator active-lang" id="lang-current">RU</span>
-          <span class="lang-divider">/</span>
+          <span class="lang-divider" aria-hidden="true">/</span>
           <span class="lang-indicator" id="lang-other">EN</span>
         </button>
 
         <!-- GitHub Link -->
-        <a href="https://github.com/OstKost/avari-gate" target="_blank" rel="noopener noreferrer" class="btn-github" title="GitHub Repository">
-          <svg class="github-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+        <a href="https://github.com/OstKost/avari-gate" target="_blank" rel="noopener noreferrer" class="btn-github" title="GitHub Repository" aria-label="GitHub Repository">
+          <svg class="github-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
             <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
           </svg>
           <span class="github-text">GitHub</span>
         </a>
 
         <!-- Download CTA -->
-        <a href="#downloads" class="btn-primary-nav" data-i18n="nav.cta">Скачать v0.6.0</a>
+        <a href="#downloads" class="btn-primary-nav" id="nav-cta-btn">Скачать v0.6.0</a>
 
         <!-- Mobile Menu Toggle -->
-        <button class="mobile-menu-toggle" id="mobile-menu-btn" aria-label="Open menu">
-          <span></span>
-          <span></span>
-          <span></span>
+        <button class="mobile-menu-toggle" id="mobile-menu-btn" type="button" aria-label="Открыть навигационное меню" aria-expanded="false" aria-controls="mobile-drawer">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
         </button>
       </div>
     </div>
   </header>
 
   <!-- Mobile Drawer -->
-  <div class="mobile-drawer" id="mobile-drawer">
+  <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
     <div class="mobile-drawer-links">
       <a href="#protocols" class="mobile-link" data-i18n="nav.protocols">Протоколы</a>
       <a href="#features" class="mobile-link" data-i18n="nav.features">Возможности</a>
-      <a href="#themes" class="mobile-link" data-i18n="nav.themes">Темы</a>
       <a href="#server" class="mobile-link" data-i18n="nav.server">Сервер</a>
+      <a href="#themes" class="mobile-link" data-i18n="nav.themes">Темы</a>
       <a href="#downloads" class="mobile-link" data-i18n="nav.downloads">Скачать</a>
       <a href="#changelog" class="mobile-link" data-i18n="nav.changelog">Релизы</a>
       <a href="#faq" class="mobile-link" data-i18n="nav.faq">FAQ</a>
     </div>
     <div class="mobile-drawer-footer">
-      <a href="#downloads" class="btn-primary btn-block" data-i18n="hero.downloadBtn">Скачать v0.6.0</a>
+      <a href="#downloads" class="btn-primary btn-block" id="mobile-drawer-cta">Скачать v0.6.0</a>
     </div>
   </div>
 
-  <main>
+  <main id="main-content">
 
-    <!-- Hero Section -->
+    <!-- Hero Section: Clean, Punchy, Focused on User Value & Large Real Product View -->
     <section class="hero-section" id="hero">
-      <div class="hero-glow-1"></div>
-      <div class="hero-glow-2"></div>
+      <div class="hero-glow-1" aria-hidden="true"></div>
+      <div class="hero-glow-2" aria-hidden="true"></div>
       
       <div class="container hero-container">
         <div class="hero-content">
-          <!-- Release Badge -->
-          <div class="release-pill">
-            <span class="pill-dot"></span>
-            <span class="pill-version" data-i18n="hero.badgeVersion">Релиз v0.6.0</span>
-            <span class="pill-sep">•</span>
-            <span class="pill-desc" data-i18n="hero.badgeText">Модульный UI & Строгая типизация моделей</span>
-          </div>
-
           <h1 class="hero-title" data-i18n="hero.title">
             Приватный туннель для <span class="gradient-text">свободного</span> интернета
           </h1>
 
           <p class="hero-description" data-i18n="hero.description">
-            AvariGate — высокоскоростной мультиплатформенный VPN-клиент на Tauri v2 + Rust и Android Compose с защитой от глубокого анализа пакетов (DPI). Объединяет Mieru, Hysteria 2 и AmneziaWG в едином приложении со сверхбыстрым failover и нулевыми привилегиями интерфейса.
+            AvariGate объединяет протоколы Mieru, Hysteria 2 и AmneziaWG в едином приложении для обхода блокировок. Умный failover, раздельное туннелирование и нулевые привилегии интерфейса.
           </p>
 
           <!-- Action Buttons -->
           <div class="hero-cta-group">
             <a href="#downloads" class="btn-primary btn-lg" id="hero-download-btn">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                 <polyline points="7 10 12 15 17 10"></polyline>
                 <line x1="12" y1="15" x2="12" y2="3"></line>
               </svg>
-              <span data-i18n="hero.downloadBtn">Скачать v0.6.0</span>
+              <span id="hero-download-label">Скачать AvariGate</span>
             </a>
 
             <a href="https://github.com/OstKost/avari-gate/releases/latest" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-lg">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                 <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
               </svg>
               <span data-i18n="hero.releasesBtn">GitHub Releases</span>
             </a>
           </div>
-
-          <!-- Quick Terminal Command for Server -->
-          <div class="server-quick-command">
-            <div class="terminal-bar">
-              <span class="t-dot t-red"></span>
-              <span class="t-dot t-yellow"></span>
-              <span class="t-dot t-green"></span>
-              <span class="terminal-title" data-i18n="hero.serverTitle">Быстрая установка сервера (Ubuntu / Debian):</span>
-            </div>
-            <div class="command-box">
-              <div class="command-code-wrap">
-                <code>curl -fsSL -O https://github.com/OstKost/avari-gate/releases/download/v0.6.0/AvariGate-admin-linux-amd64.tar.gz && tar -xzf AvariGate-admin-linux-amd64.tar.gz && sudo ./mieru-admin setup</code>
-              </div>
-              <button type="button" class="btn-copy" id="copy-quick-cmd" title="Копировать команду" aria-label="Copy command">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                </svg>
-                <span class="copy-text" data-i18n="common.copy">Копировать</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Hero Metrics -->
-          <div class="hero-metrics">
-            <div class="metric-item">
-              <span class="metric-num">3</span>
-              <span class="metric-label" data-i18n="hero.metric1">Протокола анти-DPI</span>
-            </div>
-            <div class="metric-sep"></div>
-            <div class="metric-item">
-              <span class="metric-num">&lt; 25 <small>мс</small></span>
-              <span class="metric-label" data-i18n="hero.metric2">Задержка сервера</span>
-            </div>
-            <div class="metric-sep"></div>
-            <div class="metric-item">
-              <span class="metric-num">3 <small>попытки</small></span>
-              <span class="metric-label" data-i18n="hero.metric3">Автопереключение failover</span>
-            </div>
-            <div class="metric-sep"></div>
-            <div class="metric-item">
-              <span class="metric-num">0600</span>
-              <span class="metric-label" data-i18n="hero.metric4">Изоляция секретов</span>
-            </div>
-          </div>
         </div>
 
-        <!-- Hero Preview Mockup / Interactive Switcher -->
+        <!-- Prominent, Large, Visible Real Product Showcase Window -->
         <div class="hero-visual">
           <div class="device-frame">
             <div class="window-header">
-              <div class="window-controls">
+              <div class="window-controls" aria-hidden="true">
                 <span class="win-circle close"></span>
                 <span class="win-circle minimize"></span>
                 <span class="win-circle maximize"></span>
               </div>
-              <div class="window-title" id="preview-window-title">AvariGate — Frankfurt 01 (Mieru)</div>
+              <div class="window-title" id="preview-window-title">AvariGate — Подключение (Mieru mita)</div>
               <div class="window-badge" id="preview-status-pill">
-                <span class="live-pulse"></span>
-                <span class="live-status-text" data-i18n="hero.connected">Подключено (24 мс)</span>
+                <span class="live-pulse" aria-hidden="true"></span>
+                <span class="live-status-text" data-i18n="hero.connected">Туннель активен</span>
               </div>
             </div>
 
-            <!-- Tab Switcher for Preview Screens -->
-            <div class="preview-tabs" role="tablist">
-              <button type="button" class="preview-tab active" data-target="connected" data-i18n="hero.tabConnected" role="tab" aria-selected="true">Подключение</button>
-              <button type="button" class="preview-tab" data-target="profiles" data-i18n="hero.tabProfiles" role="tab" aria-selected="false">Профили</button>
-              <button type="button" class="preview-tab" data-target="splittunnel" data-i18n="hero.tabSplit" role="tab" aria-selected="false">Сплит-туннель</button>
-              <button type="button" class="preview-tab" data-target="dragons" data-i18n="hero.tabDragons" role="tab" aria-selected="false">Тема DragonGate</button>
-              <button type="button" class="preview-tab" data-target="android" data-i18n="hero.tabAndroid" role="tab" aria-selected="false">Android</button>
-              <button type="button" class="preview-tab" data-target="server" data-i18n="hero.tabServer" role="tab" aria-selected="false">Сервер TUI</button>
+            <!-- Tab Switcher for Preview Screens (Real Screenshots Only) -->
+            <div class="preview-tabs" role="tablist" aria-label="Скриншоты приложения">
+              <button type="button" class="preview-tab active" data-target="connected" data-i18n="hero.tabConnected" role="tab" aria-selected="true" aria-controls="preview-screen-wrapper">Подключение</button>
+              <button type="button" class="preview-tab" data-target="profiles" data-i18n="hero.tabProfiles" role="tab" aria-selected="false" aria-controls="preview-screen-wrapper">Профили</button>
+              <button type="button" class="preview-tab" data-target="splittunnel" data-i18n="hero.tabSplit" role="tab" aria-selected="false" aria-controls="preview-screen-wrapper">Сплит-туннель</button>
+              <button type="button" class="preview-tab" data-target="dragons" data-i18n="hero.tabDragons" role="tab" aria-selected="false" aria-controls="preview-screen-wrapper">Тема DragonGate</button>
+              <button type="button" class="preview-tab" data-target="android" data-i18n="hero.tabAndroid" role="tab" aria-selected="false" aria-controls="preview-screen-wrapper">Android</button>
+              <button type="button" class="preview-tab" data-target="server" data-i18n="hero.tabServer" role="tab" aria-selected="false" aria-controls="preview-screen-wrapper">Сервер TUI</button>
             </div>
 
-            <div class="preview-screen-wrapper">
-              <img src="./assets/screenshots/desktop-connected.png" alt="AvariGate Desktop App" class="preview-img active" id="preview-img">
+            <div class="preview-screen-wrapper" id="preview-screen-wrapper">
+              <img src="./assets/screenshots/desktop-connected.png" alt="Интерфейс AvariGate Desktop" class="preview-img active" id="preview-img" width="1024" height="640">
               <div class="preview-caption" id="preview-caption" data-i18n="hero.captionConnected">
-                Главный экран: статус туннеля, измерение задержки в 24 мс и таймер аптайма.
+                Главный экран: статус защищённого туннеля, таймер сессии и мгновенное управление соединением.
               </div>
             </div>
           </div>
@@ -215,9 +165,9 @@
       <div class="container">
         <div class="section-header text-center">
           <div class="section-tag" data-i18n="protocols.tag">Анти-DPI Арсенал</div>
-          <h2 class="section-title" data-i18n="protocols.title">Триада передовых протоколов обхода блокировок</h2>
+          <h2 class="section-title" data-i18n="protocols.title">Триада протоколов для обхода цензуры</h2>
           <p class="section-subtitle" data-i18n="protocols.subtitle">
-            Обычные VPN протоколы блокируются эвристиками и DPI за секунды. AvariGate объединяет три независимых решения, специально спроектированных для работы в агрессивных цензурируемых сетях.
+            Обычные VPN-протоколы блокируются по сигнатурам и эвристикам. AvariGate объединяет три независимых решения, специально разработанных для работы в сетях с глубоким анализом пакетов (ТСПУ, GFW).
           </p>
         </div>
 
@@ -226,7 +176,7 @@
           <div class="protocol-card card-glow" data-protocol="mieru">
             <div class="protocol-header">
               <div class="protocol-icon-wrap icon-mieru">
-                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                   <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
                   <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
                   <line x1="6" y1="6" x2="6.01" y2="6"></line>
@@ -241,26 +191,26 @@
             </div>
 
             <p class="protocol-desc" data-i18n="protocols.mieruDesc">
-              Мультиплексированный туннель с маскировкой трафика под случайный шум и надёжной защитой от активного зондирования со стороны DPI-систем (GFW, ТСПУ).
+              Мультиплексированный туннель с маскировкой трафика под случайный шум и защитой от активного зондирования со стороны DPI-систем.
             </p>
 
             <ul class="protocol-features">
               <li>
-                <span class="check-icon">✓</span>
+                <span class="check-icon" aria-hidden="true">✓</span>
                 <span data-i18n="protocols.mieruFeat1">Анти-сканирование: не отвечает на проверочные запросы цензора</span>
               </li>
               <li>
-                <span class="check-icon">✓</span>
+                <span class="check-icon" aria-hidden="true">✓</span>
                 <span data-i18n="protocols.mieruFeat2">Мультиплексирование потоков внутри одного TCP-соединения</span>
               </li>
               <li>
-                <span class="check-icon">✓</span>
+                <span class="check-icon" aria-hidden="true">✓</span>
                 <span data-i18n="protocols.mieruFeat3">Двойная изоляция паролей mita sha256 + 0x00 salt</span>
               </li>
             </ul>
 
             <div class="protocol-footer">
-              <span class="protocol-tag" data-i18n="protocols.mieruBestFor">Идеально для: самых строгих DPI и блокировок протоколов</span>
+              <span class="protocol-tag" data-i18n="protocols.mieruBestFor">Идеально для: агрессивных блокировок протоколов и ТСПУ</span>
             </div>
           </div>
 
@@ -268,7 +218,7 @@
           <div class="protocol-card card-glow" data-protocol="hysteria">
             <div class="protocol-header">
               <div class="protocol-icon-wrap icon-hysteria">
-                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                   <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
                 </svg>
               </div>
@@ -280,26 +230,26 @@
             </div>
 
             <p class="protocol-desc" data-i18n="protocols.hysteriaDesc">
-              Молниеносный протокол поверх кастомного UDP/QUIC с обфускацией Salamander. Выжимает максимум скорости даже при высоких потерях пакетов и троттлинге провайдером.
+              Быстрый протокол поверх модифицированного UDP/QUIC с обфускацией Salamander. Обеспечивает высокую скорость даже при ощутимых потерях пакетов.
             </p>
 
             <ul class="protocol-features">
               <li>
-                <span class="check-icon">✓</span>
-                <span data-i18n="protocols.hysteriaFeat1">Обфускация Salamander: трафик выглядит как произвольный UDP</span>
+                <span class="check-icon" aria-hidden="true">✓</span>
+                <span data-i18n="protocols.hysteriaFeat1">Обфускация Salamander: трафик неотличим от произвольного UDP</span>
               </li>
               <li>
-                <span class="check-icon">✓</span>
-                <span data-i18n="protocols.hysteriaFeat2">Маскировка SNI и самоподписанные ECDSA сертификаты</span>
+                <span class="check-icon" aria-hidden="true">✓</span>
+                <span data-i18n="protocols.hysteriaFeat2">Маскировка SNI и самоподписанные сертификаты ECDSA</span>
               </li>
               <li>
-                <span class="check-icon">✓</span>
-                <span data-i18n="protocols.hysteriaFeat3">Борьба с потерями: Brutal Congestion Control до 20–30% потерь</span>
+                <span class="check-icon" aria-hidden="true">✓</span>
+                <span data-i18n="protocols.hysteriaFeat3">Компенсация потерь: Brutal Congestion Control при нестабильной сети</span>
               </li>
             </ul>
 
             <div class="protocol-footer">
-              <span class="protocol-tag" data-i18n="protocols.hysteriaBestFor">Идеально для: нестабильных мобильных сетей и высоких скоростей</span>
+              <span class="protocol-tag" data-i18n="protocols.hysteriaBestFor">Идеально для: мобильных сетей с потерями и потокового видео</span>
             </div>
           </div>
 
@@ -307,7 +257,7 @@
           <div class="protocol-card card-glow" data-protocol="amnezia">
             <div class="protocol-header">
               <div class="protocol-icon-wrap icon-amnezia">
-                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                 </svg>
               </div>
@@ -319,26 +269,26 @@
             </div>
 
             <p class="protocol-desc" data-i18n="protocols.amneziaDesc">
-              Продвинутая обфускация WireGuard v3.1. Защищает сигнатуры пакетов при рукопожатии и передаче данных, исключая блокировку по WireGuard-паттернам.
+              Продвинутая обфускация WireGuard v3.1. Защищает заголовки пакетов при рукопожатии и передаче данных, исключая детектирование по стандартным сигнатурам.
             </p>
 
             <ul class="protocol-features">
               <li>
-                <span class="check-icon">✓</span>
+                <span class="check-icon" aria-hidden="true">✓</span>
                 <span data-i18n="protocols.amneziaFeat1">Рандомизация заголовков: параметры Jc, Jmin/Jmax, S1–S4</span>
               </li>
               <li>
-                <span class="check-icon">✓</span>
+                <span class="check-icon" aria-hidden="true">✓</span>
                 <span data-i18n="protocols.amneziaFeat2">Хеширование инициализации H1–H4 и I1–I5</span>
               </li>
               <li>
-                <span class="check-icon">✓</span>
+                <span class="check-icon" aria-hidden="true">✓</span>
                 <span data-i18n="protocols.amneziaFeat3">Поддержка стандартных WireGuard .conf файлов без правок</span>
               </li>
             </ul>
 
             <div class="protocol-footer">
-              <span class="protocol-tag" data-i18n="protocols.amneziaBestFor">Идеально для: минимального пинга, игр и стриминга</span>
+              <span class="protocol-tag" data-i18n="protocols.amneziaBestFor">Идеально для: минимального пинга, игр и прямого туннелирования</span>
             </div>
           </div>
         </div>
@@ -349,17 +299,17 @@
     <section class="section features-section" id="features">
       <div class="container">
         <div class="section-header text-center">
-          <div class="section-tag" data-i18n="features.tag">Инженерия & Надежность</div>
-          <h2 class="section-title" data-i18n="features.title">Создан для непрерывной связи и защиты соединения</h2>
+          <div class="section-tag" data-i18n="features.tag">Инженерия & Безопасность</div>
+          <h2 class="section-title" data-i18n="features.title">Создан для непрерывной связи и строгой изоляции</h2>
           <p class="section-subtitle" data-i18n="features.subtitle">
-            Мы не просто завернули стороннее ядро в веб-обёртку: каждый уровень клиента и сервера спроектирован с упором на стабильность соединения и нулевое доверие к привилегиям.
+            Каждый уровень клиента и сервера спроектирован с упором на стабильность соединения и нулевое доверие к привилегиям графического интерфейса.
           </p>
         </div>
 
         <div class="features-grid">
-          <!-- Feature 1: Failover -->
+          <!-- Feature 1: Intelligent Failover -->
           <div class="feature-card">
-            <div class="feature-icon">
+            <div class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="23 4 23 10 17 10"></polyline>
                 <polyline points="1 20 1 14 7 14"></polyline>
@@ -368,30 +318,29 @@
             </div>
             <h3 data-i18n="features.failoverTitle">Интеллектуальный Failover</h3>
             <p data-i18n="features.failoverDesc">
-              При сбое ноды клиент выполняет до 3 полных обходов резервных профилей с паузами 15 секунд и подключается к первому доступному серверу. Никаких обрывов связи без предупреждения.
+              При сбое ноды клиент выполняет до 3 циклов проверки резервных профилей с паузами 15 секунд и подключается к первому доступному серверу.
             </p>
           </div>
 
           <!-- Feature 2: Split Tunneling -->
           <div class="feature-card">
-            <div class="feature-icon">
+            <div class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="18" cy="5" r="3"></circle>
-                <circle cx="6" cy="12" r="3"></circle>
-                <circle cx="18" cy="19" r="3"></circle>
-                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                <circle cx="18" cy="18" r="3"></circle>
+                <circle cx="6" cy="6" r="3"></circle>
+                <path d="M13 6h3a2 2 0 0 1 2 2v7"></path>
+                <line x1="6" y1="9" x2="6" y2="21"></line>
               </svg>
             </div>
             <h3 data-i18n="features.splitTitle">Раздельное туннелирование</h3>
             <p data-i18n="features.splitDesc">
-              Режимы Include и Exclude. Маршрутизация по маскам доменов (*.ru, gosuslugi.ru) и CIDR-подсетям. Встроенный переключатель Bypass LAN для локальных принтеров и NAS.
+              Режимы Include и Exclude. Маршрутизация по маскам доменов (*.ru, gosuslugi.ru) и CIDR-подсетям. Встроенный переключатель Bypass LAN для домашней сети.
             </p>
           </div>
 
-          <!-- Feature 3: Per-App Routing Android -->
+          <!-- Feature 3: Android Per-App Split -->
           <div class="feature-card">
-            <div class="feature-icon">
+            <div class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
                 <line x1="12" y1="18" x2="12.01" y2="18"></line>
@@ -399,13 +348,13 @@
             </div>
             <h3 data-i18n="features.perAppTitle">Per-App Split (Android)</h3>
             <p data-i18n="features.perAppDesc">
-              На мобильных устройствах выбирайте приложения вручную: банкинг напрямую, а мессенджеры и браузер — через защищённый туннель с нулевой утечкой DNS.
+              На мобильных устройствах выбирайте приложения вручную: локальные сервисы идут напрямую, а мессенджеры и браузер — через защищённый туннель.
             </p>
           </div>
 
-          <!-- Feature 4: Security Separation -->
+          <!-- Feature 4: Privilege Separation -->
           <div class="feature-card">
-            <div class="feature-icon">
+            <div class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                 <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
@@ -413,13 +362,13 @@
             </div>
             <h3 data-i18n="features.privilegeTitle">Разделение привилегий</h3>
             <p data-i18n="features.privilegeDesc">
-              UI работает без прав администратора. Сетевые маршруты и TUN настраиваются демоном mieru-helper через Unix сокет с проверкой UID/PID. Пароли хранятся с правами 0600.
+              Интерфейс работает без прав администратора. Сетевые маршруты и адаптер TUN настраиваются демоном mieru-helper через локальный сокет с правами 0600.
             </p>
           </div>
 
-          <!-- Feature 5: Instant QR -->
+          <!-- Feature 5: Fast QR Import -->
           <div class="feature-card">
-            <div class="feature-icon">
+            <div class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="3" y="3" width="7" height="7"></rect>
                 <rect x="14" y="3" width="7" height="7"></rect>
@@ -435,39 +384,152 @@
 
           <!-- Feature 6: Clean Routing Cleanup -->
           <div class="feature-card">
-            <div class="feature-icon">
+            <div class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
             </div>
             <h3 data-i18n="features.cleanupTitle">Чистое завершение сессий</h3>
             <p data-i18n="features.cleanupDesc">
-              Никакого "отвалившегося интернета" после закрытия клиента: при отключении приложение корректно останавливает ядро и восстанавливает системный DNS и таблицу маршрутов.
+              Никаких потерь интернет-соединения после закрытия: при отключении клиент корректно останавливает ядро и восстанавливает системные DNS и таблицу маршрутов.
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Interactive Themes Showcase -->
+    <!-- Dedicated Server Suite Section: mieru-admin -->
+    <section class="section server-section" id="server">
+      <div class="container">
+        <div class="section-header text-center">
+          <div class="section-tag" data-i18n="server.tag">Серверный стек</div>
+          <h2 class="section-title" data-i18n="server.title">Менеджер mieru-admin: всё в одном бинарнике</h2>
+          <p class="section-subtitle" data-i18n="server.subtitle">
+            Никаких сложных зависимостей и хрупких скриптов. Статический Go-бинарник устанавливает systemd службу, разворачивает стек протоколов и предоставляет интерактивный TUI прямо в SSH-терминале.
+          </p>
+
+          <!-- Quick Server Command (Dedicated to Server Section) -->
+          <div class="server-quick-command server-section-command">
+            <div class="terminal-bar">
+              <span class="t-dot t-red" aria-hidden="true"></span>
+              <span class="t-dot t-yellow" aria-hidden="true"></span>
+              <span class="t-dot t-green" aria-hidden="true"></span>
+              <span class="terminal-title" data-i18n="server.serverTitle">Быстрая установка сервера (Ubuntu / Debian):</span>
+            </div>
+            <div class="command-box">
+              <div class="command-code-wrap">
+                <code id="quick-cmd-code">curl -fsSL -O https://github.com/OstKost/avari-gate/releases/download/v0.6.0/AvariGate-admin-linux-amd64.tar.gz && tar -xzf AvariGate-admin-linux-amd64.tar.gz && sudo ./mieru-admin setup</code>
+              </div>
+              <button type="button" class="btn-copy" id="copy-quick-cmd" title="Копировать команду" aria-label="Копировать команду в буфер обмена">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span class="copy-text" data-i18n="common.copy">Копировать</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="server-layout">
+          <div class="server-features-col">
+            <!-- Server Point 1 -->
+            <div class="server-point active" data-point-target="wizard" role="button" tabindex="0" aria-label="5-шаговый мастер настройки с проверкой diff">
+              <div class="point-num">01</div>
+              <div>
+                <h3 class="point-title" data-i18n="server.wizardTitle">5-шаговый мастер с проверкой diff</h3>
+                <p data-i18n="server.wizardDesc">
+                  Мастер настройки валидирует конфиг до применения. На 5-м шаге вы видите точный unified diff. При ошибке службы система автоматически откатывается на предыдущую ревизию.
+                </p>
+              </div>
+            </div>
+
+            <!-- Server Point 2 -->
+            <div class="server-point" data-point-target="users" role="button" tabindex="0" aria-label="Экспорт профилей с QR-кодом в терминале">
+              <div class="point-num">02</div>
+              <div>
+                <h3 class="point-title" data-i18n="server.qrExportTitle">Экспорт профилей с QR в терминале</h3>
+                <p data-i18n="server.qrExportDesc">
+                  Создавайте пользователей Mieru, Hysteria 2 и AmneziaWG в TUI. Конфигурация выводится в формате hy2://, wireguard .conf и в виде чистого ASCII QR прямо в окно терминала.
+                </p>
+              </div>
+            </div>
+
+            <!-- Server Point 3 -->
+            <div class="server-point" data-point-target="install" role="button" tabindex="0" aria-label="Вендоринг и проверка SHA-256">
+              <div class="point-num">03</div>
+              <div>
+                <h3 class="point-title" data-i18n="server.securityTitle">Вендоринг и проверка SHA-256</h3>
+                <p data-i18n="server.securityDesc">
+                  Скрипты установки AmneziaWG встроены в бинарник через //go:embed и проверяются по криптографическому SHA-256 хэшу перед запуском, устраняя сетевые риски.
+                </p>
+              </div>
+            </div>
+
+            <!-- Server Point 4 -->
+            <div class="server-point" data-point-target="dashboard" role="button" tabindex="0" aria-label="Дашборд состояния служб">
+              <div class="point-num">04</div>
+              <div>
+                <h3 class="point-title" data-i18n="server.apiTitle">Дашборд состояния и REST API</h3>
+                <p data-i18n="server.apiDesc">
+                  Мониторинг портов и служб в реальном времени. Встроенный loopback REST API (доступен только локально через Bearer-токен) позволяет автоматизировать управление нодой.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Server Interactive TUI Viewer (Real Screenshots Only) -->
+          <div class="server-visual-col">
+            <div class="server-terminal-window">
+              <div class="terminal-nav-header">
+                <div class="window-controls" aria-hidden="true">
+                  <span class="win-circle close"></span>
+                  <span class="win-circle minimize"></span>
+                  <span class="win-circle maximize"></span>
+                </div>
+                <div class="tui-tab-bar" role="tablist" aria-label="Экраны консоли сервера">
+                  <button type="button" class="tui-tab active" data-tui="wizard" data-i18n="server.tuiWizard" role="tab" aria-selected="true">Мастер</button>
+                  <button type="button" class="tui-tab" data-tui="dashboard" data-i18n="server.tuiDash" role="tab" aria-selected="false">Дашборд</button>
+                  <button type="button" class="tui-tab" data-tui="users" data-i18n="server.tuiUsers" role="tab" aria-selected="false">Пользователи</button>
+                  <button type="button" class="tui-tab" data-tui="install" data-i18n="server.tuiInstall" role="tab" aria-selected="false">Установка</button>
+                  <button type="button" class="tui-tab" data-tui="hysteria" data-i18n="server.tuiHysteria" role="tab" aria-selected="false">Hysteria 2</button>
+                </div>
+              </div>
+
+              <div class="server-screen-wrapper">
+                <img src="./assets/screenshots/server-tui-wizard.png" alt="mieru-admin TUI Setup Wizard" class="tui-img" id="tui-screen-img" width="800" height="480">
+                <div class="tui-caption-bar">
+                  <span class="tui-badge">SSH TUI</span>
+                  <span class="tui-caption-text" id="tui-caption" data-i18n="server.captionWizard">
+                    Пошаговый мастер настройки: автоматический выбор портов, протоколов и валидация перед сохранением.
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Themes Showcase (AvariGate & DragonGate) -->
     <section class="section themes-section" id="themes">
       <div class="container">
         <div class="section-header text-center">
           <div class="section-tag" data-i18n="themes.tag">Кастомизация</div>
-          <h2 class="section-title" data-i18n="themes.title">Авторские темы оформления — выберите свой стиль</h2>
+          <h2 class="section-title" data-i18n="themes.title">Авторские темы оформления интерфейса</h2>
           <p class="section-subtitle" data-i18n="themes.subtitle">
-            Интерфейс не обязан быть скучным серым окном. Переключайте стили одним кликом: тема меняет эстетику и анимации, сохраняя все ваши профили и настройки в полной неприкосновенности.
+            Интерфейс приложения адаптируется под ваше настроение. Переключайте визуальные стили одним кликом: тема меняет эстетику, сохраняя настройки и профили в полной безопасности.
           </p>
         </div>
 
         <!-- Theme Selector Buttons -->
-        <div class="theme-buttons-bar" role="tablist">
+        <div class="theme-buttons-bar" role="tablist" aria-label="Выбор темы оформления">
           <button type="button" class="theme-btn active" data-theme-id="avari" role="tab" aria-selected="true">
-            <span class="theme-dot dot-avari"></span>
+            <span class="theme-dot dot-avari" aria-hidden="true"></span>
             <span class="theme-btn-title">AvariGate (Cyber-Sphere)</span>
           </button>
           <button type="button" class="theme-btn" data-theme-id="dragons" role="tab" aria-selected="false">
-            <span class="theme-dot dot-dragons"></span>
+            <span class="theme-dot dot-dragons" aria-hidden="true"></span>
             <span class="theme-btn-title">DragonGate (Jade Dragon)</span>
           </button>
         </div>
@@ -476,7 +538,7 @@
         <div class="theme-display-card" id="theme-display-card">
           <div class="theme-display-info">
             <div class="theme-brand-row">
-              <img src="./assets/icons/icon.png" alt="Theme Logo" class="theme-display-logo" id="theme-logo">
+              <img src="./assets/icons/icon.png" alt="AvariGate Theme Logo" class="theme-display-logo" id="theme-logo" width="48" height="48">
               <div>
                 <h3 class="theme-display-name" id="theme-name">AvariGate</h3>
                 <span class="theme-display-sub" id="theme-sub">Кибер-сфера частиц & глубокий космос</span>
@@ -484,110 +546,22 @@
             </div>
 
             <p class="theme-display-desc" id="theme-desc">
-              Классическое оформление AvariGate: тёмная космическая палитра, неоновые бирюзовые акценты и анимированная центральная сфера состояния с волнами активности при передаче трафика.
+              Классическое оформление AvariGate: тёмная космическая палитра, неоновые бирюзовые акценты и анимированная центральная сфера состояния с визуализацией активности трафика.
             </p>
 
             <div class="theme-palette-wrap">
               <span class="palette-label" data-i18n="themes.palette">Палитра:</span>
-              <div class="palette-swatches" id="theme-swatches">
-                <span class="swatch" style="background:#021a1a;"></span>
-                <span class="swatch" style="background:#06b6d4;"></span>
-                <span class="swatch" style="background:#14b8a6;"></span>
-                <span class="swatch" style="background:#0f172a;"></span>
+              <div class="palette-swatches" id="theme-swatches" aria-label="Цветовая палитра темы">
+                <span class="swatch" style="background:#021a1a;" title="#021a1a"></span>
+                <span class="swatch" style="background:#06b6d4;" title="#06b6d4"></span>
+                <span class="swatch" style="background:#14b8a6;" title="#14b8a6"></span>
+                <span class="swatch" style="background:#0f172a;" title="#0f172a"></span>
               </div>
             </div>
           </div>
 
           <div class="theme-display-preview">
-            <img src="./assets/screenshots/desktop-connected.png" alt="Theme Preview" class="theme-preview-img" id="theme-screenshot">
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Server Suite Section: mieru-admin -->
-    <section class="section server-section" id="server">
-      <div class="container">
-        <div class="section-header text-center">
-          <div class="section-tag" data-i18n="server.tag">Серверная часть</div>
-          <h2 class="section-title" data-i18n="server.title">Менеджер mieru-admin: всё в одном бинарнике</h2>
-          <p class="section-subtitle" data-i18n="server.subtitle">
-            Никаких сотен зависимостей или разрозненных bash-скриптов. Статический Go-бинарник устанавливает systemd службу, разворачивает протоколы и даёт удобный интерактивный TUI прямо в SSH.
-          </p>
-        </div>
-
-        <div class="server-layout">
-          <div class="server-features-col">
-            <!-- Server Point 1 -->
-            <div class="server-point" data-point-target="wizard" role="button" tabindex="0">
-              <div class="point-num">01</div>
-              <div>
-                <h4 data-i18n="server.wizardTitle">5-шаговый мастер с проверкой diff</h4>
-                <p data-i18n="server.wizardDesc">
-                  Мастер настройки валидирует конфиг до применения. На 5-м шаге вы видите точный unified diff. При ошибке службы система автоматически откатывается на предыдущую ревизию.
-                </p>
-              </div>
-            </div>
-
-            <!-- Server Point 2 -->
-            <div class="server-point" data-point-target="users" role="button" tabindex="0">
-              <div class="point-num">02</div>
-              <div>
-                <h4 data-i18n="server.qrExportTitle">Экспорт профилей с QR в терминале</h4>
-                <p data-i18n="server.qrExportDesc">
-                  Создавайте пользователей Mieru, Hysteria 2 и AmneziaWG в TUI. Конфигурация выводится в формате hy2://, wireguard .conf и в виде чистого ASCII QR прямо в окно терминала.
-                </p>
-              </div>
-            </div>
-
-            <!-- Server Point 3 -->
-            <div class="server-point" data-point-target="install" role="button" tabindex="0">
-              <div class="point-num">03</div>
-              <div>
-                <h4 data-i18n="server.securityTitle">Вендоринг и проверка SHA-256</h4>
-                <p data-i18n="server.securityDesc">
-                  В v0.6.0 устранены сетевые curl|bash уязвимости: скрипты установки AmneziaWG встроены через //go:embed и проверяются по криптографическому SHA-256 хэшу перед запуском.
-                </p>
-              </div>
-            </div>
-
-            <!-- Server Point 4 -->
-            <div class="server-point" data-point-target="dashboard" role="button" tabindex="0">
-              <div class="point-num">04</div>
-              <div>
-                <h4 data-i18n="server.apiTitle">Локальный REST API + systemd</h4>
-                <p data-i18n="server.apiDesc">
-                  Служба слушает исключительно 127.0.0.1:9081 с авторизацией по Bearer-токену с правами 0600. Полная готовность для автоматизации и интеграции с Ansible или CI/CD.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="server-preview-col">
-            <!-- Interactive TUI Screens Switcher -->
-            <div class="tui-window">
-              <div class="terminal-bar">
-                <span class="t-dot t-red"></span>
-                <span class="t-dot t-yellow"></span>
-                <span class="t-dot t-green"></span>
-                <span class="terminal-title" id="tui-terminal-title">mieru-admin TUI (SSH Session)</span>
-              </div>
-
-              <div class="tui-tabs" role="tablist">
-                <button type="button" class="tui-tab active" data-tui="dashboard" data-i18n="server.tuiDash" role="tab" aria-selected="true">Главный экран</button>
-                <button type="button" class="tui-tab" data-tui="wizard" data-i18n="server.tuiWizard" role="tab" aria-selected="false">Мастер настройки</button>
-                <button type="button" class="tui-tab" data-tui="users" data-i18n="server.tuiUsers" role="tab" aria-selected="false">Пользователи</button>
-                <button type="button" class="tui-tab" data-tui="install" data-i18n="server.tuiInstall" role="tab" aria-selected="false">Установка</button>
-                <button type="button" class="tui-tab" data-tui="hysteria" data-i18n="server.tuiHysteria" role="tab" aria-selected="false">Hysteria 2</button>
-              </div>
-
-              <div class="tui-screen-img-box">
-                <img src="./assets/screenshots/server-tui-dashboard.png" alt="Server TUI Dashboard" class="tui-screen-img" id="tui-screen-img">
-                <div class="tui-caption" id="tui-caption" data-i18n="server.captionDash">
-                  Главный дашборд: статус служб Mieru, Hysteria 2, AmneziaWG, сетевые порты и нагрузка сервера.
-                </div>
-              </div>
-            </div>
+            <img src="./assets/screenshots/desktop-connected.png" alt="AvariGate Theme Preview" class="theme-preview-img" id="theme-screenshot" width="700" height="440">
           </div>
         </div>
       </div>
@@ -598,17 +572,17 @@
       <div class="container">
         <div class="section-header text-center">
           <div class="section-tag" data-i18n="downloads.tag">Официальные сборки</div>
-          <h2 class="section-title" data-i18n="downloads.title">Скачать AvariGate v0.6.0</h2>
+          <h2 class="section-title" data-i18n="downloads.title">Скачать AvariGate для ваших устройств</h2>
           <p class="section-subtitle" data-i18n="downloads.subtitle">
-            Все пакеты собраны напрямую из открытого исходного кода. Без встроенной рекламы, без трекеров и без ограничений по скорости.
+            Официальные публичные релизы из репозитория OstKost/avari-gate. Каждая сборка проверена контрольными суммами SHA-256.
           </p>
         </div>
 
         <div class="downloads-grid">
           <!-- macOS Apple Silicon: AvariGate -->
-          <div class="download-card featured">
+          <div class="download-card featured" id="card-macos">
             <div class="download-badge" data-i18n="downloads.appleSilicon">macOS Apple Silicon</div>
-            <div class="download-icon-box">
+            <div class="download-icon-box" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor">
                 <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.92-2.85-.9.04-1.99.6-2.63 1.35-.57.65-1.07 1.72-.94 2.74 1.01.08 2.03-.49 2.65-1.24z"/>
               </svg>
@@ -616,10 +590,10 @@
             <h3 class="download-title">AvariGate macOS</h3>
             <span class="download-target">macOS 12+ (M1 / M2 / M3 / M4)</span>
             <div class="download-file-info">
-              <code>AvariGate_0.6.0_aarch64.dmg</code>
-              <span class="file-size">~28.6 МБ</span>
+              <code id="file-macos-name">AvariGate_0.6.0_aarch64.dmg</code>
+              <span class="file-size" id="file-macos-size">~27.3 МБ</span>
             </div>
-            <a href="https://github.com/OstKost/avari-gate/releases/download/v0.6.0/AvariGate_0.6.0_aarch64.dmg" class="btn-primary btn-block">
+            <a href="https://github.com/OstKost/avari-gate/releases/download/v0.6.0/AvariGate_0.6.0_aarch64.dmg" class="btn-primary btn-block" id="btn-download-macos">
               <span data-i18n="downloads.downloadDmgAvari">Скачать .DMG (AvariGate)</span>
             </a>
             <div class="download-secondary-link">
@@ -627,10 +601,10 @@
             </div>
           </div>
 
-          <!-- Android: APK -->
-          <div class="download-card featured">
+          <!-- Android: APK (Points to verified releases) -->
+          <div class="download-card featured" id="card-android">
             <div class="download-badge" data-i18n="downloads.androidBadge">Android 8.0+</div>
-            <div class="download-icon-box">
+            <div class="download-icon-box" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor">
                 <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.551 0 .9993.4482.9993.9993.0001.5511-.4483.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5896 8.3585 13.8566 8 12 8s-3.5896.3585-5.1368.9507L4.8409 5.4477a.416.416 0 00-.5676-.1521.416.416 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3432-4.1021-2.6889-7.5743-6.1185-9.4396"/>
               </svg>
@@ -638,11 +612,11 @@
             <h3 class="download-title">AvariGate Android</h3>
             <span class="download-target">Android 8+ (arm64-v8a & x86_64)</span>
             <div class="download-file-info">
-              <code>AvariGate-0.6.0-android-debug.apk</code>
-              <span class="file-size">~155 МБ</span>
+              <code id="file-android-name" data-i18n="downloads.androidFileNote">Сборка в GitHub Releases</code>
+              <span class="file-size" id="file-android-size">~155 МБ</span>
             </div>
-            <a href="https://github.com/OstKost/avari-gate/releases/download/v0.6.0/AvariGate-0.6.0-android-debug.apk" class="btn-primary btn-block">
-              <span data-i18n="downloads.downloadApkAvari">Скачать .APK (AvariGate)</span>
+            <a href="https://github.com/OstKost/avari-gate/releases/latest" class="btn-primary btn-block" id="btn-download-android" target="_blank" rel="noopener noreferrer">
+              <span id="btn-download-android-label" data-i18n="downloads.downloadApkAvari">Смотреть релиз Android</span>
             </a>
             <div class="download-secondary-link">
               <span class="subtle-note" data-i18n="downloads.androidNote">ARM64 и x86_64 сборка с системным VpnService</span>
@@ -650,9 +624,9 @@
           </div>
 
           <!-- Linux Server: mieru-admin -->
-          <div class="download-card">
+          <div class="download-card" id="card-server">
             <div class="download-badge" data-i18n="downloads.serverBadge">Linux Server</div>
-            <div class="download-icon-box">
+            <div class="download-icon-box" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
                 <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
@@ -663,10 +637,10 @@
             <h3 class="download-title">mieru-admin Server</h3>
             <span class="download-target">Ubuntu 24.04 / Debian 13 (x86_64)</span>
             <div class="download-file-info">
-              <code>AvariGate-admin-linux-amd64.tar.gz</code>
-              <span class="file-size">~5.7 МБ</span>
+              <code id="file-server-name">AvariGate-admin-linux-amd64.tar.gz</code>
+              <span class="file-size" id="file-server-size">~5.5 МБ</span>
             </div>
-            <a href="https://github.com/OstKost/avari-gate/releases/download/v0.6.0/AvariGate-admin-linux-amd64.tar.gz" class="btn-secondary btn-block">
+            <a href="https://github.com/OstKost/avari-gate/releases/download/v0.6.0/AvariGate-admin-linux-amd64.tar.gz" class="btn-secondary btn-block" id="btn-download-server">
               <span data-i18n="downloads.downloadServer">Скачать бинарник сервера</span>
             </a>
             <div class="download-secondary-link">
@@ -675,9 +649,9 @@
           </div>
 
           <!-- Linux Desktop & Others -->
-          <div class="download-card">
+          <div class="download-card" id="card-linux">
             <div class="download-badge" data-i18n="downloads.linuxDesktopBadge">Linux Desktop</div>
-            <div class="download-icon-box">
+            <div class="download-icon-box" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
                 <line x1="8" y1="21" x2="16" y2="21"></line>
@@ -699,39 +673,38 @@
           </div>
         </div>
 
-        <!-- Honest Platform Status Banner (No false promises) -->
+        <!-- Honest Platform Status Banner (Technically Accurate) -->
         <div class="platform-status-notice">
-          <div class="status-notice-icon">ℹ️</div>
+          <div class="status-notice-icon" aria-hidden="true">ℹ️</div>
           <div class="status-notice-body">
-            <h4 data-i18n="downloads.platformStatusTitle">Честный статус платформ и архитектур:</h4>
+            <h3 class="status-notice-title" data-i18n="downloads.platformStatusTitle">Честный статус платформ и архитектур:</h3>
             <ul class="platform-list">
               <li>
-                <strong>macOS Apple Silicon (M1/M2/M3/M4)</strong>: <span class="status-pill status-ready">Готово</span> Релизные .DMG с ad-hoc подписью и launchd-демоном.
+                <strong>macOS Apple Silicon (M1/M2/M3/M4)</strong>: <span class="status-pill status-ready" data-i18n="status.ready">Готово</span> Релизные .DMG с ad-hoc подписью и launchd-демоном.
               </li>
               <li>
-                <strong>Android 8+ (ARM64 & x86_64)</strong>: <span class="status-pill status-ready">Готово</span> Подтверждено туннелирование TCP Mieru и WireGuard/AWG.
+                <strong>Android 8+ (ARM64 & x86_64)</strong>: <span class="status-pill status-ready" data-i18n="status.ready">Готово</span> Подтверждено туннелирование TCP Mieru и WireGuard/AWG.
               </li>
               <li>
-                <strong>Linux Server (Ubuntu / Debian x86_64)</strong>: <span class="status-pill status-ready">Готово</span> Принят под systemd, безопасный вендоринг AWG.
+                <strong>Linux Server (Ubuntu / Debian x86_64)</strong>: <span class="status-pill status-ready" data-i18n="status.ready">Готово</span> Принят под systemd, безопасный вендоринг AWG.
               </li>
               <li>
-                <strong>Windows Desktop (10/11)</strong>: <span class="status-pill status-progress">В разработке</span> Служба AvariGateHelper, очистка DNS и автопереключение написаны; сетевая приёмка и сборка в процессе.
+                <strong>Windows Desktop (10/11)</strong>: <span class="status-pill status-progress" data-i18n="status.inProgress">В разработке</span> Служба AvariGateHelper, очистка DNS и автопереключение реализованы; сетевая приёмка и сборка в процессе.
               </li>
               <li>
-                <strong>iOS</strong>: <span class="status-pill status-planned">В планах</span> Архитектурный план NetworkExtension подготовлен, разработка стартует после Windows.
+                <strong>iOS</strong>: <span class="status-pill status-planned" data-i18n="status.planned">В планах</span> Архитектурный план NetworkExtension подготовлен, реализация запланирована после Windows.
               </li>
             </ul>
           </div>
         </div>
 
-        <!-- SHA-256 Verification Box -->
+        <!-- SHA-256 Verification Box (AvariGate Verified Assets) -->
         <div class="sha256-box">
           <div class="sha256-header">
-            <span class="sha256-title" data-i18n="downloads.sha256Title">Контрольные суммы SHA-256 (Релиз v0.6.0):</span>
-            <button type="button" class="btn-copy-sha" id="copy-sha-btn" data-i18n="common.copyAll">Копировать всё</button>
+            <span class="sha256-title" id="sha256-title">Контрольные суммы SHA-256 (Релиз v0.6.0):</span>
+            <button type="button" class="btn-copy-sha" id="copy-sha-btn" data-i18n="common.copyAll" aria-label="Копировать все хэши SHA-256">Копировать всё</button>
           </div>
-          <pre class="sha256-code" id="sha256-content">27e9bd16e91a49c985dcc703dad6d9513fe89a504f8ae18e2dc8cddeda2bcbc4  AvariGate-0.6.0-android-debug.apk
-850c40f671230b75cc284027027674e242b8aabf2cede9518d94dd24836d9fca  AvariGate_0.6.0_aarch64.dmg
+          <pre class="sha256-code" id="sha256-content">850c40f671230b75cc284027027674e242b8aabf2cede9518d94dd24836d9fca  AvariGate_0.6.0_aarch64.dmg
 7ab6a12d833a6255a6376a7bf44bda7aea38c5f7b4c09248e77941184f8f67cd  AvariGate-admin-linux-amd64.tar.gz</pre>
           <div class="sha256-footer">
             <span data-i18n="downloads.shaCheckCmd">Проверка в терминале:</span> <code>sha256sum -c SHA256SUMS</code>
@@ -753,19 +726,19 @@
 
         <div class="timeline">
           <!-- Release v0.6.0 -->
-          <div class="timeline-item current">
-            <div class="timeline-badge">v0.6.0</div>
+          <div class="timeline-item">
+            <div class="timeline-badge" aria-hidden="true">v0.6.0</div>
             <div class="timeline-card">
               <div class="timeline-header">
-                <h3 class="timeline-title">v0.6.0 — Архитектурный рефакторинг, модульность UI и безопасность</h3>
+                <h3 class="timeline-title">v0.6.0 — Полиморфные профили, модульный UI и вендоринг AWG</h3>
                 <span class="timeline-date">19 ноября 2026</span>
               </div>
               <ul class="timeline-list">
                 <li>
-                  <strong>Декомпозиция монолитов UI:</strong> 6134 строки десктопного <code>main.ts</code> разбиты на сфокусированные экранные модули в <code>desktop/ui/src/screens/</code>; монолит <code>MainScreen.kt</code> на Android сокращён с 3505 до 629 строк.
+                  <strong>Полиморфный Profile:</strong> Tagged Union <code>ProtocolData</code> в Rust и <code>sealed interface ProtocolConfig</code> в Kotlin с полной обратной совместимостью старых JSON-профилей.
                 </li>
                 <li>
-                  <strong>Полиморфные профили:</strong> внедрён строго типизированный Tagged Union <code>ProtocolData</code> в Rust (<code>mieru-shared</code>) и <code>sealed interface ProtocolConfig</code> в Kotlin с сохранением 100% обратной совместимости.
+                  <strong>Модульная декомпозиция UI:</strong> главный файл desktop <code>main.ts</code> сокращён до компактного модуля, экран Android <code>MainScreen.kt</code> разделён на изолированные компоненты.
                 </li>
                 <li>
                   <strong>Устранение supply-chain риска:</strong> скрипт установки AmneziaWG завендорен локально в Go-бинарник и проверяется по SHA-256 перед запуском с root правами.
@@ -779,7 +752,7 @@
 
           <!-- Release v0.5.0 -->
           <div class="timeline-item">
-            <div class="timeline-badge">v0.5.0</div>
+            <div class="timeline-badge" aria-hidden="true">v0.5.0</div>
             <div class="timeline-card">
               <div class="timeline-header">
                 <h3 class="timeline-title">v0.5.0 — Android редизайн, живой трафик, QR-сканер и секундомер переключений</h3>
@@ -793,7 +766,7 @@
                   <strong>Камера и QR-сканер:</strong> встроенный сканер CameraX + ZXing для моментального сканирования Mieru, Hysteria 2, WireGuard и AmneziaWG.
                 </li>
                 <li>
-                  <strong>Подтверждённое живое туннелирование:</strong> успешные сетевые тесты TCP Mieru (598 мс) и WireGuard/AWG (421 мс) на эмуляторе с подтверждением обратного трафика.
+                  <strong>Подтверждённое живое туннелирование:</strong> успешные сетевые тесты TCP Mieru и WireGuard/AWG на эмуляторе с подтверждением обратного трафика.
                 </li>
                 <li>
                   <strong>Секундомер в Desktop UI:</strong> визуализация стадий переключения профилей (stopping, releasing, starting, verifying) с таймером в интерфейсе.
@@ -807,7 +780,7 @@
 
           <!-- Release v0.4.0 -->
           <div class="timeline-item">
-            <div class="timeline-badge">v0.4.0</div>
+            <div class="timeline-badge" aria-hidden="true">v0.4.0</div>
             <div class="timeline-card">
               <div class="timeline-header">
                 <h3 class="timeline-title">v0.4.0 — Запуск мобильного клиента AvariGate для Android</h3>
@@ -815,7 +788,7 @@
               </div>
               <ul class="timeline-list">
                 <li>
-                  <strong>Android VpnService:</strong> интеграция мобильного VPN-ядра с системной службой Android, сохранение сессии в фоне.
+                  <strong>Android VpnService:</strong> интеграция мобильного ядра с системной службой Android, сохранение сессии в фоне.
                 </li>
                 <li>
                   <strong>Мультиархитектурность:</strong> сборка под arm64-v8a и x86_64, поддержка Android 8.0+ (API 26).
@@ -829,7 +802,7 @@
 
           <!-- Release v0.3.0 - v0.3.2 -->
           <div class="timeline-item">
-            <div class="timeline-badge">v0.3.x</div>
+            <div class="timeline-badge" aria-hidden="true">v0.3.x</div>
             <div class="timeline-card">
               <div class="timeline-header">
                 <h3 class="timeline-title">v0.3.0–v0.3.2 — Linux дистрибуция, мультипрофили и темы</h3>
@@ -854,7 +827,7 @@
 
           <!-- Release v0.1.0 -->
           <div class="timeline-item">
-            <div class="timeline-badge">v0.1.0</div>
+            <div class="timeline-badge" aria-hidden="true">v0.1.0</div>
             <div class="timeline-card">
               <div class="timeline-header">
                 <h3 class="timeline-title">v0.1.0 — Первый MVP релиз для macOS Apple Silicon</h3>
@@ -881,24 +854,24 @@
           <div class="section-tag" data-i18n="arch.tag">Архитектурная схема</div>
           <h2 class="section-title" data-i18n="arch.title">Принцип нулевого доверия к интерфейсу</h2>
           <p class="section-subtitle" data-i18n="arch.subtitle">
-            Вредоносный скрипт или взлом UI не смогут захватить систему: сетевые интерфейсы изолированы в отдельном демоне.
+            Вредоносный код или компрометация UI не могут захватить систему: сетевые адаптеры изолированы в отдельном системном сервисе.
           </p>
         </div>
 
         <div class="arch-diagram">
           <div class="arch-col">
             <div class="arch-box box-ui">
-              <div class="box-icon">🖥️</div>
+              <div class="box-icon" aria-hidden="true">🖥️</div>
               <div class="box-content">
-                <h4>Графический интерфейс</h4>
+                <h3 class="arch-box-title">Графический интерфейс</h3>
                 <p>Tauri v2 (Rust + Vite) или Jetpack Compose (Android)</p>
                 <span class="arch-badge badge-safe">UID: Обычный пользователь (Без root)</span>
               </div>
             </div>
           </div>
 
-          <div class="arch-arrow">
-            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2">
+          <div class="arch-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="5" y1="12" x2="19" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
@@ -907,17 +880,17 @@
 
           <div class="arch-col">
             <div class="arch-box box-helper">
-              <div class="box-icon">🛡️</div>
+              <div class="box-icon" aria-hidden="true">🛡️</div>
               <div class="box-content">
-                <h4>Системный демон (Helper)</h4>
+                <h3 class="arch-box-title">Системный демон (Helper)</h3>
                 <p>launchd (macOS) / Polkit (Linux) / VpnService (Android)</p>
                 <span class="arch-badge badge-priv">Строгая валидация PID и UID</span>
               </div>
             </div>
           </div>
 
-          <div class="arch-arrow">
-            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2">
+          <div class="arch-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="5" y1="12" x2="19" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
@@ -926,11 +899,11 @@
 
           <div class="arch-col">
             <div class="arch-box box-core">
-              <div class="box-icon">⚡</div>
+              <div class="box-icon" aria-hidden="true">⚡</div>
               <div class="box-content">
-                <h4>Ядро enfein/mbox 1.14.3</h4>
+                <h3 class="arch-box-title">Ядро enfein/mbox 1.14.3</h3>
                 <p>Mieru 3.38 + Hysteria 2 + AmneziaWG 3.1 + TUN</p>
-                <span class="arch-badge badge-tun">Таблица маршрутов & DNS</span>
+                <span class="arch-badge badge-core">Таблица маршрутов & DNS</span>
               </div>
             </div>
           </div>
@@ -949,81 +922,81 @@
           </p>
         </div>
 
-        <div class="faq-accordion">
+        <div class="faq-list">
           <!-- FAQ 1 -->
           <div class="faq-item">
-            <button type="button" class="faq-question">
+            <button type="button" class="faq-question" aria-expanded="false">
               <span data-i18n="faq.q1">Чем Mieru, Hysteria 2 и AmneziaWG лучше обычного OpenVPN или WireGuard?</span>
-              <span class="faq-chevron">+</span>
+              <span class="faq-chevron" aria-hidden="true">+</span>
             </button>
             <div class="faq-answer">
               <p data-i18n="faq.a1">
-                Стандартные протоколы OpenVPN и базовый WireGuard имеют легко детектируемые сигнатуры рукопожатия и заголовков, которые мгновенно распознаются современными системами DPI (ТСПУ, GFW) и глушатся. Mieru маскирует трафик под HTTPS и блокирует активные зонды, Hysteria 2 использует обфусцированный QUIC Salamander с компенсацией потерь, а AmneziaWG добавляет рандомизацию заголовков и мусорные байты (Jc, S1–S4, H1–H4), делая пакеты неотличимыми от случайного шифрованного трафика.
+                Стандартные протоколы OpenVPN и базовый WireGuard имеют фиксированные сигнатуры рукопожатия, которые мгновенно распознаются DPI-системами (ТСПУ, GFW) и блокируются. Mieru маскирует трафик под случайный шум и не отвечает на активные зонды цензора, Hysteria 2 использует модифицированный QUIC Salamander с компенсацией потерь, а AmneziaWG рандомизирует заголовки (Jc, S1–S4, H1–H4), делая пакеты неотличимыми от произвольного шифрованного трафика.
               </p>
             </div>
           </div>
 
           <!-- FAQ 2 -->
           <div class="faq-item">
-            <button type="button" class="faq-question">
+            <button type="button" class="faq-question" aria-expanded="false">
               <span data-i18n="faq.q2">Какие темы оформления доступны в AvariGate?</span>
-              <span class="faq-chevron">+</span>
+              <span class="faq-chevron" aria-hidden="true">+</span>
             </button>
             <div class="faq-answer">
               <p data-i18n="faq.a2">
-                В AvariGate встроены два примера оформления: классическая космическая кибер-сфера Avari с неоновыми частицами, императорский нефрит DragonGate с золотым драконом. Вы можете мгновенно переключать темы в настройках приложения — они изменяют эстетику интерфейса, сохраняя все ваши профили, маршруты и активные туннели в полной безопасности.
+                В клиенте AvariGate встроены темы оформления: AvariGate (фирменная кибер-космическая тема с неоновой бирюзовой сферой частиц), DragonGate (императорский изумрудный нефрит с золотым драконом), CorsairGate и KawaiiGate. Вы можете переключать их в любой момент в настройках приложения без перезапуска соединения.
               </p>
             </div>
           </div>
 
           <!-- FAQ 3 -->
           <div class="faq-item">
-            <button type="button" class="faq-question">
+            <button type="button" class="faq-question" aria-expanded="false">
               <span data-i18n="faq.q3">Собирает ли клиент или сервер аналитику и логи?</span>
-              <span class="faq-chevron">+</span>
+              <span class="faq-chevron" aria-hidden="true">+</span>
             </button>
             <div class="faq-answer">
               <p data-i18n="faq.a3">
-                Исходный код открыт на GitHub. Вы можете самостоятельно изучить работу приложения и его обработку данных.
+                Нет. Приложение и сервер не содержат телеметрии, трекеров и аналитики. Исходный код открыт на GitHub в публичном репозитории OstKost/avari-gate, где вы можете самостоятельно убедиться в чистоте кода.
               </p>
             </div>
           </div>
 
           <!-- FAQ 4 -->
           <div class="faq-item">
-            <button type="button" class="faq-question">
+            <button type="button" class="faq-question" aria-expanded="false">
               <span data-i18n="faq.q4">Зачем при установке на macOS нужен пароль администратора?</span>
-              <span class="faq-chevron">+</span>
+              <span class="faq-chevron" aria-hidden="true">+</span>
             </button>
             <div class="faq-answer">
               <p data-i18n="faq.a4">
-                Операционные системы не позволяют обычным непривилегированным программам создавать виртуальные сетевые адаптеры (TUN) и менять системные маршруты. Для этого AvariGate один раз устанавливает легковесный системный демон mieru-helper в launchd через стандартный диалог macOS. Сам GUI-клиент работает от обычного пользователя и общается с демоном через локальный Unix-сокет.
+                Операционные системы не позволяют непривилегированным программам создавать виртуальные сетевые адаптеры (TUN) и менять системные маршруты. Для этого AvariGate один раз устанавливает легковесный системный демон mieru-helper в launchd через стандартный диалог macOS. Сам GUI-клиент работает от обычного пользователя и общается с демоном через локальный Unix-сокет.
               </p>
             </div>
           </div>
 
           <!-- FAQ 5 -->
           <div class="faq-item">
-            <button type="button" class="faq-question">
+            <button type="button" class="faq-question" aria-expanded="false">
               <span data-i18n="faq.q5">Могу ли я развернуть сервер на собственном VPS?</span>
-              <span class="faq-chevron">+</span>
+              <span class="faq-chevron" aria-hidden="true">+</span>
             </button>
             <div class="faq-answer">
               <p data-i18n="faq.a5">
-                Да, именно для этого создан mieru-admin! Достаточно арендовать любой виртуальный сервер на Ubuntu 24.04 LTS или Debian 13, скачать архив утилиты и выполнить «sudo ./mieru-admin setup». Пошаговый мастер проведёт вас через настройку за 2 минуты, проверит diff конфига и покажет QR-код для моментального подключения с телефона или ноутбука.
+                Да, именно для этого создан mieru-admin! Достаточно арендовать любой виртуальный сервер на Ubuntu 24.04 LTS или Debian 13, скачать архив утилиты и выполнить «sudo ./mieru-admin setup». Пошаговый мастер проведёт вас через настройку за пару минут, проверит diff конфига и покажет QR-код для моментального подключения с телефона или ноутбука.
               </p>
             </div>
           </div>
 
           <!-- FAQ 6 -->
           <div class="faq-item">
-            <button type="button" class="faq-question">
+            <button type="button" class="faq-question" aria-expanded="false">
               <span data-i18n="faq.q6">Когда ожидать версии для Windows и iOS?</span>
-              <span class="faq-chevron">+</span>
+              <span class="faq-chevron" aria-hidden="true">+</span>
             </button>
             <div class="faq-answer">
               <p data-i18n="faq.a6">
-                Для Windows уже написана служба AvariGateHelper, модуль очистки DNS/маршрутов и алгоритм автопереключения; сейчас завершается сборка и стендовые сетевые испытания. Для iOS подготовлен архитектурный план на базе NetworkExtension API. Мы не обещаем релизов до того, как они пройдут строгую сетевую приёмку. Следите за обновлениями в GitHub Releases!
+                Для Windows уже написана служба AvariGateHelper, модуль очистки DNS/маршрутов и алгоритм автопереключения; сейчас завершается сборка и стендовые сетевые испытания. Для iOS подготовлен архитектурный план на базе NetworkExtension API. Мы публикуем релизы только после прохождения строгой сетевой приёмки. Следите за обновлениями в GitHub Releases!
               </p>
             </div>
           </div>
@@ -1034,12 +1007,12 @@
     <!-- Bottom CTA Banner -->
     <section class="bottom-cta-section">
       <div class="container text-center">
-        <h2 class="cta-banner-title" data-i18n="cta.title">Готовы вернуть себе свободный и быстрый интернет?</h2>
+        <h2 class="cta-banner-title" data-i18n="cta.title">Готовы вернуть себе свободный интернет?</h2>
         <p class="cta-banner-subtitle" data-i18n="cta.subtitle">
-          Скачайте AvariGate прямо сейчас или разверните собственный сервер mieru-admin за 2 минуты.
+          Скачайте AvariGate прямо сейчас или разверните собственный сервер mieru-admin за пару минут.
         </p>
         <div class="cta-banner-actions">
-          <a href="#downloads" class="btn-primary btn-lg" data-i18n="hero.downloadBtn">Скачать v0.6.0</a>
+          <a href="#downloads" class="btn-primary btn-lg" id="bottom-cta-download">Скачать v0.6.0</a>
           <a href="https://github.com/OstKost/avari-gate/releases/latest" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-lg" data-i18n="hero.releasesBtn">GitHub Releases</a>
         </div>
       </div>
@@ -1052,11 +1025,11 @@
     <div class="container footer-container">
       <div class="footer-brand">
         <div class="footer-logo-row">
-          <img src="./assets/icons/icon.png" alt="AvariGate" class="footer-logo">
+          <img src="./assets/icons/icon.png" alt="AvariGate Logo" class="footer-logo" width="32" height="32">
           <span class="footer-title">AvariGate</span>
         </div>
         <p class="footer-desc" data-i18n="footer.desc">
-          Свободный, быстрый и мультипротокольный VPN-стек.
+          Мультипротокольный клиент и серверный стек для устойчивой связи в условиях сетевых ограничений.
         </p>
         <div class="footer-license">
           <span data-i18n="footer.license">Лицензия:</span> <a href="https://github.com/OstKost/avari-gate/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GPL-3.0</a>
@@ -1064,25 +1037,25 @@
       </div>
 
       <div class="footer-links-col">
-        <h5 data-i18n="footer.colNav">Навигация</h5>
+        <h3 class="footer-col-title" data-i18n="footer.colNav">Навигация</h3>
         <a href="#protocols" data-i18n="nav.protocols">Протоколы</a>
         <a href="#features" data-i18n="nav.features">Возможности</a>
-        <a href="#themes" data-i18n="nav.themes">Темы оформления</a>
         <a href="#server" data-i18n="nav.server">Сервер mieru-admin</a>
+        <a href="#themes" data-i18n="nav.themes">Темы оформления</a>
         <a href="#downloads" data-i18n="nav.downloads">Скачать</a>
         <a href="#changelog" data-i18n="nav.changelog">История релизов</a>
       </div>
 
       <div class="footer-links-col">
-        <h5 data-i18n="footer.colResources">Ресурсы</h5>
+        <h3 class="footer-col-title" data-i18n="footer.colResources">Ресурсы</h3>
         <a href="https://github.com/OstKost/avari-gate" target="_blank" rel="noopener noreferrer">Репозиторий GitHub</a>
-        <a href="https://github.com/OstKost/avari-gate/releases/latest" target="_blank" rel="noopener noreferrer">Последний релиз v0.6.0</a>
+        <a href="https://github.com/OstKost/avari-gate/releases/latest" target="_blank" rel="noopener noreferrer">Последний релиз</a>
         <a href="https://github.com/OstKost/avari-gate/blob/main/README.md" target="_blank" rel="noopener noreferrer">Документация README</a>
         <a href="https://github.com/OstKost/avari-gate/blob/main/docs/CODE_MAP.md" target="_blank" rel="noopener noreferrer">Карта кода проекта</a>
       </div>
 
       <div class="footer-links-col">
-        <h5 data-i18n="footer.colTech">Технологии</h5>
+        <h3 class="footer-col-title" data-i18n="footer.colTech">Технологии</h3>
         <span>enfein/mbox 1.14.3</span>
         <span>Mieru mita 3.38.0</span>
         <span>Hysteria 2 (QUIC)</span>
@@ -1096,7 +1069,7 @@
       <div class="container footer-bottom-inner">
         <p class="copyright">© 2026 OstKost. Разработано для открытого и свободного интернета.</p>
         <p class="footer-disclaimer" data-i18n="footer.disclaimer">
-          Проект не аффилирован с коммерческими VPN-провайдерами. Скриншоты сняты с реального интерфейса на демо-данных.
+          Проект не аффилирован с коммерческими VPN-провайдерами. Скриншоты сняты с реального интерфейса приложения на демонстрационных данных.
         </p>
       </div>
     </div>
