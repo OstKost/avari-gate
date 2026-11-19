@@ -698,129 +698,84 @@ function updatePreviewScreen(targetKey) {
 }
 
 // ==========================================================================
-// 4b. Hero Connection Sphere (real particle/orbit effect from the client)
+// 4b. Hero Connection Sphere
+//
+// Состояние connected записано из настоящего desktop-рендерера
+// (desktop/ui/src/sphere.ts) в зацикленное видео с кроссфейдом на стыке.
+// Исходный код рендерера в публичный лендинг не попадает. Reduced motion
+// оставляет статичный постер, а вне экрана видео ставится на паузу.
 // ==========================================================================
 
+const HERO_SPHERE_STATE = "connected";
+
 function initHeroSphere() {
-  const canvas = document.getElementById("hero-sphere-canvas");
-  if (!canvas || !canvas.getContext) return;
-  const ctx = canvas.getContext("2d");
-  if (!ctx) return;
+  const video = document.getElementById("hero-sphere-video");
+  if (!video) return;
 
-  const reduceMotion = window.matchMedia &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const ripples = document.getElementById("hero-sphere-ripples");
 
-  const DPR = Math.min(window.devicePixelRatio || 1, 2);
-  const SIZE = 160;
-  canvas.width = Math.round(SIZE * DPR);
-  canvas.height = Math.round(SIZE * DPR);
-
-  const W = canvas.width;
-  const H = canvas.height;
-  const cx = W / 2;
-  const cy = H / 2;
-  const radius = W * 0.33;
-
-  // Fibonacci sphere for an even particle distribution.
-  const COUNT = 150;
-  const points = [];
-  for (let i = 0; i < COUNT; i++) {
-    const y = 1 - (i / (COUNT - 1)) * 2;
-    const r = Math.sqrt(Math.max(0, 1 - y * y));
-    const theta = i * Math.PI * (3 - Math.sqrt(5));
-    points.push({ x: Math.cos(theta) * r, y, z: Math.sin(theta) * r });
+  // Кольца-волны, как в desktop UI, расходятся только у подключённого
+  // профиля; при reduced motion CSS отключает их анимацию.
+  if (ripples && HERO_SPHERE_STATE === "connected") {
+    ripples.classList.add("is-active");
   }
 
-  function project(p, angle) {
-    const cosA = Math.cos(angle);
-    const sinA = Math.sin(angle);
-    const x = p.x * cosA - p.z * sinA;
-    const z = p.x * sinA + p.z * cosA;
-    // Mild perspective tilt.
-    const tilt = 0.35;
-    const ty = p.y * Math.cos(tilt) - z * Math.sin(tilt);
-    const tz = p.y * Math.sin(tilt) + z * Math.cos(tilt);
-    const perspective = 2.2 / (2.2 - tz);
-    return { sx: cx + x * radius * perspective, sy: cy + ty * radius * perspective, depth: tz };
-  }
+  const motionQuery = window.matchMedia
+    ? window.matchMedia("(prefers-reduced-motion: reduce)")
+    : null;
 
-  function drawFrame(time) {
-    ctx.clearRect(0, 0, W, H);
-
-    // Core glow.
-    const glow = ctx.createRadialGradient(cx, cy, radius * 0.1, cx, cy, radius * 1.5);
-    glow.addColorStop(0, "rgba(52, 211, 153, 0.55)");
-    glow.addColorStop(0.5, "rgba(16, 185, 129, 0.16)");
-    glow.addColorStop(1, "rgba(16, 185, 129, 0)");
-    ctx.fillStyle = glow;
-    ctx.beginPath();
-    ctx.arc(cx, cy, radius * 1.5, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Orbit rings.
-    for (let ring = 0; ring < 3; ring++) {
-      ctx.beginPath();
-      ctx.strokeStyle = "rgba(52, 211, 153, " + (0.16 - ring * 0.04) + ")";
-      ctx.lineWidth = 1 * DPR;
-      ctx.ellipse(
-        cx,
-        cy,
-        radius * (1.12 + ring * 0.16),
-        radius * (0.55 + ring * 0.14),
-        time * 0.00012 * (ring % 2 ? -1 : 1),
-        0,
-        Math.PI * 2
-      );
-      ctx.stroke();
+  const play = () => {
+    const started = video.play();
+    if (started && typeof started.catch === "function") {
+      // Автовоспроизведение может быть запрещено — остаётся постер.
+      started.catch(() => {});
     }
+  };
 
-    const angle = time * 0.00042;
-    const projected = points
-      .map((p) => project(p, angle))
-      .sort((a, b) => a.depth - b.depth);
-
-    // Connection web between near neighbours (subtle).
-    ctx.lineWidth = 0.6 * DPR;
-    for (let i = 0; i < projected.length; i += 2) {
-      const a = projected[i];
-      const b = projected[(i + 7) % projected.length];
-      if (Math.abs(a.depth - b.depth) > 0.35) continue;
-      ctx.strokeStyle = "rgba(45, 212, 191, 0.12)";
-      ctx.beginPath();
-      ctx.moveTo(a.sx, a.sy);
-      ctx.lineTo(b.sx, b.sy);
-      ctx.stroke();
+  const applyMotionPreference = () => {
+    if (motionQuery && motionQuery.matches) {
+      video.pause();
+    } else {
+      play();
     }
+  };
 
-    // Particles.
-    projected.forEach((p) => {
-      const alpha = 0.25 + (p.depth + 1) * 0.35;
-      const dot = (0.9 + (p.depth + 1) * 0.9) * DPR;
-      ctx.beginPath();
-      ctx.fillStyle = "rgba(110, 231, 183, " + alpha.toFixed(3) + ")";
-      ctx.arc(p.sx, p.sy, dot, 0, Math.PI * 2);
-      ctx.fill();
-    });
+  applyMotionPreference();
 
-    // Central core dot.
-    ctx.beginPath();
-    ctx.fillStyle = "rgba(209, 250, 229, 0.9)";
-    ctx.arc(cx, cy, 2.2 * DPR, 0, Math.PI * 2);
-    ctx.fill();
+  if (motionQuery) {
+    if (typeof motionQuery.addEventListener === "function") {
+      motionQuery.addEventListener("change", applyMotionPreference);
+    } else if (typeof motionQuery.addListener === "function") {
+      motionQuery.addListener(applyMotionPreference);
+    }
   }
 
-  if (reduceMotion) {
-    drawFrame(0);
-    return;
+  // Не жжём кадры, когда герой-блок ушёл за пределы экрана.
+  const wrap = video.parentElement;
+  if (wrap && "IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !(motionQuery && motionQuery.matches)) {
+            play();
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0 }
+    );
+    observer.observe(wrap);
   }
 
-  let start = null;
-  function loop(ts) {
-    if (start === null) start = ts;
-    drawFrame(ts - start);
-    window.requestAnimationFrame(loop);
-  }
-  window.requestAnimationFrame(loop);
+  // Освобождаем декодер, если страница выгружается.
+  window.addEventListener(
+    "pagehide",
+    () => {
+      video.pause();
+    },
+    { once: true }
+  );
 }
 
 // ==========================================================================

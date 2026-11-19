@@ -554,23 +554,32 @@ button:focus-visible,
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45), 0 0 22px rgba(16, 185, 129, 0.25);
 }
 
-.hero-sphere-canvas-wrap {
+.hero-sphere-media-wrap {
+  --hero-sphere-size: 128px;
   position: relative;
-  width: 44px;
-  height: 44px;
+  width: var(--hero-sphere-size);
+  height: var(--hero-sphere-size);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
-.hero-sphere-canvas {
-  width: 44px;
-  height: 44px;
+/*
+ * Записанная анимация сферы. Кадры сняты на чёрном фоне, поэтому
+ * screen-блендинг убирает фон и оставляет только свечение поверх пилюли —
+ * это работает и там, где видео не поддерживает альфа-канал.
+ */
+.hero-sphere-media {
+  width: var(--hero-sphere-size);
+  height: var(--hero-sphere-size);
   display: block;
   position: relative;
   z-index: 2;
   pointer-events: none;
+  border-radius: 50%;
+  object-fit: cover;
+  mix-blend-mode: screen;
 }
 
 .hero-sphere-ripples {
@@ -585,8 +594,8 @@ button:focus-visible,
 
 .hero-ripple {
   position: absolute;
-  width: 36px;
-  height: 36px;
+  width: 96px;
+  height: 96px;
   border-radius: 50%;
   border: 1.5px solid rgba(52, 211, 153, 0.65);
   box-shadow: 0 0 10px rgba(16, 185, 129, 0.45), inset 0 0 6px rgba(52, 211, 153, 0.25);
@@ -594,17 +603,17 @@ button:focus-visible,
   opacity: 0;
 }
 
-.hero-ripple-1 {
+.hero-sphere-ripples.is-active .hero-ripple-1 {
   animation: hero-ripple-wave 3s cubic-bezier(0.1, 0.5, 0.3, 1) infinite;
   animation-delay: 0s;
 }
 
-.hero-ripple-2 {
+.hero-sphere-ripples.is-active .hero-ripple-2 {
   animation: hero-ripple-wave 3s cubic-bezier(0.1, 0.5, 0.3, 1) infinite;
   animation-delay: 1s;
 }
 
-.hero-ripple-3 {
+.hero-sphere-ripples.is-active .hero-ripple-3 {
   animation: hero-ripple-wave 3s cubic-bezier(0.1, 0.5, 0.3, 1) infinite;
   animation-delay: 2s;
 }
@@ -2535,6 +2544,13 @@ button:focus-visible,
     max-width: 100%;
     gap: 10px;
     padding: 6px 12px;
+  }
+  .hero-sphere-media-wrap {
+    --hero-sphere-size: 96px;
+  }
+  .hero-ripple {
+    width: 72px;
+    height: 72px;
   }
   .hero-sphere-sub {
     display: none;

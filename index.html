@@ -95,15 +95,29 @@
       
       <div class="container hero-container">
         <div class="hero-content">
-          <!-- Connection Status Sphere (Real Canvas 2D / 3D orbital particle effect from AvariGate) -->
+          <!-- Connection Status Sphere: запись connected-состояния настоящего desktop-рендерера. -->
           <div class="hero-sphere-badge" id="hero-sphere-badge" role="region" aria-label="Статус защищённого соединения">
-            <div class="hero-sphere-canvas-wrap">
-              <div class="hero-sphere-ripples" aria-hidden="true">
+            <div class="hero-sphere-media-wrap">
+              <div class="hero-sphere-ripples" id="hero-sphere-ripples" aria-hidden="true">
                 <div class="hero-ripple hero-ripple-1"></div>
                 <div class="hero-ripple hero-ripple-2"></div>
                 <div class="hero-ripple hero-ripple-3"></div>
               </div>
-              <canvas id="hero-sphere-canvas" width="160" height="160" class="hero-sphere-canvas" aria-hidden="true"></canvas>
+              <video
+                id="hero-sphere-video"
+                class="hero-sphere-media"
+                width="256"
+                height="256"
+                poster="./assets/sphere/status-connected-poster.png"
+                preload="auto"
+                muted
+                playsinline
+                loop
+                aria-hidden="true"
+                tabindex="-1"
+              >
+                <source src="./assets/sphere/status-connected.webm" type="video/webm">
+              </video>
             </div>
             <div class="hero-sphere-meta">
               <div class="hero-sphere-pill">
