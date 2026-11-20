@@ -82,7 +82,7 @@ html {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  overflow-x: clip;
   width: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -91,7 +91,7 @@ html {
 body {
   min-height: 100vh;
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: clip;
   width: 100%;
   position: relative;
   background: radial-gradient(circle at 50% -20%, rgba(6, 182, 212, 0.08), transparent 50%),
@@ -825,6 +825,22 @@ button:focus-visible,
   width: 100%;
 }
 
+.demo-shot-view[hidden] { display:none; }
+.demo-mode-switch { justify-content: flex-start; padding-left: 18px; }
+.demo-shot-tabs { display:flex; justify-content:center; gap:4px; padding:8px; background:rgba(6,9,17,.8); border-top:1px solid var(--border-subtle); overflow-x:auto; }
+.demo-shot-tabs .preview-tab { font-size:12px; padding:6px 12px; }
+.demo-shot-view .preview-img-container { aspect-ratio:16 / 10; }
+.demo-shot-view#demo-tui .preview-img-container { aspect-ratio:5 / 3; }
+.demo-shot-view .preview-img { object-fit:contain; }
+.demo-shot-view .preview-caption { min-height:62px; }
+.demo-desktop { min-height:0; display:block; }
+.demo-desktop[hidden], .demo-tui[hidden] { display:none; }
+.mac-menubar,.mac-toolbar,.mac-window-status { display:none; }
+.demo-sidebar { width: 190px; flex: none; padding: 18px 10px; background:rgba(4,9,18,.58); border-right:1px solid var(--border-subtle); display:flex; flex-direction:column; gap:7px; }
+.demo-nav { text-align:left; padding:11px 12px; border:0; border-radius:10px; background:transparent; color:#a9b6c8; cursor:pointer; font:inherit; }
+.demo-nav span { margin-left:8px; }
+.demo-nav.active,.demo-nav:hover { color:#effbff; background:rgba(6,182,212,.16); }
+
 .preview-img-container {
   position: relative;
   width: 100%;
@@ -874,6 +890,7 @@ button:focus-visible,
 }
 
 .protocol-card {
+  min-width: 0;
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
@@ -1909,6 +1926,11 @@ button:focus-visible,
   font-family: var(--font-mono);
 }
 
+.sha256-scope {
+  margin-top: 6px;
+  color: var(--text-muted);
+}
+
 /* ==========================================================================
    Changelog Timeline
    ========================================================================== */
@@ -2422,6 +2444,15 @@ button:focus-visible,
    ========================================================================== */
 
 @media (max-width: 1100px) {
+  .nav-links {
+    display: none;
+  }
+  .btn-primary-nav, .btn-github {
+    display: none;
+  }
+  .mobile-menu-toggle {
+    display: flex;
+  }
   .downloads-grid,
   .client-downloads-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -2677,3 +2708,29 @@ button:focus-visible,
     transform: none !important;
   }
 }
+
+
+/* Very narrow phones: keep protocol header/card inside the viewport */
+@media (max-width: 360px) {
+  .protocol-card {
+    padding: 24px 18px;
+  }
+  .protocol-header {
+    flex-wrap: wrap;
+    row-gap: 10px;
+  }
+  .protocol-meta {
+    min-width: 0;
+  }
+}
+
+/* Screenshot galleries: one image, descriptive navigation, optional full view. */
+.screenshot-gallery{overflow:hidden;min-width:0;background:#080e18;border:1px solid #ffffff16;border-radius:18px;box-shadow:0 24px 70px #0004}
+.gallery-categories{display:flex;gap:4px;padding:12px 16px;background:#ffffff03}.gallery-categories:empty{display:none}
+.gallery-categories button{border:0;border-radius:8px;background:transparent;color:#94a3b8;padding:9px 20px;font:600 13px var(--font-main);cursor:pointer}.gallery-categories button[aria-pressed=true]{background:#ffffff12;color:#f1f5f9}
+.gallery-stage{display:block;position:relative;width:100%;aspect-ratio:16/10;background:#060b13;border:0;padding:16px;cursor:zoom-in;overflow:hidden}.gallery-main{display:block;width:100%;height:100%;object-fit:contain;transition:opacity .18s;border-radius:7px}.gallery-loading{opacity:.65}.gallery-zoom{position:absolute;right:24px;bottom:24px;background:#0b1229cc;border:1px solid #ffffff30;border-radius:8px;color:white;width:32px;height:32px;display:grid;place-items:center}
+.gallery-description{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px 22px;border-top:1px solid #ffffff10;min-height:108px}.gallery-description strong{font-size:15px;color:#e2e8f0}.gallery-description p{font-size:12px;line-height:1.6;color:#94a3b8;margin:5px 0 0;max-width:600px}.gallery-controls{display:flex;align-items:center;gap:10px;flex:none}.gallery-controls button{width:32px;height:32px;border:1px solid #ffffff20;border-radius:50%;background:transparent;color:#e2e8f0;cursor:pointer}.gallery-controls span{font:10px var(--font-mono);color:#94a3b8;white-space:nowrap}
+.gallery-thumbnails{display:flex;gap:10px;overflow-x:auto;padding:0 20px 18px;scrollbar-width:thin}.gallery-thumb{flex:0 0 120px;padding:5px;border:1px solid transparent;border-radius:9px;background:transparent;color:#94a3b8;text-align:left;cursor:pointer}.gallery-thumb img{display:block;width:100%;aspect-ratio:16/10;object-fit:contain;background:#020408;border-radius:4px;opacity:.6}.gallery-thumb span{display:block;font-size:10px;white-space:nowrap;margin:7px 3px 2px}.gallery-thumb[aria-selected=true]{background:#06b6d410;border-color:#06b6d477;color:#ecfeff}.gallery-thumb[aria-selected=true] img,.gallery-thumb:hover img{opacity:1}
+.screenshot-dialog{width:min(1400px,96vw);max-height:94vh;border:1px solid #ffffff30;border-radius:14px;background:#080e18;padding:40px 18px 16px;color:#cbd5e1}.screenshot-dialog::backdrop{background:#020617e8;backdrop-filter:blur(10px)}.screenshot-dialog img{display:block;max-width:100%;max-height:76vh;object-fit:contain;margin:auto}.screenshot-dialog p{font-size:12px;line-height:1.6;margin:12px 5px 0}.gallery-close{position:absolute;right:10px;top:5px;border:0;background:transparent;color:white;font-size:28px;cursor:pointer}
+@media(max-width:600px){.gallery-stage{padding:7px}.gallery-description{padding:14px;min-height:125px;gap:10px;align-items:flex-start}.gallery-controls{gap:5px}.gallery-controls button{width:27px;height:27px}.gallery-thumbnails{padding:0 12px 12px;gap:6px}.gallery-thumb{flex-basis:100px}.gallery-description p{font-size:11px}.gallery-zoom{right:14px;bottom:14px}}
+@media(prefers-reduced-motion:reduce){.gallery-main{transition:none}}

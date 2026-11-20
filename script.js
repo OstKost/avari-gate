@@ -15,7 +15,8 @@
 // 1. Dynamic Release & Version State
 // ==========================================================================
 
-let currentVersion = "v0.6.0";
+let currentVersion = "v0.7.0";
+let checksumVersion = "v0.7.0";
 let hasAndroidDirectAsset = false;
 let currentLang = "ru";
 
@@ -32,6 +33,21 @@ const i18n = {
     "common.copied": "Скопировано!",
     "common.copyAll": "Копировать всё",
     "common.yourPlatform": "Ваша система",
+    "aria.langToggle": "Переключить язык (RU / EN)",
+    "aria.mobileMenu": "Открыть навигационное меню",
+    "aria.copyCommand": "Копировать команду в буфер обмена",
+    "aria.copyServerCommand": "Скопировать команду запуска",
+    "aria.copySha": "Копировать все хэши SHA-256",
+    "aria.sphereStatus": "Статус защищённого соединения",
+    "aria.previewTabs": "Скриншоты приложения",
+    "aria.tuiScreens": "Экраны консоли сервера",
+    "aria.themeSelector": "Выбор темы оформления",
+    "aria.themePalette": "Цветовая палитра темы",
+    "aria.serverWizard": "5-шаговый мастер настройки с проверкой diff",
+    "aria.serverUsers": "Экспорт профилей с QR-кодом в терминале",
+    "aria.serverInstall": "Вендоринг и проверка SHA-256",
+    "aria.serverDashboard": "Дашборд состояния служб",
+    "meta.description": "Мультиплатформенный клиент и серверный стек с поддержкой Mieru, Hysteria 2 и AmneziaWG. Защита от блокировок по протоколам, умный failover, раздельное туннелирование и нулевые привилегии интерфейса.",
 
     // Nav
     "nav.protocols": "Протоколы",
@@ -151,6 +167,12 @@ const i18n = {
     "downloads.androidFileNote": "Сборка в GitHub Releases",
     "downloads.serverNote": "Включает TUI, REST API daemon и systemd unit",
     "downloads.linuxPackagesNote": "Стабильные сборки desktop для Linux",
+    "downloads.linuxPackagesTitle": "Пакеты Linux GUI",
+    "downloads.statusMacos": "Релизные .DMG с ad-hoc подписью и launchd-демоном.",
+    "downloads.statusAndroid": "Подтверждено туннелирование TCP Mieru и WireGuard/AWG.",
+    "downloads.statusLinux": "Принят под systemd, безопасный вендоринг AWG.",
+    "downloads.statusWindows": "Служба AvariGateHelper, очистка DNS и автопереключение реализованы; сетевая приёмка и сборка в процессе.",
+    "downloads.statusIos": "Архитектурный план NetworkExtension подготовлен, реализация запланирована после Windows.",
     "downloads.platformStatusTitle": "Честный статус платформ и архитектур:",
     "downloads.shaCheckCmd": "Проверка в терминале:",
     "downloads.clientTitle": "Клиентские приложения",
@@ -172,7 +194,7 @@ const i18n = {
     "changelog.tag": "История развития",
     "changelog.title": "Хронология реальных релизов проекта",
     "changelog.subtitle": "Каждая строчка подкреплена исходным кодом, unit-тестами и сетевыми проверками в репозитории.",
-    "changelog.showOlder": "Показать предыдущие релизы (v0.5.0, v0.4.0, v0.3.x, v0.1.0)",
+    "changelog.showOlder": "Показать предыдущие релизы (v0.6.0, v0.5.0, v0.4.0, v0.3.x, v0.1.0)",
     "changelog.hideOlder": "Скрыть предыдущие релизы",
 
     // Architecture
@@ -218,7 +240,12 @@ const i18n = {
     "footer.colNav": "Навигация",
     "footer.colResources": "Ресурсы",
     "footer.colTech": "Технологии",
-    "footer.disclaimer": "Проект не аффилирован с коммерческими VPN-провайдерами. Скриншоты сняты с реального интерфейса приложения на демонстрационных данных."
+    "footer.disclaimer": "Проект не аффилирован с коммерческими VPN-провайдерами. Скриншоты сняты с реального интерфейса приложения на демонстрационных данных.",
+    "footer.repo": "Репозиторий GitHub",
+    "footer.latestRelease": "Последний релиз",
+    "footer.readme": "Документация README",
+    "footer.architecture": "Архитектура проекта",
+    "footer.copyright": "© 2026 OstKost. Разработано для открытого и свободного интернета.",
   },
 
   en: {
@@ -229,6 +256,21 @@ const i18n = {
     "common.copied": "Copied!",
     "common.copyAll": "Copy all",
     "common.yourPlatform": "Your Platform",
+    "aria.langToggle": "Toggle language (RU / EN)",
+    "aria.mobileMenu": "Open navigation menu",
+    "aria.copyCommand": "Copy command to clipboard",
+    "aria.copyServerCommand": "Copy startup command",
+    "aria.copySha": "Copy all SHA-256 checksums",
+    "aria.sphereStatus": "Secure connection status",
+    "aria.previewTabs": "Application screenshots",
+    "aria.tuiScreens": "Server console screens",
+    "aria.themeSelector": "Theme selector",
+    "aria.themePalette": "Theme color palette",
+    "aria.serverWizard": "5-step setup wizard with diff review",
+    "aria.serverUsers": "Profile export with terminal QR codes",
+    "aria.serverInstall": "Vendoring and SHA-256 validation",
+    "aria.serverDashboard": "Service dashboard",
+    "meta.description": "Multi-platform client and server stack supporting Mieru, Hysteria 2 and AmneziaWG. Protocol-level censorship resistance, smart failover, split tunneling and zero-privilege UI.",
 
     // Nav
     "nav.protocols": "Protocols",
@@ -348,6 +390,12 @@ const i18n = {
     "downloads.androidFileNote": "Release in GitHub Releases",
     "downloads.serverNote": "Includes TUI, local REST API daemon, and systemd unit",
     "downloads.linuxPackagesNote": "Stable desktop builds for Linux distributions",
+    "downloads.linuxPackagesTitle": "Linux GUI Packages",
+    "downloads.statusMacos": "Release .DMG with ad-hoc signature and launchd helper.",
+    "downloads.statusAndroid": "TCP Mieru and WireGuard/AWG tunneling confirmed.",
+    "downloads.statusLinux": "Accepted under systemd; AWG installer is vendored and SHA-256 verified.",
+    "downloads.statusWindows": "AvariGateHelper service, DNS cleanup and auto-failover are implemented; network acceptance and packaging are in progress.",
+    "downloads.statusIos": "NetworkExtension architecture plan is ready; implementation is scheduled after Windows.",
     "downloads.platformStatusTitle": "Honest Platform & Architecture Status:",
     "downloads.shaCheckCmd": "Verify in terminal:",
     "downloads.clientTitle": "Client Applications",
@@ -369,7 +417,7 @@ const i18n = {
     "changelog.tag": "Release History",
     "changelog.title": "Verified Project Release Timeline",
     "changelog.subtitle": "Every bullet is backed by actual commit history, unit tests, and live network verifications in the repository.",
-    "changelog.showOlder": "Show previous releases (v0.5.0, v0.4.0, v0.3.x, v0.1.0)",
+    "changelog.showOlder": "Show previous releases (v0.6.0, v0.5.0, v0.4.0, v0.3.x, v0.1.0)",
     "changelog.hideOlder": "Hide previous releases",
 
     // Architecture
@@ -415,7 +463,12 @@ const i18n = {
     "footer.colNav": "Navigation",
     "footer.colResources": "Resources",
     "footer.colTech": "Technologies",
-    "footer.disclaimer": "This project is not affiliated with commercial VPN providers. All screenshots are captured from the live application with demo data."
+    "footer.disclaimer": "This project is not affiliated with commercial VPN providers. All screenshots are captured from the live application with demo data.",
+    "footer.repo": "GitHub Repository",
+    "footer.latestRelease": "Latest Release",
+    "footer.readme": "README Documentation",
+    "footer.architecture": "Project Architecture",
+    "footer.copyright": "© 2026 OstKost. Built for an open and free internet.",
   }
 };
 
@@ -459,8 +512,15 @@ function updateVersionElements() {
   const shaTitle = document.getElementById("sha256-title");
   if (shaTitle) {
     shaTitle.textContent = currentLang === "en"
-      ? `SHA-256 Checksums (Release ${currentVersion}):`
-      : `Контрольные суммы SHA-256 (Релиз ${currentVersion}):`;
+      ? `SHA-256 Checksums (Release ${checksumVersion}):`
+      : `Контрольные суммы SHA-256 (Релиз ${checksumVersion}):`;
+  }
+
+  const shaScope = document.getElementById("sha256-scope");
+  if (shaScope) {
+    shaScope.textContent = currentLang === "en"
+      ? `These checksums apply to ${checksumVersion}; they are updated manually with the next release.`
+      : `Хэши относятся к релизу ${checksumVersion}; обновляются вручную вместе со следующим релизом.`;
   }
 
   // Update Android button label based on asset availability
@@ -492,6 +552,21 @@ function setLanguage(lang) {
     }
   });
 
+  document.querySelectorAll("[data-i18n-aria-label]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-aria-label");
+    if (i18n[lang] && i18n[lang][key]) el.setAttribute("aria-label", i18n[lang][key]);
+  });
+
+  document.querySelectorAll("[data-i18n-title]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-title");
+    if (i18n[lang] && i18n[lang][key]) el.setAttribute("title", i18n[lang][key]);
+  });
+
+  document.querySelectorAll("[data-i18n-content]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-content");
+    if (i18n[lang] && i18n[lang][key]) el.setAttribute("content", i18n[lang][key]);
+  });
+
   // Update language indicator toggle buttons
   const langCurrent = document.getElementById("lang-current");
   const langOther = document.getElementById("lang-other");
@@ -512,25 +587,13 @@ function setLanguage(lang) {
   // Apply dynamic version labels (preserves fetched version across switches)
   updateVersionElements();
 
-  // Update active preview screen screenshot for current language
-  const activeTab = document.querySelector(".preview-tab.active");
-  if (activeTab) {
-    const target = activeTab.getAttribute("data-target");
-    updatePreviewScreen(target);
-  }
+  window.refreshScreenshotGalleries?.();
 
   // Update theme showcase screenshot
   const activeThemeBtn = document.querySelector(".theme-btn.active");
   if (activeThemeBtn) {
     const themeId = activeThemeBtn.getAttribute("data-theme-id");
     updateThemeDisplay(themeId);
-  }
-
-  // Update active server TUI caption
-  const activeTuiTab = document.querySelector(".tui-tab.active");
-  if (activeTuiTab) {
-    const tuiKey = activeTuiTab.getAttribute("data-tui");
-    switchServerTui(tuiKey);
   }
 
   // Keep the changelog toggle label consistent with its expanded state
@@ -1129,7 +1192,8 @@ function addPlatformBadge(cardElement) {
   const pill = document.createElement("span");
   pill.className = "platform-detected-pill";
   pill.style.cssText = "position:absolute; top:-10px; right:16px; background:var(--accent); color:#030712; font-size:11px; font-weight:800; padding:3px 10px; border-radius:9999px; box-shadow:0 0 10px var(--accent-glow);";
-  pill.textContent = currentLang === "en" ? "★ Your Platform" : "★ Ваша система";
+  pill.dataset.i18n = "common.yourPlatform";
+  pill.textContent = (i18n[currentLang] && i18n[currentLang]["common.yourPlatform"]) || "★ Ваша система";
   cardElement.appendChild(pill);
 }
 
@@ -1180,8 +1244,8 @@ document.addEventListener("DOMContentLoaded", () => {
   if (previewFront && previewBack) {
     previewCrossfader = createCrossfader(previewFront, previewBack, "AvariGate Desktop");
   }
-  const tuiFront = document.getElementById("tui-screen-img");
-  const tuiBack = document.getElementById("tui-screen-img-next");
+  const tuiFront = document.getElementById("tui-preview-img");
+  const tuiBack = document.getElementById("tui-preview-img-next");
   if (tuiFront && tuiBack) {
     tuiCrossfader = createCrossfader(tuiFront, tuiBack, "mieru-admin TUI");
   }
@@ -1245,35 +1309,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }, { passive: true });
 
-  // Hero Preview tabs
-  const previewTabs = Array.from(document.querySelectorAll(".preview-tab"));
-  previewTabs.forEach((tab, index) => {
-    tab.setAttribute("tabindex", tab.classList.contains("active") ? "0" : "-1");
-    tab.addEventListener("click", () => {
-      previewTabs.forEach((t) => {
-        t.classList.remove("active");
-        t.setAttribute("aria-selected", "false");
-        t.setAttribute("tabindex", "-1");
-      });
-      tab.classList.add("active");
-      tab.setAttribute("aria-selected", "true");
-      tab.setAttribute("tabindex", "0");
-      const target = tab.getAttribute("data-target");
-      updatePreviewScreen(target);
-    });
-    tab.addEventListener("keydown", (e) => {
-      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft" && e.key !== "Home" && e.key !== "End") return;
-      e.preventDefault();
-      let next = index;
-      if (e.key === "ArrowRight") next = (index + 1) % previewTabs.length;
-      if (e.key === "ArrowLeft") next = (index - 1 + previewTabs.length) % previewTabs.length;
-      if (e.key === "Home") next = 0;
-      if (e.key === "End") next = previewTabs.length - 1;
-      previewTabs[next].focus();
-      previewTabs[next].click();
-    });
-  });
-
   // Theme selector buttons
   const themeBtns = Array.from(document.querySelectorAll(".theme-btn"));
   themeBtns.forEach((btn, index) => {
@@ -1304,7 +1339,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Initialize Server TUI tabs
-  initServerTuiTabs();
+  initScreenshotGalleries();
 
   // FAQ Accordion
   const faqItems = document.querySelectorAll(".faq-item");
@@ -1357,11 +1392,21 @@ document.addEventListener("DOMContentLoaded", () => {
   if (copyQuickCmd) {
     copyQuickCmd.addEventListener("click", () => {
       const codeEl = document.getElementById("quick-cmd-code");
-      const cmd = codeEl ? codeEl.textContent : "curl -fsSL -O https://github.com/OstKost/avari-gate/releases/download/v0.6.0/AvariGate-admin-linux-amd64.tar.gz && tar -xzf AvariGate-admin-linux-amd64.tar.gz && sudo ./mieru-admin setup";
+      const cmd = codeEl ? codeEl.textContent : "curl -fsSL -O https://github.com/OstKost/avari-gate/releases/download/v0.7.0/AvariGate-admin-linux-amd64.tar.gz && tar -xzf AvariGate-admin-linux-amd64.tar.gz && sudo ./mieru-admin setup";
       const successMsg = currentLang === "en" ? "Copied!" : "Скопировано!";
       copyToClipboard(cmd, copyQuickCmd, successMsg);
     });
   }
+
+  // Generic data-copy-target buttons (server quick start)
+  document.querySelectorAll("[data-copy-target]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const target = document.getElementById(btn.getAttribute("data-copy-target"));
+      if (!target) return;
+      const successMsg = currentLang === "en" ? "Copied!" : "Скопировано!";
+      copyToClipboard(target.textContent, btn, successMsg);
+    });
+  });
 
   // SHA-256 Copy Button
   const copyShaBtn = document.getElementById("copy-sha-btn");
@@ -1374,3 +1419,44 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+function initScreenshotGalleries() {
+  const desktop = ['connected','profiles','splittunnel'].map(key => ({key, ...previewScreens[key], label: `hero.tab${{connected:'Connected',profiles:'Profiles',splittunnel:'Split'}[key]}`}));
+  const server = Object.entries(serverTuiData).map(([key,data]) => ({key,ru:data.src,en:data.src,captionKey:data.captionKey,label:`server.tui${{wizard:'Wizard',dashboard:'Dash',users:'Users',install:'Install',hysteria:'Hysteria'}[key]}`}));
+  const dialog = document.createElement('dialog');
+  dialog.className='screenshot-dialog';
+  dialog.innerHTML='<button class="gallery-close" aria-label="Close / Закрыть">×</button><img alt=""><p></p>';
+  document.body.append(dialog);
+  dialog.querySelector('button').onclick=()=>dialog.close();
+  dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});
+  const refresh=[];
+  function mount(root, groups, syncPoints=false) {
+    root.innerHTML='<div class="gallery-categories"></div><button class="gallery-stage" type="button"><img class="gallery-main" alt=""><span class="gallery-zoom">↗</span></button><div class="gallery-description"><div><strong></strong><p></p></div><div class="gallery-controls"><button data-step="-1" aria-label="Previous / Назад">←</button><span></span><button data-step="1" aria-label="Next / Вперёд">→</button></div></div><div class="gallery-thumbnails" role="tablist"></div>';
+    root.classList.add('screenshot-gallery');
+    const stage=root.querySelector('.gallery-stage'),image=root.querySelector('.gallery-main'),thumbs=root.querySelector('.gallery-thumbnails');
+    let group=0,index=0,token=0,startX=0;
+    const label=item=>i18n[currentLang][item.label]||item.key;
+    const items=()=>groups[group].items;
+    function select(next){index=(next+items().length)%items().length;render()}
+    function render(){
+      const item=items()[index],src=currentLang==='en'?item.en:item.ru,myToken=++token;
+      const title=label(item),caption=i18n[currentLang][item.captionKey]||'';
+      const loader=new Image();loader.onload=()=>{if(myToken!==token)return;image.src=src;image.alt=title;image.classList.remove('gallery-loading')};loader.onerror=()=>{if(myToken===token)image.classList.remove('gallery-loading')};image.classList.add('gallery-loading');loader.src=src;
+      root.querySelector('.gallery-description strong').textContent=title;
+      root.querySelector('.gallery-description p').textContent=caption;
+      root.querySelector('.gallery-controls span').textContent=`${String(index+1).padStart(2,'0')} / ${String(items().length).padStart(2,'0')}`;
+      root.querySelector('.gallery-categories').innerHTML=groups.length>1?groups.map((g,i)=>`<button type="button" aria-pressed="${i===group}" data-group="${i}">${g.name}</button>`).join(''):'';
+      root.querySelectorAll('[data-group]').forEach(b=>b.onclick=()=>{group=Number(b.dataset.group);index=0;render()});
+      thumbs.replaceChildren();items().forEach((entry,i)=>{const b=document.createElement('button');b.type='button';b.className='gallery-thumb';b.setAttribute('role','tab');b.setAttribute('aria-selected',String(i===index));b.tabIndex=i===index?0:-1;const img=document.createElement('img');img.src=currentLang==='en'?entry.en:entry.ru;img.alt='';img.loading='lazy';const text=document.createElement('span');text.textContent=label(entry);b.append(img,text);b.onclick=()=>select(i);b.onkeydown=e=>{let n=i;if(e.key==='ArrowRight')n=i+1;else if(e.key==='ArrowLeft')n=i-1;else if(e.key==='Home')n=0;else if(e.key==='End')n=items().length-1;else return;e.preventDefault();select(n);thumbs.children[index].focus()};thumbs.append(b)});
+      if(syncPoints)document.querySelectorAll('.server-point[data-point-target]').forEach(p=>{const active=p.dataset.pointTarget===item.key;p.classList.toggle('active',active);p.setAttribute('aria-current',String(active))});
+    }
+    root.querySelectorAll('[data-step]').forEach(b=>b.onclick=()=>select(index+Number(b.dataset.step)));
+    stage.onclick=()=>{const item=items()[index];dialog.querySelector('img').src=currentLang==='en'?item.en:item.ru;dialog.querySelector('img').alt=label(item);dialog.querySelector('p').textContent=i18n[currentLang][item.captionKey]||'';dialog.showModal()};
+    stage.addEventListener('touchstart',e=>{startX=e.changedTouches[0].clientX},{passive:true});stage.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-startX;if(Math.abs(d)>50)select(index+(d<0?1:-1))},{passive:true});
+    if(syncPoints)document.querySelectorAll('.server-point[data-point-target]').forEach(p=>{const choose=()=>{const n=items().findIndex(x=>x.key===p.dataset.pointTarget);if(n>=0)select(n)};p.onclick=choose;p.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose()}}});
+    refresh.push(render);render();
+  }
+  mount(document.querySelector('.hero-visual .device-frame'),[{name:'Desktop',items:desktop},{name:'Server TUI',items:server}]);
+  mount(document.querySelector('.server-terminal-window'),[{name:'Server TUI',items:server}],true);
+  window.refreshScreenshotGalleries=()=>refresh.forEach(fn=>fn());
+}
