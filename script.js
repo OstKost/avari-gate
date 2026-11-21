@@ -15,8 +15,8 @@
 // 1. Dynamic Release & Version State
 // ==========================================================================
 
-let currentVersion = "v0.7.0";
-let checksumVersion = "v0.7.0";
+let currentVersion = "v0.8.0";
+let checksumVersion = "v0.8.0";
 let hasAndroidDirectAsset = false;
 let currentLang = "ru";
 
@@ -194,7 +194,7 @@ const i18n = {
     "changelog.tag": "История развития",
     "changelog.title": "Хронология реальных релизов проекта",
     "changelog.subtitle": "Каждая строчка подкреплена исходным кодом, unit-тестами и сетевыми проверками в репозитории.",
-    "changelog.showOlder": "Показать предыдущие релизы (v0.6.0, v0.5.0, v0.4.0, v0.3.x, v0.1.0)",
+    "changelog.showOlder": "Показать предыдущие релизы (v0.5.0, v0.4.0, v0.3.x, v0.1.0)",
     "changelog.hideOlder": "Скрыть предыдущие релизы",
 
     // Architecture
@@ -417,7 +417,7 @@ const i18n = {
     "changelog.tag": "Release History",
     "changelog.title": "Verified Project Release Timeline",
     "changelog.subtitle": "Every bullet is backed by actual commit history, unit tests, and live network verifications in the repository.",
-    "changelog.showOlder": "Show previous releases (v0.6.0, v0.5.0, v0.4.0, v0.3.x, v0.1.0)",
+    "changelog.showOlder": "Show previous releases (v0.5.0, v0.4.0, v0.3.x, v0.1.0)",
     "changelog.hideOlder": "Hide previous releases",
 
     // Architecture
@@ -1392,7 +1392,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (copyQuickCmd) {
     copyQuickCmd.addEventListener("click", () => {
       const codeEl = document.getElementById("quick-cmd-code");
-      const cmd = codeEl ? codeEl.textContent : "curl -fsSL -O https://github.com/OstKost/avari-gate/releases/download/v0.7.0/AvariGate-admin-linux-amd64.tar.gz && tar -xzf AvariGate-admin-linux-amd64.tar.gz && sudo ./mieru-admin setup";
+      const cmd = codeEl ? codeEl.textContent : "curl -fsSL -O https://github.com/OstKost/avari-gate/releases/download/v0.8.0/AvariGate-admin-linux-amd64.tar.gz && tar -xzf AvariGate-admin-linux-amd64.tar.gz && sudo ./mieru-admin setup";
       const successMsg = currentLang === "en" ? "Copied!" : "Скопировано!";
       copyToClipboard(cmd, copyQuickCmd, successMsg);
     });
