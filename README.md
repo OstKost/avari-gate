@@ -14,6 +14,7 @@
 - **Desktop (macOS / Linux / Windows):** Tauri v2 + Rust, разделение привилегий через системный launchd helper / Polkit daemon.
 - **Android:** Нативный Jetpack Compose + Kotlin, per-app split tunneling, сканер QR-кодов (CameraX + ZXing), адаптивные темы.
 - **Ядро:** Высокопроизводительное сетевое ядро на базе `mbox` с полной поддержкой TUN-интерфейса и протоколов обхода цензуры.
+- **Сервер (mieru-admin):** Легковесный менеджер для Linux с удобным TUI-мастером первичной настройки, REST API и автоматическим экспортом клиентских конфигов с QR-кодами в консоли.
 
 ---
 
@@ -32,7 +33,16 @@
 | **macOS (Apple Silicon)** | [AvariGate_1.0.0_aarch64.dmg](https://github.com/OstKost/avari-gate/releases/download/v1.0.0/AvariGate_1.0.0_aarch64.dmg) | Официальная сборка macOS (M1–M4) |
 | **Windows 10 / 11** | [AvariGate_1.0.0_x64-setup.exe](https://github.com/OstKost/avari-gate/releases/download/v1.0.0/AvariGate_1.0.0_x64-setup.exe) | Установщик Windows (64-bit) |
 | **Android 8.0+** | [AvariGate-1.0.0-android.apk](https://github.com/OstKost/avari-gate/releases/download/v1.0.0/AvariGate-1.0.0-android.apk) | APK-пакет для Android |
+| **Linux-сервер (x86_64)** | [AvariGate-admin-linux-amd64.tar.gz](https://github.com/OstKost/avari-gate/releases/download/v1.0.0/AvariGate-admin-linux-amd64.tar.gz) | Утилита `mieru-admin` (TUI + сервис) |
 | **Хеши всех файлов** | [SHA256SUMS](https://github.com/OstKost/avari-gate/releases/download/v1.0.0/SHA256SUMS) | Проверка целостности сборок |
+
+### Быстрая установка сервера (Ubuntu / Debian):
+
+```bash
+curl -fsSL -O https://github.com/OstKost/avari-gate/releases/download/v1.0.0/AvariGate-admin-linux-amd64.tar.gz && \
+tar -xzf AvariGate-admin-linux-amd64.tar.gz && \
+sudo ./mieru-admin setup
+```
 
 ---
 
