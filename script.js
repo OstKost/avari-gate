@@ -868,6 +868,17 @@ const themeDetails = {
     screenshotEn: "./assets/screenshots/desktop-dragons-en.png",
     swatches: ["#061c14", "#10b981", "#f59e0b", "#064e3b"]
   },
+  eyevpn: {
+    name: "EyeVPN",
+    subRu: "Интерактивный аниме-глаз & тёплый янтарь",
+    subEn: "Interactive Anime Eye & Warm Amber",
+    descRu: "Стиль с анимированным живым компаньоном: тёплая янтарно-багряная палитра и интерактивный аниме-глаз, реагирующий на состояние туннеля и движение курсора.",
+    descEn: "Character theme with an interactive living companion: warm crimson-amber palette and an anime eye that reacts to tunnel status and mouse movements.",
+    logo: "./assets/logos/otfront-logo.png",
+    screenshotRu: "./assets/screenshots/desktop-eyevpn.png",
+    screenshotEn: "./assets/screenshots/desktop-eyevpn-en.png",
+    swatches: ["#1f1406", "#f59e0b", "#ef4444", "#78350f"]
+  },
   pirates: {
     name: "CorsairGate",
     subRu: "Пиратский штурвал & латунь",

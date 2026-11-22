@@ -25,15 +25,14 @@
 
 ---
 
-## Загрузка последнего релиза (v0.6.0)
+## Загрузка последнего релиза (v1.0.0)
 
 | Платформа | Файл | Описание |
 |---|---|---|
-| **macOS (Apple Silicon)** | [AvariGate_0.6.0_aarch64.dmg](https://github.com/OstKost/avari-gate/releases/download/v0.6.0/AvariGate_0.6.0_aarch64.dmg) | Фирменное оформление AvariGate |
-| **macOS (Apple Silicon)** | [EyeVPN_0.6.0_aarch64.dmg](https://github.com/OstKost/avari-gate/releases/download/v0.6.0/EyeVPN_0.6.0_aarch64.dmg) | Альтернативное оформление EyeVPN |
-| **Android 8.0+** | [AvariGate-0.6.0-android-debug.apk](https://github.com/OstKost/avari-gate/releases/download/v0.6.0/AvariGate-0.6.0-android-debug.apk) | Debug APK AvariGate |
-| **Android 8.0+** | [EyeVPN-0.6.0-android-debug.apk](https://github.com/OstKost/avari-gate/releases/download/v0.6.0/EyeVPN-0.6.0-android-debug.apk) | Debug APK EyeVPN |
-| **Хеши всех файлов** | [SHA256SUMS](https://github.com/OstKost/avari-gate/releases/download/v0.6.0/SHA256SUMS) | Проверка целостности сборок |
+| **macOS (Apple Silicon)** | [AvariGate_1.0.0_aarch64.dmg](https://github.com/OstKost/avari-gate/releases/download/v1.0.0/AvariGate_1.0.0_aarch64.dmg) | Официальная сборка macOS (M1–M4) |
+| **Windows 10 / 11** | [AvariGate_1.0.0_x64-setup.exe](https://github.com/OstKost/avari-gate/releases/download/v1.0.0/AvariGate_1.0.0_x64-setup.exe) | Установщик Windows (64-bit) |
+| **Android 8.0+** | [AvariGate-1.0.0-android.apk](https://github.com/OstKost/avari-gate/releases/download/v1.0.0/AvariGate-1.0.0-android.apk) | APK-пакет для Android |
+| **Хеши всех файлов** | [SHA256SUMS](https://github.com/OstKost/avari-gate/releases/download/v1.0.0/SHA256SUMS) | Проверка целостности сборок |
 
 ---
 
