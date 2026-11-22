@@ -14,7 +14,6 @@
 - **Desktop (macOS / Linux / Windows):** Tauri v2 + Rust, разделение привилегий через системный launchd helper / Polkit daemon.
 - **Android:** Нативный Jetpack Compose + Kotlin, per-app split tunneling, сканер QR-кодов (CameraX + ZXing), адаптивные темы.
 - **Ядро:** Высокопроизводительное сетевое ядро на базе `mbox` с полной поддержкой TUN-интерфейса и протоколов обхода цензуры.
-- **Сервер (mieru-admin):** Легковесный менеджер для Linux с удобным TUI-мастером первичной настройки, REST API и автоматическим экспортом клиентских конфигов с QR-кодами в консоли.
 
 ---
 
@@ -34,16 +33,7 @@
 | **macOS (Apple Silicon)** | [EyeVPN_0.6.0_aarch64.dmg](https://github.com/OstKost/avari-gate/releases/download/v0.6.0/EyeVPN_0.6.0_aarch64.dmg) | Альтернативное оформление EyeVPN |
 | **Android 8.0+** | [AvariGate-0.6.0-android-debug.apk](https://github.com/OstKost/avari-gate/releases/download/v0.6.0/AvariGate-0.6.0-android-debug.apk) | Debug APK AvariGate |
 | **Android 8.0+** | [EyeVPN-0.6.0-android-debug.apk](https://github.com/OstKost/avari-gate/releases/download/v0.6.0/EyeVPN-0.6.0-android-debug.apk) | Debug APK EyeVPN |
-| **Linux-сервер (x86_64)** | [AvariGate-admin-linux-amd64.tar.gz](https://github.com/OstKost/avari-gate/releases/download/v0.6.0/AvariGate-admin-linux-amd64.tar.gz) | Утилита `mieru-admin` (TUI + сервис) |
 | **Хеши всех файлов** | [SHA256SUMS](https://github.com/OstKost/avari-gate/releases/download/v0.6.0/SHA256SUMS) | Проверка целостности сборок |
-
-### Быстрая установка сервера (Ubuntu / Debian):
-
-```bash
-curl -fsSL -O https://github.com/OstKost/avari-gate/releases/download/v0.6.0/AvariGate-admin-linux-amd64.tar.gz && \
-tar -xzf AvariGate-admin-linux-amd64.tar.gz && \
-sudo ./mieru-admin setup
-```
 
 ---
 
