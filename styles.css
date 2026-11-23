@@ -694,6 +694,28 @@ button:focus-visible,
   flex-wrap: wrap;
 }
 
+.hero-platform-subnote {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.hero-platform-subnote a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+
+.hero-platform-subnote a:hover {
+  color: #fff;
+}
+
 /* Hero Visual / Large Product Window */
 .hero-visual {
   width: 100%;
@@ -1591,7 +1613,7 @@ button:focus-visible,
 
 .client-downloads-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 24px;
 }
 

@@ -64,6 +64,13 @@ const i18n = {
     "hero.sphereConnected": "Защищённый туннель активен",
     "hero.sphereEngine": "enfein/mbox 1.14.3 • Mieru + Hysteria 2 + AmneziaWG",
     "hero.releasesBtn": "GitHub Releases",
+    "hero.downloadForWindows": "Скачать для Windows",
+    "hero.downloadForMac": "Скачать для macOS",
+    "hero.downloadForAndroid": "Скачать для Android",
+    "hero.downloadForLinux": "Скачать для Linux",
+    "hero.downloadDefault": "Скачать",
+    "hero.allPlatforms": "Все платформы",
+    "hero.detectedFallback": "Доступно для Windows, macOS, Android и Linux",
     "hero.connected": "Туннель активен",
     "hero.tabConnected": "Подключение",
     "hero.tabProfiles": "Профили",
@@ -155,14 +162,18 @@ const i18n = {
     "downloads.title": "Скачать AvariGate для ваших устройств",
     "downloads.subtitle": "Официальные публичные релизы из репозитория OstKost/avari-gate. Каждая сборка проверена контрольными суммами SHA-256.",
     "downloads.appleSilicon": "macOS Apple Silicon",
+    "downloads.windowsBadge": "Windows 10 / 11",
+    "downloads.windowsTarget": "Windows 10 / 11 (64-bit)",
     "downloads.androidBadge": "Android 8.0+",
     "downloads.serverBadge": "Linux Server",
     "downloads.linuxDesktopBadge": "Linux Desktop",
-    "downloads.downloadDmgAvari": "Скачать .DMG (AvariGate)",
-    "downloads.downloadApkAvari": "Смотреть релиз Android",
+    "downloads.downloadDmgAvari": "Скачать .DMG (macOS)",
+    "downloads.downloadExeWindows": "Скачать .EXE (Windows)",
+    "downloads.downloadApkAvari": "Скачать .APK (Android)",
     "downloads.downloadServer": "Скачать бинарник сервера",
     "downloads.viewLinuxPackages": "Смотреть пакеты в Releases",
     "downloads.macosNote": "Релизный .DMG с ad-hoc подписью и launchd-демоном",
+    "downloads.windowsNote": "NSIS-установщик со службой AvariGateHelper",
     "downloads.androidNote": "ARM64 и x86_64 сборка с системным VpnService",
     "downloads.androidFileNote": "Сборка в GitHub Releases",
     "downloads.serverNote": "Включает TUI, REST API daemon и systemd unit",
@@ -171,7 +182,7 @@ const i18n = {
     "downloads.statusMacos": "Релизные .DMG с ad-hoc подписью и launchd-демоном.",
     "downloads.statusAndroid": "Подтверждено туннелирование TCP Mieru и WireGuard/AWG.",
     "downloads.statusLinux": "Принят под systemd, безопасный вендоринг AWG.",
-    "downloads.statusWindows": "Служба AvariGateHelper, очистка DNS и автопереключение реализованы; сетевая приёмка и сборка в процессе.",
+    "downloads.statusWindows": "Официальный 64-битный NSIS-установщик со службой AvariGateHelper, защитой от DNS-утечек и автообновлением.",
     "downloads.statusIos": "Архитектурный план NetworkExtension подготовлен, реализация запланирована после Windows.",
     "downloads.platformStatusTitle": "Честный статус платформ и архитектур:",
     "downloads.shaCheckCmd": "Проверка в терминале:",
@@ -227,8 +238,8 @@ const i18n = {
     "faq.a4": "Операционные системы не позволяют непривилегированным программам создавать виртуальные сетевые адаптеры (TUN) и менять системные маршруты. Для этого AvariGate один раз устанавливает легковесный системный демон mieru-helper в launchd через стандартный диалог macOS. Сам GUI-клиент работает от обычного пользователя и общается с демоном через локальный Unix-сокет.",
     "faq.q5": "Могу ли я развернуть сервер на собственном VPS?",
     "faq.a5": "Да, именно для этого создан mieru-admin! Достаточно арендовать любой виртуальный сервер на Ubuntu 24.04 LTS или Debian 13, скачать архив утилиты и выполнить «sudo ./mieru-admin setup». Пошаговый мастер проведёт вас через настройку за пару минут, проверит diff конфига и покажет QR-код для моментального подключения с телефона или ноутбука.",
-    "faq.q6": "Когда ожидать версии для Windows и iOS?",
-    "faq.a6": "Для Windows уже написана служба AvariGateHelper, модуль очистки DNS/маршрутов и алгоритм автопереключения; сейчас завершается сборка и стендовые сетевые испытания. Для iOS подготовлен архитектурный план на базе NetworkExtension API. Мы публикуем релизы только после прохождения строгой сетевой приёмки. Следите за обновлениями в GitHub Releases!",
+    "faq.q6": "Поддерживается ли Windows и когда ожидать версию для iOS?",
+    "faq.a6": "Для Windows доступен официальный 64-битный NSIS-установщик со службой AvariGateHelper, защитой от утечек DNS и автоматическим переключением профилей. Для iOS подготовлен архитектурный план на базе NetworkExtension API — релиз запланирован следующим этапом. Следите за обновлениями в GitHub Releases!",
 
     // CTA
     "cta.title": "Готовы вернуть себе свободный интернет?",
@@ -287,6 +298,13 @@ const i18n = {
     "hero.sphereConnected": "Secure tunnel active",
     "hero.sphereEngine": "enfein/mbox 1.14.3 • Mieru + Hysteria 2 + AmneziaWG",
     "hero.releasesBtn": "GitHub Releases",
+    "hero.downloadForWindows": "Download for Windows",
+    "hero.downloadForMac": "Download for macOS",
+    "hero.downloadForAndroid": "Download for Android",
+    "hero.downloadForLinux": "Download for Linux",
+    "hero.downloadDefault": "Download",
+    "hero.allPlatforms": "All Platforms",
+    "hero.detectedFallback": "Available for Windows, macOS, Android, and Linux",
     "hero.connected": "Tunnel Active",
     "hero.tabConnected": "Connection",
     "hero.tabProfiles": "Profiles",
@@ -378,14 +396,18 @@ const i18n = {
     "downloads.title": "Download AvariGate for Your Devices",
     "downloads.subtitle": "Official public builds published in the OstKost/avari-gate repository. Every package is cryptographically verified by SHA-256 checksums.",
     "downloads.appleSilicon": "macOS Apple Silicon",
+    "downloads.windowsBadge": "Windows 10 / 11",
+    "downloads.windowsTarget": "Windows 10 / 11 (64-bit)",
     "downloads.androidBadge": "Android 8.0+",
     "downloads.serverBadge": "Linux Server",
     "downloads.linuxDesktopBadge": "Linux Desktop",
-    "downloads.downloadDmgAvari": "Download .DMG (AvariGate)",
-    "downloads.downloadApkAvari": "View Android Release",
+    "downloads.downloadDmgAvari": "Download .DMG (macOS)",
+    "downloads.downloadExeWindows": "Download .EXE (Windows)",
+    "downloads.downloadApkAvari": "Download .APK (Android)",
     "downloads.downloadServer": "Download Server Binary",
     "downloads.viewLinuxPackages": "View Packages in Releases",
     "downloads.macosNote": "Release .DMG with ad-hoc signing and launchd helper",
+    "downloads.windowsNote": "NSIS installer with AvariGateHelper system service",
     "downloads.androidNote": "ARM64 & x86_64 build using native Android VpnService",
     "downloads.androidFileNote": "Release in GitHub Releases",
     "downloads.serverNote": "Includes TUI, local REST API daemon, and systemd unit",
@@ -394,7 +416,7 @@ const i18n = {
     "downloads.statusMacos": "Release .DMG with ad-hoc signature and launchd helper.",
     "downloads.statusAndroid": "TCP Mieru and WireGuard/AWG tunneling confirmed.",
     "downloads.statusLinux": "Accepted under systemd; AWG installer is vendored and SHA-256 verified.",
-    "downloads.statusWindows": "AvariGateHelper service, DNS cleanup and auto-failover are implemented; network acceptance and packaging are in progress.",
+    "downloads.statusWindows": "Official 64-bit NSIS installer with AvariGateHelper service, DNS leak protection and auto-updates.",
     "downloads.statusIos": "NetworkExtension architecture plan is ready; implementation is scheduled after Windows.",
     "downloads.platformStatusTitle": "Honest Platform & Architecture Status:",
     "downloads.shaCheckCmd": "Verify in terminal:",
@@ -450,8 +472,8 @@ const i18n = {
     "faq.a4": "Operating systems restrict standard unprivileged applications from creating virtual network adapters (TUN) and altering routing tables. AvariGate installs a minimal launchd daemon (mieru-helper) once via the standard macOS authorization dialog. The UI continues to run under your standard user account, communicating with the helper via a local Unix socket.",
     "faq.q5": "Can I deploy the server on my own VPS?",
     "faq.a5": "Yes, that is the exact purpose of mieru-admin. Rent any virtual private server running Ubuntu 24.04 LTS or Debian 13, download the archive, and run «sudo ./mieru-admin setup». The step-by-step wizard configures the stack in minutes and prints an ASCII QR code for instant client onboarding.",
-    "faq.q6": "When can we expect versions for Windows and iOS?",
-    "faq.a6": "For Windows, the AvariGateHelper service, DNS/route cleanup, and auto-failover are already implemented; final build packaging and network validation are currently underway. For iOS, a NetworkExtension architectural plan is completed. We only publish builds after passing rigorous network smoke tests. Track progress in GitHub Releases!",
+    "faq.q6": "Is Windows supported and when can we expect the iOS version?",
+    "faq.a6": "An official 64-bit NSIS installer is available for Windows with the AvariGateHelper service, DNS leak prevention, and automatic failover. For iOS, a NetworkExtension architectural roadmap is finalized — stay tuned for updates on GitHub!",
 
     // CTA
     "cta.title": "Ready to reclaim an open internet?",
@@ -499,11 +521,6 @@ function updateVersionElements() {
     mobileDrawerCta.textContent = currentLang === "en" ? `Download ${currentVersion}` : `Скачать ${currentVersion}`;
   }
 
-  const heroDownloadLabel = document.getElementById("hero-download-label");
-  if (heroDownloadLabel) {
-    heroDownloadLabel.textContent = currentLang === "en" ? `Download AvariGate (${currentVersion})` : `Скачать AvariGate (${currentVersion})`;
-  }
-
   const bottomCtaDownload = document.getElementById("bottom-cta-download");
   if (bottomCtaDownload) {
     bottomCtaDownload.textContent = currentLang === "en" ? `Download ${currentVersion}` : `Скачать ${currentVersion}`;
@@ -532,6 +549,9 @@ function updateVersionElements() {
       btnAndroidLabel.textContent = currentLang === "en" ? "View Android Release" : "Смотреть релиз Android";
     }
   }
+
+  // Update Hero CTA according to detected user platform
+  applyPlatformToUI();
 }
 
 function setLanguage(lang) {
@@ -1142,6 +1162,19 @@ async function fetchLatestRelease() {
         quickCode.textContent = `curl -fsSL -O ${serverAsset.browser_download_url} && tar -xzf ${serverAsset.name} && sudo ./mieru-admin setup`;
       }
     }
+
+    // Windows Setup EXE (AvariGate x64)
+    const winAsset = assets.find((a) => a.name.includes("AvariGate") && a.name.endsWith(".exe"));
+    if (winAsset) {
+      const btnWin = document.getElementById("btn-download-windows");
+      const nameWin = document.getElementById("file-windows-name");
+      const sizeWin = document.getElementById("file-windows-size");
+      if (btnWin) btnWin.href = winAsset.browser_download_url;
+      if (nameWin) nameWin.textContent = winAsset.name;
+      if (sizeWin) sizeWin.textContent = formatBytes(winAsset.size);
+    }
+
+    applyPlatformToUI();
   } catch (err) {
     console.warn("GitHub Release API unavailable, using verified fallback release assets.", err);
   }
@@ -1151,47 +1184,196 @@ async function fetchLatestRelease() {
 // 8. Client Platform Detection & Download Highlight
 // ==========================================================================
 
+let userDetectedPlatform = null; // "windows" | "macos" | "android" | "linux" | null
+
+const PLATFORM_ICONS = {
+  windows: '<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.551H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.949-1.949"/></svg>',
+  macos: '<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.92-2.85-.9.04-1.99.6-2.63 1.35-.57.65-1.07 1.72-.94 2.74 1.01.08 2.03-.49 2.65-1.24z"/></svg>',
+  android: '<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.551 0 .9993.4482.9993.9993.0001.5511-.4483.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5896 8.3585 13.8566 8 12 8s-3.5896.3585-5.1368.9507L4.8409 5.4477a.416.416 0 00-.5676-.1521.416.416 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3432-4.1021-2.6889-7.5743-6.1185-9.4396"/></svg>',
+  linux: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>',
+  default: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" class="download-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>'
+};
+
 function detectUserPlatform() {
   const userAgent = navigator.userAgent || "";
   const platform = navigator.platform || "";
+  const uaData = navigator.userAgentData;
 
   let detected = null;
 
-  if (/Mac|iPhone|iPad/i.test(platform) || /Macintosh/i.test(userAgent)) {
-    detected = "macos";
-  } else if (/Android/i.test(userAgent)) {
-    detected = "android";
-  } else if (/Linux/i.test(platform) || /Linux/i.test(userAgent)) {
-    detected = "linux";
-  } else if (/Win/i.test(platform) || /Windows/i.test(userAgent)) {
-    detected = "windows";
+  // 1. Client Hints API (Chromium-based: Chrome, Edge, Brave, etc.)
+  if (uaData && uaData.platform) {
+    const p = uaData.platform.toLowerCase();
+    if (p.includes("win")) detected = "windows";
+    else if (p.includes("mac")) detected = "macos";
+    else if (p.includes("android")) detected = "android";
+    else if (p.includes("linux")) detected = "linux";
   }
 
-  if (detected === "macos") {
+  // 2. UserAgent / Platform fallback
+  if (!detected) {
+    if (/Android/i.test(userAgent)) {
+      detected = "android";
+    } else if (/iPhone|iPad|iPod/i.test(userAgent) || (platform === "MacIntel" && navigator.maxTouchPoints > 1)) {
+      detected = null; // iOS currently planned, falls back to generic "Скачать"
+    } else if (/Win|Windows/i.test(platform) || /Windows/i.test(userAgent)) {
+      detected = "windows";
+    } else if (/Mac|Macintosh/i.test(platform) || /Macintosh/i.test(userAgent)) {
+      detected = "macos";
+    } else if (/Linux/i.test(platform) || /Linux/i.test(userAgent)) {
+      detected = "linux";
+    }
+  }
+
+  userDetectedPlatform = detected;
+  applyPlatformToUI();
+}
+
+function applyPlatformToUI() {
+  const isEn = currentLang === "en";
+
+  // Reset any previous platform badges from cards
+  document.querySelectorAll(".download-card").forEach((card) => {
+    card.classList.remove("user-platform");
+    const badge = card.querySelector(".platform-detected-pill");
+    if (badge) badge.remove();
+  });
+
+  const heroBtn = document.getElementById("hero-download-btn");
+  const heroLabel = document.getElementById("hero-download-label");
+  const heroIcon = document.getElementById("hero-download-icon");
+  const heroSecondaryBtn = document.getElementById("hero-secondary-btn");
+  const heroSecondaryLabel = document.getElementById("hero-secondary-label");
+  const heroSubnoteText = document.getElementById("hero-subnote-text");
+
+  if (userDetectedPlatform === "windows") {
+    const cardWin = document.getElementById("card-windows");
+    if (cardWin) {
+      cardWin.classList.add("user-platform");
+      addPlatformBadge(cardWin);
+    }
+    const btnWin = document.getElementById("btn-download-windows");
+    if (heroBtn) {
+      heroBtn.href = (btnWin && btnWin.href) || `https://github.com/OstKost/avari-gate/releases/download/${currentVersion}/AvariGate_${currentVersion.replace(/^v/, "")}_x64-setup.exe`;
+    }
+    if (heroLabel) {
+      heroLabel.textContent = isEn ? "Download for Windows" : "Скачать для Windows";
+    }
+    if (heroIcon) {
+      heroIcon.innerHTML = PLATFORM_ICONS.windows;
+    }
+    if (heroSecondaryBtn) {
+      heroSecondaryBtn.href = "#downloads";
+    }
+    if (heroSecondaryLabel) {
+      heroSecondaryLabel.textContent = isEn ? "All Platforms" : "Все платформы";
+    }
+    if (heroSubnoteText) {
+      heroSubnoteText.innerHTML = isEn
+        ? 'Windows 10 / 11 (64-bit) • <a href="#card-windows">Checksums & details ↓</a>'
+        : 'Windows 10 / 11 (64-bit) • <a href="#card-windows">Параметры и SHA-256 ↓</a>';
+    }
+  } else if (userDetectedPlatform === "macos") {
     const cardMac = document.getElementById("card-macos");
     if (cardMac) {
       cardMac.classList.add("user-platform");
       addPlatformBadge(cardMac);
     }
-    const heroBtn = document.getElementById("hero-download-btn");
+    const btnMac = document.getElementById("btn-download-macos");
     if (heroBtn) {
-      heroBtn.href = "#card-macos";
+      heroBtn.href = (btnMac && btnMac.href) || `https://github.com/OstKost/avari-gate/releases/download/${currentVersion}/AvariGate_${currentVersion.replace(/^v/, "")}_aarch64.dmg`;
     }
-  } else if (detected === "android") {
+    if (heroLabel) {
+      heroLabel.textContent = isEn ? "Download for macOS" : "Скачать для macOS";
+    }
+    if (heroIcon) {
+      heroIcon.innerHTML = PLATFORM_ICONS.macos;
+    }
+    if (heroSecondaryBtn) {
+      heroSecondaryBtn.href = "#downloads";
+    }
+    if (heroSecondaryLabel) {
+      heroSecondaryLabel.textContent = isEn ? "All Platforms" : "Все платформы";
+    }
+    if (heroSubnoteText) {
+      heroSubnoteText.innerHTML = isEn
+        ? 'macOS 12+ (Apple Silicon) • <a href="#card-macos">Checksums & details ↓</a>'
+        : 'macOS 12+ (Apple Silicon) • <a href="#card-macos">Параметры и SHA-256 ↓</a>';
+    }
+  } else if (userDetectedPlatform === "android") {
     const cardAndroid = document.getElementById("card-android");
     if (cardAndroid) {
       cardAndroid.classList.add("user-platform");
       addPlatformBadge(cardAndroid);
     }
-    const heroBtn = document.getElementById("hero-download-btn");
+    const btnAndroid = document.getElementById("btn-download-android");
     if (heroBtn) {
-      heroBtn.href = "#card-android";
+      heroBtn.href = (btnAndroid && btnAndroid.href) || `https://github.com/OstKost/avari-gate/releases/download/${currentVersion}/AvariGate-${currentVersion.replace(/^v/, "")}-android.apk`;
     }
-  } else if (detected === "linux") {
+    if (heroLabel) {
+      heroLabel.textContent = isEn ? "Download for Android" : "Скачать для Android";
+    }
+    if (heroIcon) {
+      heroIcon.innerHTML = PLATFORM_ICONS.android;
+    }
+    if (heroSecondaryBtn) {
+      heroSecondaryBtn.href = "#downloads";
+    }
+    if (heroSecondaryLabel) {
+      heroSecondaryLabel.textContent = isEn ? "All Platforms" : "Все платформы";
+    }
+    if (heroSubnoteText) {
+      heroSubnoteText.innerHTML = isEn
+        ? 'Android 8.0+ (ARM64 / x86_64) • <a href="#card-android">Checksums & details ↓</a>'
+        : 'Android 8.0+ (ARM64 / x86_64) • <a href="#card-android">Параметры и SHA-256 ↓</a>';
+    }
+  } else if (userDetectedPlatform === "linux") {
     const cardLinux = document.getElementById("card-linux");
     if (cardLinux) {
       cardLinux.classList.add("user-platform");
       addPlatformBadge(cardLinux);
+    }
+    if (heroBtn) {
+      heroBtn.href = "#card-linux";
+    }
+    if (heroLabel) {
+      heroLabel.textContent = isEn ? "Download for Linux" : "Скачать для Linux";
+    }
+    if (heroIcon) {
+      heroIcon.innerHTML = PLATFORM_ICONS.linux;
+    }
+    if (heroSecondaryBtn) {
+      heroSecondaryBtn.href = "#downloads";
+    }
+    if (heroSecondaryLabel) {
+      heroSecondaryLabel.textContent = isEn ? "All Platforms" : "Все платформы";
+    }
+    if (heroSubnoteText) {
+      heroSubnoteText.innerHTML = isEn
+        ? 'Ubuntu, Debian & Arch • <a href="#card-linux">Packages & repositories ↓</a>'
+        : 'Ubuntu, Debian и Arch • <a href="#card-linux">Пакеты и репозитории ↓</a>';
+    }
+  } else {
+    // If detection failed / unknown / iOS: user requested "если не получилось - просто Скачать"
+    if (heroBtn) {
+      heroBtn.href = "#downloads";
+    }
+    if (heroLabel) {
+      heroLabel.textContent = isEn ? "Download" : "Скачать";
+    }
+    if (heroIcon) {
+      heroIcon.innerHTML = PLATFORM_ICONS.default;
+    }
+    if (heroSecondaryBtn) {
+      heroSecondaryBtn.href = "https://github.com/OstKost/avari-gate/releases/latest";
+    }
+    if (heroSecondaryLabel) {
+      heroSecondaryLabel.textContent = "GitHub Releases";
+    }
+    if (heroSubnoteText) {
+      heroSubnoteText.innerHTML = isEn
+        ? 'Available for Windows, macOS, Android, and Linux • <a href="#downloads">Choose platform ↓</a>'
+        : 'Доступно для Windows, macOS, Android и Linux • <a href="#downloads">Выбрать платформу ↓</a>';
     }
   }
 }

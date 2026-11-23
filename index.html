@@ -139,22 +139,27 @@
           <!-- Action Buttons -->
           <div class="hero-cta-group">
             <a href="#downloads" class="btn-primary btn-lg" id="hero-download-btn">
-              <span class="btn-icon-wrap" aria-hidden="true">
+              <span class="btn-icon-wrap" aria-hidden="true" id="hero-download-icon">
                 <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" class="download-icon">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                   <polyline points="7 10 12 15 17 10"></polyline>
                   <line x1="12" y1="15" x2="12" y2="3"></line>
                 </svg>
               </span>
-              <span id="hero-download-label">Скачать AvariGate</span>
+              <span id="hero-download-label" data-i18n="hero.downloadDefault">Скачать</span>
             </a>
 
-            <a href="https://github.com/OstKost/avari-gate/releases/latest" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-lg">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            <a href="#downloads" class="btn-secondary btn-lg" id="hero-secondary-btn">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" id="hero-secondary-icon">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
               </svg>
-              <span data-i18n="hero.releasesBtn">GitHub Releases</span>
+              <span id="hero-secondary-label" data-i18n="hero.allPlatforms">Все платформы</span>
             </a>
+          </div>
+          <div class="hero-platform-subnote" id="hero-platform-subnote" aria-live="polite">
+            <span id="hero-subnote-text" data-i18n="hero.detectedFallback">Доступно для Windows, macOS, Android и Linux</span>
           </div>
         </div>
 
@@ -672,14 +677,36 @@
                 <span class="file-size" id="file-macos-size">~28.9 МБ</span>
               </div>
               <a href="https://github.com/OstKost/avari-gate/releases/download/v1.0.1/AvariGate_1.0.1_aarch64.dmg" class="btn-primary btn-block" id="btn-download-macos">
-                <span data-i18n="downloads.downloadDmgAvari">Скачать .DMG (AvariGate)</span>
+                <span data-i18n="downloads.downloadDmgAvari">Скачать .DMG (macOS)</span>
               </a>
               <div class="download-secondary-link">
                 <span class="subtle-note" data-i18n="downloads.macosNote">Релизный .DMG с ad-hoc подписью и launchd-демоном</span>
               </div>
             </div>
 
-            <!-- Android: APK (Points to verified releases) -->
+            <!-- Windows Desktop: AvariGate x64 Setup -->
+            <div class="download-card featured" id="card-windows">
+              <div class="download-badge" data-i18n="downloads.windowsBadge">Windows 10 / 11</div>
+              <div class="download-icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor">
+                  <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.551H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.949-1.949"/>
+                </svg>
+              </div>
+              <h3 class="download-title">AvariGate Windows</h3>
+              <span class="download-target" data-i18n="downloads.windowsTarget">Windows 10 / 11 (64-bit)</span>
+              <div class="download-file-info">
+                <code id="file-windows-name">AvariGate_1.0.1_x64-setup.exe</code>
+                <span class="file-size" id="file-windows-size">~21.0 МБ</span>
+              </div>
+              <a href="https://github.com/OstKost/avari-gate/releases/download/v1.0.1/AvariGate_1.0.1_x64-setup.exe" class="btn-primary btn-block" id="btn-download-windows">
+                <span data-i18n="downloads.downloadExeWindows">Скачать .EXE (Windows)</span>
+              </a>
+              <div class="download-secondary-link">
+                <span class="subtle-note" data-i18n="downloads.windowsNote">NSIS-установщик со службой AvariGateHelper</span>
+              </div>
+            </div>
+
+            <!-- Android: APK (Verified Direct Download) -->
             <div class="download-card featured" id="card-android">
               <div class="download-badge" data-i18n="downloads.androidBadge">Android 8.0+</div>
               <div class="download-icon-box" aria-hidden="true">
@@ -690,11 +717,11 @@
               <h3 class="download-title">AvariGate Android</h3>
               <span class="download-target">Android 8+ (arm64-v8a & x86_64)</span>
               <div class="download-file-info">
-                <code id="file-android-name" data-i18n="downloads.androidFileNote">Сборка в GitHub Releases</code>
-                <span class="file-size" id="file-android-size">~148.5 МБ</span>
+                <code id="file-android-name">AvariGate-1.0.1-android.apk</code>
+                <span class="file-size" id="file-android-size">~142.6 МБ</span>
               </div>
-              <a href="https://github.com/OstKost/avari-gate/releases/latest" class="btn-primary btn-block" id="btn-download-android" target="_blank" rel="noopener noreferrer">
-                <span id="btn-download-android-label" data-i18n="downloads.downloadApkAvari">Смотреть релиз Android</span>
+              <a href="https://github.com/OstKost/avari-gate/releases/download/v1.0.1/AvariGate-1.0.1-android.apk" class="btn-primary btn-block" id="btn-download-android">
+                <span id="btn-download-android-label" data-i18n="downloads.downloadApkAvari">Скачать .APK (Android)</span>
               </a>
               <div class="download-secondary-link">
                 <span class="subtle-note" data-i18n="downloads.androidNote">ARM64 и x86_64 сборка с системным VpnService</span>
@@ -799,7 +826,7 @@
                 <strong>Linux Server (Ubuntu / Debian x86_64)</strong>: <span class="status-pill status-ready" data-i18n="status.ready">Готово</span> <span data-i18n="downloads.statusLinux">Принят под systemd, безопасный вендоринг AWG.</span>
               </li>
               <li>
-                <strong>Windows Desktop (10/11)</strong>: <span class="status-pill status-progress" data-i18n="status.inProgress">В разработке</span> <span data-i18n="downloads.statusWindows">Служба AvariGateHelper, очистка DNS и автопереключение реализованы; сетевая приёмка и сборка в процессе.</span>
+                <strong>Windows Desktop (10/11 64-bit)</strong>: <span class="status-pill status-ready" data-i18n="status.ready">Готово</span> <span data-i18n="downloads.statusWindows">Официальный 64-битный NSIS-установщик со службой AvariGateHelper, защитой от DNS-утечек и автообновлением.</span>
               </li>
               <li>
                 <strong>iOS</strong>: <span class="status-pill status-planned" data-i18n="status.planned">В планах</span> <span data-i18n="downloads.statusIos">Архитектурный план NetworkExtension подготовлен, реализация запланирована после Windows.</span>
@@ -1222,12 +1249,12 @@
           <!-- FAQ 6 -->
           <div class="faq-item">
             <button type="button" class="faq-question" aria-expanded="false">
-              <span data-i18n="faq.q6">Когда ожидать версии для Windows и iOS?</span>
+              <span data-i18n="faq.q6">Поддерживается ли Windows и когда ожидать версию для iOS?</span>
               <span class="faq-chevron" aria-hidden="true">+</span>
             </button>
             <div class="faq-answer">
               <p data-i18n="faq.a6">
-                Для Windows уже написана служба AvariGateHelper, модуль очистки DNS/маршрутов и алгоритм автопереключения; сейчас завершается сборка и стендовые сетевые испытания. Для iOS подготовлен архитектурный план на базе NetworkExtension API. Мы публикуем релизы только после прохождения строгой сетевой приёмки. Следите за обновлениями в GitHub Releases!
+                Для Windows доступен официальный 64-битный NSIS-установщик со службой AvariGateHelper, защитой от утечек DNS и автоматическим переключением профилей. Для iOS подготовлен архитектурный план на базе NetworkExtension API — релиз запланирован следующим этапом. Следите за обновлениями в GitHub Releases!
               </p>
             </div>
           </div>
