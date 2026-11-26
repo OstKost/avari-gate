@@ -15,8 +15,8 @@
 // 1. Dynamic Release & Version State
 // ==========================================================================
 
-let currentVersion = "v1.1.3";
-let checksumVersion = "v1.1.3";
+let currentVersion = "v1.1.4";
+let checksumVersion = "v1.1.4";
 let hasAndroidDirectAsset = false;
 let currentLang = "ru";
 
@@ -1585,7 +1585,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (copyQuickCmd) {
     copyQuickCmd.addEventListener("click", () => {
       const codeEl = document.getElementById("quick-cmd-code");
-      const cmd = codeEl ? codeEl.textContent : "curl -fsSL -O https://github.com/OstKost/avari-gate/releases/download/v1.1.3/AvariGate-admin-linux-amd64.tar.gz && tar -xzf AvariGate-admin-linux-amd64.tar.gz && sudo ./mieru-admin setup";
+      const cmd = codeEl ? codeEl.textContent : "curl -fsSL -O https://github.com/OstKost/avari-gate/releases/download/v1.1.4/AvariGate-admin-linux-amd64.tar.gz && tar -xzf AvariGate-admin-linux-amd64.tar.gz && sudo ./mieru-admin setup";
       const successMsg = currentLang === "en" ? "Copied!" : "Скопировано!";
       copyToClipboard(cmd, copyQuickCmd, successMsg);
     });
